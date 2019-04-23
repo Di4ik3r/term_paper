@@ -1,0 +1,76 @@
+
+atlas.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+0
+  rotate: false
+  xy: 2, 141
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+archer
+  rotate: false
+  xy: 45, 75
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+cell
+  rotate: false
+  xy: 297, 372
+  size: 40, 25
+  orig: 40, 25
+  offset: 0, 0
+  index: -1
+cellBlocked
+  rotate: false
+  xy: 339, 372
+  size: 40, 25
+  orig: 40, 25
+  offset: 0, 0
+  index: -1
+cellMouseOn
+  rotate: false
+  xy: 79, 114
+  size: 40, 25
+  orig: 40, 25
+  offset: 0, 0
+  index: -1
+cellMouseOnBlocked
+  rotate: false
+  xy: 297, 345
+  size: 40, 25
+  orig: 40, 25
+  offset: 0, 0
+  index: -1
+cellPickable
+  rotate: false
+  xy: 79, 87
+  size: 40, 25
+  orig: 40, 25
+  offset: 0, 0
+  index: -1
+knight
+  rotate: false
+  xy: 260, 324
+  size: 35, 73
+  orig: 35, 73
+  offset: 0, 0
+  index: -1
+orc
+  rotate: false
+  xy: 2, 2
+  size: 36, 67
+  orig: 36, 67
+  offset: 0, 0
+  index: -1
+zombie
+  rotate: false
+  xy: 2, 71
+  size: 41, 68
+  orig: 41, 68
+  offset: 0, 0
+  index: -1
