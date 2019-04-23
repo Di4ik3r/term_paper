@@ -10,12 +10,17 @@ public class CellCalculator {
 	private CellMap map;
 	private String[] strMap;
 	private Vector2 location;
-	private int range;
+	private int rangeMove, rangeAttack;
+	
+	private boolean isPlayer;
 
-	public CellCalculator(CellMap map, Vector2 location, int range) {
+	public CellCalculator(boolean isPlayer, CellMap map, Vector2 location, int rangeMove, int rangeAttack) {
 		this.map = map;
 		this.location = location;
-		this.range = range;
+		this.rangeMove = rangeMove;
+		this.rangeAttack = rangeAttack;
+		
+		this.isPlayer = isPlayer;
 
 		this.strMap = toString(map);
 	}
@@ -38,7 +43,7 @@ public class CellCalculator {
 
 		for (int i = 0; i < this.strMap.length; i++) {
 			for (int j = 0; j < this.strMap[i].length(); j++) {
-				if (this.strMap[i].charAt(j) == '+')
+				if (this.strMap[i].charAt(j) == 'E')
 					cells.add(this.map.getCell(i, j));
 			}
 		}
@@ -53,15 +58,43 @@ public class CellCalculator {
 		for (int i = 0; i < cells.length; i++)
 			for (int j = 0; j < cells[i].length; j++)
 				if (j == 0)
-					str[i] = cells[i][j].containsUnit()
-							? i == (int) this.location.x && j == (int) this.location.y ? "0" : "o"
+					if(isPlayer)
+						str[i] = cells[i][j].containsUnit()
+						? i == (int) this.location.x && j == (int) this.location.y ? "0"
+								: this.map.getCell(i, j).getUnit().isEnemy() ? Math.pow(i - this.location.x, 2)
+										+ Math.pow(j - this.location.y, 2) <= Math.pow(this.rangeAttack, 2) ? "E"
+												: "e"
+										: "a"
+						: Math.pow(i - this.location.x, 2) + Math.pow(j - this.location.y, 2) <= Math
+								.pow(this.rangeMove, 2) ? "+" : "*";
+					else 
+						str[i] = cells[i][j].containsUnit()
+							? i == (int) this.location.x && j == (int) this.location.y ? "0"
+									: !this.map.getCell(i, j).getUnit().isEnemy() ? Math.pow(i - this.location.x, 2)
+											+ Math.pow(j - this.location.y, 2) <= Math.pow(this.rangeAttack, 2) ? "E"
+													: "e"
+											: "a"
 							: Math.pow(i - this.location.x, 2) + Math.pow(j - this.location.y, 2) <= Math
-									.pow(this.range, 2) ? "+" : "*";
+									.pow(this.rangeMove, 2) ? "+" : "*";
 				else
-					str[i] += cells[i][j].containsUnit()
-							? i == (int) this.location.x && j == (int) this.location.y ? "0" : "o"
+					if(isPlayer)
+						str[i] += cells[i][j].containsUnit()
+						? i == (int) this.location.x && j == (int) this.location.y ? "0"
+								: this.map.getCell(i, j).getUnit().isEnemy() ? Math.pow(i - this.location.x, 2)
+										+ Math.pow(j - this.location.y, 2) <= Math.pow(this.rangeAttack, 2) ? "E"
+												: "e"
+										: "a"
+						: Math.pow(i - this.location.x, 2) + Math.pow(j - this.location.y, 2) <= Math
+								.pow(this.rangeMove, 2) ? "+" : "*";
+					else 
+						str[i] += cells[i][j].containsUnit()
+							? i == (int) this.location.x && j == (int) this.location.y ? "0"
+									: !this.map.getCell(i, j).getUnit().isEnemy() ? Math.pow(i - this.location.x, 2)
+											+ Math.pow(j - this.location.y, 2) <= Math.pow(this.rangeAttack, 2) ? "E"
+													: "e"
+											: "a"
 							: Math.pow(i - this.location.x, 2) + Math.pow(j - this.location.y, 2) <= Math
-									.pow(this.range, 2) ? "+" : "*";
+									.pow(this.rangeMove, 2) ? "+" : "*";
 //					str[i] += cells[i][j].containsUnit() ? i == (int)this.location.x && j == (int)this.location.y ? "0" : "o" : "*";
 		return str;
 	}

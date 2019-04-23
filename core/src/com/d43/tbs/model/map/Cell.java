@@ -19,6 +19,8 @@ public class Cell extends GameObject{
 	private Array<TextureRegion> regions;
 	private TextureRegion textureRegion;
 	
+	private boolean forDefeated;
+	
 	public Cell(Array<TextureRegion> regions, float x, float y, float width, float height) {
 		super(regions.get(0), x, y, width, height);
 		
@@ -28,6 +30,16 @@ public class Cell extends GameObject{
 		
 		this.regions = regions;
 		this.textureRegion = regions.get(0);
+		
+		this.forDefeated = false;
+	}
+	
+	public boolean isForDefeated() {
+		return this.forDefeated;
+	}
+	
+	public void setForDefeated(boolean forDefeated) {
+		this.forDefeated = forDefeated;
 	}
 	
 	public Array<TextureRegion> getRegions() {

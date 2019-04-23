@@ -8,8 +8,10 @@ public class Knight extends MeleeUnit{
 	public Knight(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
 		
-		this.setRangeMovement(1);
+		this.setRangeMovement(2);
 		this.setRangeAttack(1);
+		this.setHp(72);
+		this.setDamage(34);
 	}
 	
 	@Override

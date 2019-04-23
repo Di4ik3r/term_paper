@@ -33,10 +33,18 @@ public class CellController {
 			if(this.unit != null && !this.unit.isReplaceable() && !this.unit.isEnemy())
 				this.cell.changeTextureRegion(this.cell.getRegions().get(2));
 			if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-				if(this.unit != null)
-					mapChecker.pickUnit(this.unit);
+				if(!this.cell.isForDefeated()) {
+					if(this.unit != null)
+						if(!this.unit.isEnemy())
+							mapChecker.pickUnit(this.unit);
+						else
+							mapChecker.unitAttack(this.bounds);
+					else {
+						mapChecker.unitMove(this.bounds);
+					}
+				}
 				else {
-					mapChecker.replaceUnit(this.bounds);
+					
 				}
 			}
 		}

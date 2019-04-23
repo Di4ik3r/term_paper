@@ -19,6 +19,7 @@ public class Unit extends GameObject {
 	private Cell cell;
 	private boolean isReplaceable;
 	private boolean isEnemy;
+	private boolean isAlive;
 	
 	private Dimension size;
 	
@@ -34,8 +35,16 @@ public class Unit extends GameObject {
 		this.rangeMovement = 0;
 		this.damage = 0;
 		this.isReplaceable = true;
+		this.isAlive = true;
+		this.isEnemy = false;
 
 		this.size = new Dimension((int)width, (int)height);
+	}
+	
+	public void damage(int damage) {
+		this.hp -= damage;
+		if(hp < 1)
+			this.isAlive = false;
 	}
 	
 	public boolean isEnemy() {
@@ -82,6 +91,30 @@ public class Unit extends GameObject {
 	
 	public int getId() {
 		return id;
+	}
+	
+	public boolean isAlive() {
+		return this.isAlive;
+	}
+	
+	public void setAlive(boolean isAlive) {
+		this.isAlive = isAlive;
+	}
+	
+	public int getDamage() {
+		return this.damage;
+	}
+	
+	public void setDamage(int damage) {
+		this.damage = damage;
+	}
+	
+	public int getHp() {
+		return this.hp;
+	}
+	
+	public void setHp(int hp) {
+		this.hp = hp;
 	}
 	
 	public int getRangeAttack() {

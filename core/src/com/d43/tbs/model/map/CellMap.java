@@ -43,7 +43,8 @@ public class CellMap extends GameObject{
 //				if(j % 2 == 0)
 //					cell = new Cell(regions, (-8 + i*0.99f)*multiplier+multiplier/2, (-3.5f + j*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 //				else 
-					cell = new Cell(regions, (-8 + i*0.99f)*multiplier, (-3.5f + j*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
+//					cell = new Cell(regions, (-8 + i*0.99f)*multiplier, (-3.5f + j*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
+				cell = new Cell(regions, (-8 + i*0.99f)*multiplier, (-4.3f + j*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 				map[i][j] = cell;
 			}
 	}

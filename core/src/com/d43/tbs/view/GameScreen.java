@@ -6,15 +6,17 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.model.map.CellMap;
+import com.d43.tbs.model.map.DefeatedZone;
 import com.d43.tbs.model.unit.Archer;
 import com.d43.tbs.model.unit.Knight;
+import com.d43.tbs.model.unit.Orc;
 import com.d43.tbs.model.unit.Unit;
+import com.d43.tbs.model.unit.Zombie;
 import com.d43.tbs.utils.MapChecker;
 import com.d43.tbs.utils.Rnd;
-import com.d43.tbs.utils.UI;
 
 public class GameScreen implements Screen {
 
@@ -28,6 +30,7 @@ public class GameScreen implements Screen {
 	Array<Unit> allies;
 	Array<Unit> enemies;
 	private CellMap map;
+	DefeatedZone defeatedZone;
 	
 	private MapChecker mapChecker;
 	 
@@ -68,35 +71,38 @@ public class GameScreen implements Screen {
 //				allies.get(i).setCell(map.getCell(row, col));
 //		}
 		
-		Unit zombie = new Archer(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * 68/41);
-		Unit orc = new Archer(textureAtlas.findRegion("orc"), -390, 210, unitSize, unitSize * 70/35);
+		Unit zombie = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * 68/41);
+		Unit orc = new Orc(textureAtlas.findRegion("orc"), -390, 210, unitSize, unitSize * 70/35);
 		enemies = new Array<Unit>();
 		enemies.add(zombie);
 		enemies.add(orc);
 		this.initUnits(enemies, true);
 		
+		defeatedZone = new DefeatedZone(this.textureAtlas, textureAtlas.findRegion("0"), -5f, 10f, 1f, 1f);
+		defeatedZone.initCells(this.allies.size, this.enemies.size);
+		for(int i = 0; i < this.allies.size; i++)
+			defeatedZone.getAlliesCell(i).setCell();
+		for(int i = 0; i < this.enemies.size; i++)
+			defeatedZone.getEnemiesCell(i).setCell();
 		
-		this.mapChecker = new MapChecker(map, allies);
+		this.mapChecker = new MapChecker(map, defeatedZone, allies, enemies);
 		this.mapChecker.setAtlas(this.textureAtlas);
 		
 		map.setMapChecker(this.mapChecker);
 		for(int i = 0; i < allies.size; i++) {
 			allies.get(i).setMapChecker(this.mapChecker); 
-			allies.get(i).setIsEnemy(false);
 		}
 		map.placeUnits(allies);
 		for(int i = 0; i < enemies.size; i++) {
 			enemies.get(i).setMapChecker(this.mapChecker);
-			enemies.get(i).setIsEnemy(true);
-			enemies.get(i).setReplaceability(false);
 		}
 		map.placeUnits(enemies);
 		
 		ui = new UI(this.textureAtlas);
+		ui.setUnits(allies, enemies);
 		
 		this.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
-		stateTime = 0f;
 	}
 	
 	private void initUnits(Array<Unit> units, boolean isEnemy) {
@@ -122,8 +128,6 @@ public class GameScreen implements Screen {
 		this.textureAtlas = textureAtlas;
 	}
 
-	float stateTime;
-	
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -131,24 +135,26 @@ public class GameScreen implements Screen {
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 		GameScreen.delta = delta;
-		
-		stateTime += Gdx.graphics.getDeltaTime();
 //		BadLogic.currentFrame = BadLogic.animation.getKeyFrame(stateTime, true);
 		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 //			badLogic.draw(batch);
 			map.draw(batch);
+			defeatedZone.draw(batch);
 			for(int i = 0; i < allies.size; i++)
 				allies.get(i).draw(batch);
+						
 //				units.get(1).draw(batch);
 			for(int i = 0; i < enemies.size; i++)
 				enemies.get(i).draw(batch);
 		batch.end();
 		
 		ui.draw();
-		ui.setLabelX(Float.toString(camera.unproject(new Vector3(Gdx.input.getX(), 0, 0)).x));
-		ui.setLabelY(Float.toString(camera.unproject(new Vector3(0, Gdx.input.getY(), 0)).y));
+		ui.attachLabels();
+//		ui.setLabelX(Float.toString(Gdx.input.getX()) + ":" +Float.toString(Gdx.input.getY()));
+//		ui.setLabelY(Float.toString(allies.get(0).getBounds().getX()) + ":" +Float.toString(allies.get(0).getBounds().getY()));
+		
 //		ui.setLabelX(String.format("%.3g%n", badLogic.getBounds().getX()));
 //		ui.setLabelY(String.format("%.3g%n", badLogic.getBounds().getY()));
 //		ui.setLabelSpeed(String.format("%.3g%n", badLogic.getSpeed()));
@@ -156,8 +162,9 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		float aspectRation = (float)height/width;
+//		float aspectRation = (float)height/width;		
 		camera = new OrthographicCamera(1377f, 768f);
+		
 		camera.update();
 	}
 
