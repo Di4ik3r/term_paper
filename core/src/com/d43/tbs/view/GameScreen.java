@@ -60,6 +60,7 @@ public class GameScreen implements Screen {
 		allies.add(knight);
 		allies.add(knight1);
 		this.initUnits(allies, false);
+		
 //		for(int i = 0; i < allies.size; i++)
 //		{
 //			allies.get(i).setUnitToControl();
@@ -72,10 +73,16 @@ public class GameScreen implements Screen {
 //		}
 		
 		Unit zombie = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * 68/41);
+		Unit zombie1 = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * 68/41);
+		Unit zombie2 = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * 68/41);
 		Unit orc = new Orc(textureAtlas.findRegion("orc"), -390, 210, unitSize, unitSize * 70/35);
+		Unit orc1 = new Orc(textureAtlas.findRegion("orc"), -390, 210, unitSize, unitSize * 70/35);
 		enemies = new Array<Unit>();
 		enemies.add(zombie);
+		enemies.add(zombie1);
+		enemies.add(zombie2);
 		enemies.add(orc);
+		enemies.add(orc1);
 		this.initUnits(enemies, true);
 		
 		defeatedZone = new DefeatedZone(this.textureAtlas, textureAtlas.findRegion("0"), -5f, 10f, 1f, 1f);
@@ -119,10 +126,27 @@ public class GameScreen implements Screen {
 				col = Rnd.generate(0, map.getCols()-1);
 			}
 			
+//			generateCoord(row, col, isEnemy);
+			
 			if(map.getCell(row, col).getUnit() == null)
 				units.get(i).setCell(map.getCell(row, col));
 		}
 	}
+	
+//	private void generateCoord(int row, int col, boolean isEnemy) {
+//		if(isEnemy) {
+//			row = Rnd.generate(map.getRows() - map.getRows()/3, map.getRows()-1);
+//			col = Rnd.generate(0, map.getCols()-1);
+//		}
+//		else {
+//			row = Rnd.generate(0, map.getRows()/3);
+//			col = Rnd.generate(0, map.getCols()-1);
+//		}
+//		
+//		if(map.getCell(row, col).getUnit() != null)
+//			generateCoord(row, col, isEnemy);
+//		else return;
+//	}
 	
 	public void setTextureAtlas(TextureAtlas textureAtlas) {
 		this.textureAtlas = textureAtlas;
@@ -152,8 +176,8 @@ public class GameScreen implements Screen {
 		
 		ui.draw();
 		ui.attachLabels();
-//		ui.setLabelX(Float.toString(Gdx.input.getX()) + ":" +Float.toString(Gdx.input.getY()));
-//		ui.setLabelY(Float.toString(allies.get(0).getBounds().getX()) + ":" +Float.toString(allies.get(0).getBounds().getY()));
+//		ui.setLabelX(Float.toString(Gdx.input.getX()));
+//		ui.setLabelY(Float.toString(Gdx.input.getY()));
 		
 //		ui.setLabelX(String.format("%.3g%n", badLogic.getBounds().getX()));
 //		ui.setLabelY(String.format("%.3g%n", badLogic.getBounds().getY()));

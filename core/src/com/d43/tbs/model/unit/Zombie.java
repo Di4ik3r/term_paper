@@ -8,7 +8,7 @@ public class Zombie extends MeleeUnit {
 	public Zombie(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
 		
-		this.setRangeMovement(1);
+		this.setRangeMovement(3);
 		this.setRangeAttack(1);
 		this.setHp(16);
 		this.setDamage(24);

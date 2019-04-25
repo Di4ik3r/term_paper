@@ -39,8 +39,8 @@ public class DefeatedZone extends GameObject {
 			this.allies[i] = cell;
 		}
 		
-		for(int i = 0; i < enemiesCount; i++) {
-			Cell cell = new Cell(regions, (5.88f + i*0.99f)*multiplier, (-3.5f + 11f*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
+		for(int i = enemiesCount-1; i >= 0; i--) {
+			Cell cell = new Cell(regions, (2f + i*0.99f)*multiplier, (-3.5f + 11f*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 			cell.setForDefeated(true);
 			this.enemies[i] = cell;
 		}

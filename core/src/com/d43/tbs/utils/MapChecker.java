@@ -61,7 +61,7 @@ public class MapChecker {
 	
 	private void paintAvailableCell() {
 		for(int i = 0; i < this.availableCells.size; i++)
-			this.availableCells.get(i).setRegion(this.availableCells.get(i).containsUnit() ? this.textureAtlas.findRegion("0") : this.textureAtlas.findRegion("cellPickable"));
+			this.availableCells.get(i).setRegion(this.availableCells.get(i).containsUnit() ? this.textureAtlas.findRegion("cellPickable") : this.textureAtlas.findRegion("cellPickable"));
 	}
 	
 	private boolean cellIsAvailable(Cell cell) {

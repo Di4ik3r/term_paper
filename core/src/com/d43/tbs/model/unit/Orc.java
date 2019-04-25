@@ -9,7 +9,7 @@ public class Orc extends RangeUnit {
 		super(textureRegion, x, y, width, height);
 		
 		this.setRangeMovement(2);
-		this.setRangeAttack(5);
+		this.setRangeAttack(4);
 		this.setHp(42);
 		this.setDamage(19);
 		this.setIsEnemy(true);

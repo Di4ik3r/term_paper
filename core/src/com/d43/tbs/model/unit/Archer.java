@@ -15,9 +15,9 @@ public class Archer extends RangeUnit {
 		super(textureRegion, x, y, width, height);
 		
 		this.setRangeMovement(2);
-		this.setRangeAttack(8);
+		this.setRangeAttack(4);
 		this.setHp(33);
-		this.setDamage(18);
+		this.setDamage(11);
 	}
 	
 	@Override
