@@ -40,7 +40,7 @@ public class GameScreen implements Screen {
 //		badLogic = new BadLogic(textureAtlas.findRegion("0"), 0, 0, 1f, 1.7f);
 
 		// *********************************************************** MAP
-		// *************************************************************
+		// ***********************************************************
 		map = new CellMap(this.textureAtlas, textureAtlas.findRegion("0"), -5f, 10f, 1f, 1f);
 		int a, b;
 		a = 16;
@@ -53,11 +53,13 @@ public class GameScreen implements Screen {
 		float unitSize = 40f;
 
 		// *********************************************************** ALLIES
-		// *************************************************************
-		Unit archer = new Archer(textureAtlas.findRegion("archer"), -360, 210, unitSize, unitSize * 70 / 35);
-		Unit archer1 = new Archer(textureAtlas.findRegion("archer"), -390, 210, unitSize, unitSize * 70 / 35);
-		Unit knight = new Knight(textureAtlas.findRegion("knight"), -390, 210, unitSize, unitSize * 70 / 35);
-		Unit knight1 = new Knight(textureAtlas.findRegion("knight"), -390, 210, unitSize, unitSize * 70 / 35);
+		// ***********************************************************
+		float archerKoef = 70f/35f;
+		float knightKoef = 73f/35f;
+		Unit archer = new Archer(textureAtlas.findRegion("archer"), -360, 210, unitSize, unitSize * archerKoef);
+		Unit archer1 = new Archer(textureAtlas.findRegion("archer"), -390, 210, unitSize, unitSize * archerKoef);
+		Unit knight = new Knight(textureAtlas.findRegion("knight"), -390, 210, unitSize, unitSize * knightKoef);
+		Unit knight1 = new Knight(textureAtlas.findRegion("knight"), -390, 210, unitSize, unitSize * knightKoef);
 		allies = new Array<Unit>();
 		allies.add(archer);
 		allies.add(archer1);
@@ -77,12 +79,14 @@ public class GameScreen implements Screen {
 //		}
 
 		// *********************************************************** ENEMIES
-		// *************************************************************
-		Unit zombie = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * 68 / 41);
-		Unit zombie1 = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * 68 / 41);
-		Unit zombie2 = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * 68 / 41);
-		Unit orc = new Orc(textureAtlas.findRegion("orc"), -390, 210, unitSize, unitSize * 70 / 35);
-		Unit orc1 = new Orc(textureAtlas.findRegion("orc"), -390, 210, unitSize, unitSize * 70 / 35);
+		// ***********************************************************
+		float zombieKoef = 68f / 41f;
+		float orcKoef = 70f / 35f;
+		Unit zombie = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * zombieKoef);
+		Unit zombie1 = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * zombieKoef);
+		Unit zombie2 = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * zombieKoef);
+		Unit orc = new Orc(textureAtlas.findRegion("orc"), -390, 210, unitSize, unitSize * orcKoef);
+		Unit orc1 = new Orc(textureAtlas.findRegion("orc"), -390, 210, unitSize, unitSize * orcKoef);
 		enemies = new Array<Unit>();
 		enemies.add(zombie);
 		enemies.add(zombie1);
@@ -92,7 +96,7 @@ public class GameScreen implements Screen {
 		this.initUnits(enemies, true);
 
 		// *********************************************************** DEFEATE ZONE
-		// *************************************************************
+		// ***********************************************************
 		defeatedZone = new DefeatedZone(this.textureAtlas, textureAtlas.findRegion("0"), -5f, 10f, 1f, 1f);
 		defeatedZone.initCells(this.allies.size, this.enemies.size);
 		for (int i = 0; i < this.allies.size; i++)
@@ -116,7 +120,7 @@ public class GameScreen implements Screen {
 		map.placeUnits(enemies);
 
 		// *********************************************************** UI
-		// *************************************************************
+		// ***********************************************************
 		ui = new UI(this.textureAtlas);
 		ui.setUnits(allies, enemies);
 
@@ -139,10 +143,6 @@ public class GameScreen implements Screen {
 //		else return;
 //	}
 
-	public void setTextureAtlas(TextureAtlas textureAtlas) {
-		this.textureAtlas = textureAtlas;
-	}
-
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -156,19 +156,21 @@ public class GameScreen implements Screen {
 		batch.begin();
 //			badLogic.draw(batch);
 		map.draw(batch);
+		
 		defeatedZone.draw(batch);
-		for (int i = 0; i < allies.size; i++)
-			allies.get(i).draw(batch);
-
-//				units.get(1).draw(batch);
-		for (int i = 0; i < enemies.size; i++)
-			enemies.get(i).draw(batch);
+			for (int i = 0; i < allies.size; i++)
+				allies.get(i).draw(batch);
+	
+//			units.get(1).draw(batch);
+			for (int i = 0; i < enemies.size; i++)
+				enemies.get(i).draw(batch);
+		
 		batch.end();
 
 		ui.draw();
-		ui.attachLabels();
-//		ui.setLabelX(Float.toString(Gdx.input.getX()));
-//		ui.setLabelY(Float.toString(Gdx.input.getY()));
+//		ui.attachLabels();
+		ui.setLabelX(Float.toString(Gdx.input.getX()));
+		ui.setLabelY(Float.toString(Gdx.input.getY()));
 
 //		ui.setLabelX(String.format("%.3g%n", badLogic.getBounds().getX()));
 //		ui.setLabelY(String.format("%.3g%n", badLogic.getBounds().getY()));
@@ -202,6 +204,10 @@ public class GameScreen implements Screen {
 	public void dispose() {
 		batch.dispose();
 		ui.dispose();
+	}
+
+	public void setTextureAtlas(TextureAtlas textureAtlas) {
+		this.textureAtlas = textureAtlas;
 	}
 
 	private void initUnits(Array<Unit> units, boolean isEnemy) {

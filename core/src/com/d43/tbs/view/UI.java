@@ -129,6 +129,8 @@ public class UI {
 		
 		stage.act();
 		stage.draw();
+		
+		this.attachLabels();
 //		attachLabels();
 	}
 	

@@ -25,6 +25,8 @@ public class MapChecker {
 	private DefeatedZone defeatedZone;
 	
 	private Bot bot;
+	
+	private Unit movingUnit;
 
 	public MapChecker(CellMap cells, DefeatedZone defeatedZone, Array<Unit> allies, Array<Unit> enemies) {
 		this.map = cells;
@@ -36,6 +38,8 @@ public class MapChecker {
 		this.pickedUnit = null;
 		
 		this.bot = new Bot(this.allies, this.enemies, this, this.map);
+		
+		this.movingUnit = null;
 	}
 
 	// ********************** Map Control *********************************
@@ -94,6 +98,10 @@ public class MapChecker {
 	// ********************** Unit Control ********************************
 
 	public void pickUnit(Unit unit) {
+		
+		if(unit.isMoving())
+			return;
+		
 		this.paintToDefault();
 		this.pickedUnit = unit;
 		
@@ -119,6 +127,7 @@ public class MapChecker {
 		if (this.pickedUnit != null) {
 			Cell cell = map.findCell(bounds);
 			if(this.cellIsAvailable(cell)) {
+				this.movingUnit = this.pickedUnit;
 				this.pickedUnit.setCell(cell);
 
 				this.pickedUnit.getCell().setRegion(this.textureAtlas.findRegion("cellBlocked"));

@@ -30,9 +30,9 @@ public class UnitController {
 		if (this.unit == null)
 			return;
 		this.cell = cell;
-		this.bounds.setPosition(
-				this.cell.getBounds().getX() + this.cell.getSize().width / 2 - this.unit.getSize().width / 2,
-				this.cell.getBounds().getY() + this.cell.getSize().height / 2 - this.cell.getSize().height / 4);
+//		this.bounds.setPosition(
+//				this.cell.getBounds().getX() + this.cell.getSize().width / 2 - this.unit.getSize().width / 2,
+//				this.cell.getBounds().getY() + this.cell.getSize().height / 2 - this.cell.getSize().height / 4);
 	}
 
 	public void setMapChecker(MapChecker mapChecker) {

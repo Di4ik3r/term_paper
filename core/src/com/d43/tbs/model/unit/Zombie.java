@@ -13,7 +13,6 @@ public class Zombie extends MeleeUnit {
 		this.setHp(16);
 		this.setDamage(24);
 		this.setIsEnemy(true);
-		this.setReplaceability(false);
 	}
 	
 	@Override
