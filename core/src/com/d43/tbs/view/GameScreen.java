@@ -29,6 +29,7 @@ public class GameScreen implements Screen {
 //	private BadLogic badLogic;
 	Array<Unit> allies;
 	Array<Unit> enemies;
+	Array<Unit> units;
 	private CellMap map;
 	DefeatedZone defeatedZone;
 
@@ -124,10 +125,30 @@ public class GameScreen implements Screen {
 		ui = new UI(this.textureAtlas);
 		ui.setUnits(allies, enemies);
 
+		
+		// *********************************************************** UNITS CONTAINER
+		// ***********************************************************
+		units = new Array<Unit>();
+		for(int i = 0; i < allies.size; i++)
+			units.add(allies.get(i));
+		for(int i = 0; i < enemies.size; i++)
+			units.add(enemies.get(i));
+		this.sortUnits();
+		
+		
 		this.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 	}
 
+	private void sortUnits() {
+		for(int j = 0; j < units.size; j++)
+			for(int i = 0; i < units.size-1; i++)
+				if(units.get(i).getCell() != null && units.get(i+1).getCell() != null)
+					if(map.cellExist(units.get(i).getCell().getBounds()) && map.cellExist(units.get(i+1).getCell().getBounds()))
+						if(map.findCellCoord(units.get(i).getCell().getBounds()).y < map.findCellCoord(units.get(i+1).getCell().getBounds()).y)
+							units.swap(i, i+1);
+	}
+	
 //	private void generateCoord(int row, int col, boolean isEnemy) {
 //		if(isEnemy) {
 //			row = Rnd.generate(map.getRows() - map.getRows()/3, map.getRows()-1);
@@ -151,23 +172,28 @@ public class GameScreen implements Screen {
 
 		GameScreen.delta = delta;
 //		BadLogic.currentFrame = BadLogic.animation.getKeyFrame(stateTime, true);
-
+		
 		batch.setProjectionMatrix(camera.combined);
+		ui.draw();
 		batch.begin();
 //			badLogic.draw(batch);
-		map.draw(batch);
+			map.draw(batch);
 		
-		defeatedZone.draw(batch);
-			for (int i = 0; i < allies.size; i++)
-				allies.get(i).draw(batch);
+			defeatedZone.draw(batch);
+			
+//			for (int i = 0; i < allies.size; i++)
+//				allies.get(i).draw(batch);
 	
+			for (int i = 0; i < units.size; i++)
+				units.get(i).draw(batch);
+			
 //			units.get(1).draw(batch);
-			for (int i = 0; i < enemies.size; i++)
-				enemies.get(i).draw(batch);
+			
+//			for (int i = 0; i < enemies.size; i++)
+//				enemies.get(i).draw(batch);
 		
 		batch.end();
 
-		ui.draw();
 //		ui.attachLabels();
 		ui.setLabelX(Float.toString(Gdx.input.getX()));
 		ui.setLabelY(Float.toString(Gdx.input.getY()));
@@ -175,6 +201,8 @@ public class GameScreen implements Screen {
 //		ui.setLabelX(String.format("%.3g%n", badLogic.getBounds().getX()));
 //		ui.setLabelY(String.format("%.3g%n", badLogic.getBounds().getY()));
 //		ui.setLabelSpeed(String.format("%.3g%n", badLogic.getSpeed()));
+		
+		this.sortUnits();
 	}
 
 	@Override

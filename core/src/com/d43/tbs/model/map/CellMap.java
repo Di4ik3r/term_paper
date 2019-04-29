@@ -108,6 +108,14 @@ public class CellMap extends GameObject{
 //		return "";
 //	}
 	
+	public boolean cellExist(Polygon bounds) {
+		for(int i = 0; i < this.rows; i++)
+			for(int j = 0; j < this.cols; j++)
+				if(map[i][j].getBounds() == bounds)
+					return true;
+		return false;
+	}
+	
 	public Cell findCell(Polygon bounds) {
 		for(int i = 0; i < this.rows; i++)
 			for(int j = 0; j < this.cols; j++)

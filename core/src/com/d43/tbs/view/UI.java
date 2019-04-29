@@ -29,9 +29,7 @@ public class UI {
 	
 	private Array<Label> hps;
 	private Array<Unit> units;
-	
-	private OrthographicCamera camera;
-	
+		
 	
 	public UI(TextureAtlas atlas) {
 		this.atlas = atlas;
@@ -62,7 +60,9 @@ public class UI {
 //			hps.get(i).setPosition(Gdx.graphics.getWidth() - units.get(i).getBounds().getX(), Gdx.graphics.getHeight()-units.get(i).getBounds().getY());
 //			hps.get(i).setPosition(Gdx.input.getX(), Gdx.input.getY());
 //			if(camera != null)
-			hps.get(i).setPosition(Gdx.graphics.getWidth()/2 + units.get(i).getBounds().getX(), Gdx.graphics.getHeight()/2 +  units.get(i).getBounds().getY());
+			
+//			hps.get(i).setPosition(Gdx.graphics.getWidth()/2 + units.get(i).getBounds().getX(), Gdx.graphics.getHeight()/2 +  units.get(i).getBounds().getY());
+			hps.get(i).setPosition(Gdx.graphics.getWidth()/2 + units.get(i).getBounds().getX() + 25, Gdx.graphics.getHeight()/2 +  units.get(i).getBounds().getY() + 5);
 			hps.get(i).setText(units.get(i).getHp());
 		}
 	}
