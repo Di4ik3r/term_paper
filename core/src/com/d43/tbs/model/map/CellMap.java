@@ -44,7 +44,9 @@ public class CellMap extends GameObject{
 //					cell = new Cell(regions, (-8 + i*0.99f)*multiplier+multiplier/2, (-3.5f + j*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 //				else 
 //					cell = new Cell(regions, (-8 + i*0.99f)*multiplier, (-3.5f + j*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
-				cell = new Cell(regions, (-8 + i*0.99f)*multiplier, (-4.3f + j*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
+//				cell = new Cell(regions, (-8 + i*0.99f)*multiplier, (-4.3f + j*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
+//				cell = new Cell(regions, (-8 + i*1f)*multiplier, (-4.3f + j*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
+				cell = new Cell(regions, (-8 + i*1f)*multiplier, (-4.5f + j*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 				map[i][j] = cell;
 			}
 	}
@@ -79,6 +81,7 @@ public class CellMap extends GameObject{
 	
 	@Override
 	public void draw(SpriteBatch batch) {
+		super.draw(batch);
 		for(int i = 0; i < this.rows; i++)
 			for(int j = 0; j < this.cols; j++)
 			map[i][j].draw(batch);

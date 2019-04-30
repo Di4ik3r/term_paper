@@ -12,7 +12,7 @@ import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.utils.IdCounter;
 import com.d43.tbs.utils.MapChecker;
 
-public class Unit extends GameObject {
+public abstract class Unit extends GameObject {
 
 	public static float SPEED_X = 8, SPEED_Y = 6;
 	public static Vector2 BASIC_SIZE = new Vector2(40f, 70f / 35f);

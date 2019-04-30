@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
-import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.model.map.CellMap;
 import com.d43.tbs.model.map.DefeatedZone;
 import com.d43.tbs.model.unit.Archer;
@@ -39,10 +39,13 @@ public class GameScreen implements Screen {
 	public void show() {
 		batch = new SpriteBatch();
 //		badLogic = new BadLogic(textureAtlas.findRegion("0"), 0, 0, 1f, 1.7f);
+		
+//		this.background = new TextureRegion(this.textureAtlas.findRegion("grass"), 0, 0, 1366, 768);
 
 		// *********************************************************** MAP
 		// ***********************************************************
-		map = new CellMap(this.textureAtlas, textureAtlas.findRegion("0"), -5f, 10f, 1f, 1f);
+//		map = new CellMap(this.textureAtlas, textureAtlas.findRegion("grass"), -5f, 10f, 1f, 1f);
+		map = new CellMap(this.textureAtlas, textureAtlas.findRegion("dirt"),  -Gdx.graphics.getWidth()/2, -Gdx.graphics.getHeight()/2, 1366, 768);
 		int a, b;
 		a = 16;
 		b = 10;
@@ -173,12 +176,13 @@ public class GameScreen implements Screen {
 		GameScreen.delta = delta;
 //		BadLogic.currentFrame = BadLogic.animation.getKeyFrame(stateTime, true);
 		
+		
 		batch.setProjectionMatrix(camera.combined);
-		ui.draw();
 		batch.begin();
 //			badLogic.draw(batch);
 			map.draw(batch);
-		
+			batch.draw(this.textureAtlas.findRegion("grass_behind"), -Gdx.graphics.getWidth()/2, -Gdx.graphics.getHeight()/2);
+			
 			defeatedZone.draw(batch);
 			
 //			for (int i = 0; i < allies.size; i++)
@@ -192,8 +196,11 @@ public class GameScreen implements Screen {
 //			for (int i = 0; i < enemies.size; i++)
 //				enemies.get(i).draw(batch);
 		
+			batch.draw(this.textureAtlas.findRegion("grass_above"), -Gdx.graphics.getWidth()/2, -Gdx.graphics.getHeight()/2);
 		batch.end();
+		
 
+		ui.draw();
 //		ui.attachLabels();
 		ui.setLabelX(Float.toString(Gdx.input.getX()));
 		ui.setLabelY(Float.toString(Gdx.input.getY()));
@@ -208,7 +215,7 @@ public class GameScreen implements Screen {
 	@Override
 	public void resize(int width, int height) {
 //		float aspectRation = (float)height/width;		
-		camera = new OrthographicCamera(1377f, 768f);
+		camera = new OrthographicCamera(1366f, 768f);
 
 		camera.update();
 	}

@@ -34,13 +34,16 @@ public class DefeatedZone extends GameObject {
 		int multiplier = 80;
 		
 		for(int i = 0; i < alliesCount; i++) {
-			Cell cell = new Cell(regions, (-8 + i*0.99f)*multiplier, (-3.5f + 11f*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
+//			Cell cell = new Cell(regions, (-8 + i*0.99f)*multiplier, (-3.5f + 11f*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
+			Cell cell = new Cell(regions, (-8 + i*1f)*multiplier, (-3.5f + 11*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 			cell.setForDefeated(true);
 			this.allies[i] = cell;
 		}
 		
 		for(int i = enemiesCount-1; i >= 0; i--) {
-			Cell cell = new Cell(regions, (2f + i*0.99f)*multiplier, (-3.5f + 11f*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
+//			Cell cell = new Cell(regions, (2f + i*0.99f)*multiplier, (-3.5f + 11f*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
+//			Cell cell = new Cell(regions, (-8 + i*1f)*multiplier, (-3.5f + 10f*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
+			Cell cell = new Cell(regions, (-8 + i*1f)*multiplier, (-3.5f + 10*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 			cell.setForDefeated(true);
 			this.enemies[i] = cell;
 		}
@@ -76,11 +79,11 @@ public class DefeatedZone extends GameObject {
 	
 	@Override
 	public void draw(SpriteBatch batch) {
-		for(int i = 0; i < allies.length; i++) 
-			allies[i].draw(batch);
-		
 		for(int i = 0; i < enemies.length; i++) 
 			enemies[i].draw(batch);
+		
+		for(int i = 0; i < allies.length; i++) 
+			allies[i].draw(batch);
 	}
 	
 	public Cell[] getAlliesCells() {
