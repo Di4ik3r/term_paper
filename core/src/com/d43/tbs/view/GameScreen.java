@@ -146,6 +146,7 @@ public class GameScreen implements Screen {
 		this.enemies = new Array<Unit>();
 		for (int i = 0; i < units.size; i++) {
 //			units.get(i).setCell(map.getCell((int)units.get(i).getLocation().x, (int)units.get(i).getLocation().y));
+			units.get(i).changeSpeed(3.6f, 3.6f);
 			if(units.get(i).isEnemy())
 				enemies.add(units.get(i));
 			else 
