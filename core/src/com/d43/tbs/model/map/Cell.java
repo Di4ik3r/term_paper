@@ -10,6 +10,7 @@ import com.d43.tbs.control.CellController;
 import com.d43.tbs.control.MapHandler;
 import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.unit.Unit;
+import com.d43.tbs.view.ChooseScreen;
 
 public class Cell extends GameObject {
 
@@ -33,6 +34,10 @@ public class Cell extends GameObject {
 		this.textureRegion = regions.get(0);
 
 		this.forDefeated = false;
+	}
+	
+	public void setChooseScreen(ChooseScreen chooseScreen) {
+		this.controller.setChooseScreen(chooseScreen);
 	}
 
 	public Vector2 locationForUnit() {
@@ -102,7 +107,7 @@ public class Cell extends GameObject {
 		super.draw(batch);
 		controller.handle();
 		
-		if(this.unit != null)
-			this.unit.draw(batch);
+//		if(this.unit != null)
+//			this.unit.draw(batch);
 	}
 }

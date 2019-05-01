@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.control.MapHandler;
 import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.unit.Unit;
+import com.d43.tbs.view.ChooseScreen;
 
 public class ChoosingZone extends GameObject {
 	private Cell[] allies, enemies;
@@ -19,7 +20,7 @@ public class ChoosingZone extends GameObject {
 		this.textureAtlas = textureAtlas;
 	}
 	
-	public void initCells(int alliesCount, int enemiesCount) {
+	public void initCells(ChooseScreen chooseScreen, int alliesCount, int enemiesCount) {
 		this.allies = new Cell[alliesCount];
 		this.enemies = new Cell[enemiesCount];
 		
@@ -35,6 +36,7 @@ public class ChoosingZone extends GameObject {
 //			Cell cell = new Cell(regions, (-8 + i*1f)*multiplier, (-3.5f + 11*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 			Cell cell = new Cell(regions, (-7 + i*1f)*multiplier, (-3.5f + 11.1f*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 			cell.setForDefeated(true);
+			cell.setChooseScreen(chooseScreen);
 			this.allies[i] = cell;
 		}
 		
@@ -44,6 +46,7 @@ public class ChoosingZone extends GameObject {
 //			Cell cell = new Cell(regions, (-8 + i*1f)*multiplier, (-3.5f + 10*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 			Cell cell = new Cell(regions, (5 + i*1f)*multiplier, (-3.5f + 10.1f*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 			cell.setForDefeated(true);
+			cell.setChooseScreen(chooseScreen);
 			this.enemies[i] = cell;
 		}
 	}

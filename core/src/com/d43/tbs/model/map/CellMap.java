@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.control.MapHandler;
 import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.unit.Unit;
+import com.d43.tbs.view.ChooseScreen;
 
 public class CellMap extends GameObject{
 	
@@ -19,6 +20,8 @@ public class CellMap extends GameObject{
 	private Array<Unit> choosingUnits;
 	
 	private TextureAtlas textureAtlas;
+	
+	private ChooseScreen chooseScreen;
 	
 	public CellMap(TextureAtlas textureAtlas, TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
@@ -53,6 +56,15 @@ public class CellMap extends GameObject{
 //				cell = new Cell(regions, (-8 + i*1f)*multiplier, (-4.5f + j*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 				cell = new Cell(regions, (-8 + i*1f)*multiplier, (-4.4f + j*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 				map[i][j] = cell;
+			}
+	}
+	
+	public void initChooseScreen(ChooseScreen chooseScreen) {
+		this.chooseScreen = chooseScreen;
+		
+		for(int i = 0; i < rows; i++)
+			for(int j = 0; j < cols; j++) {
+				map[i][j].setChooseScreen(chooseScreen);
 			}
 	}
 	

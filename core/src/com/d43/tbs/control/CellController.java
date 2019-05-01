@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Polygon;
 import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.model.unit.Unit;
+import com.d43.tbs.view.ChooseScreen;
 
 public class CellController {
 
@@ -13,6 +14,8 @@ public class CellController {
 	private Cell cell;
 
 	private MapHandler mapHandler;
+	
+	private ChooseScreen chooseScreen;
 
 	public CellController(Polygon bounds) {
 		this.bounds = bounds;
@@ -24,8 +27,8 @@ public class CellController {
 		this.mapHandler = mapHandler;
 	}
 
-	public void setMapChoosing(MapChoosing mapChoosing) {
-
+	public void setChooseScreen(ChooseScreen chooseScreen) {
+		this.chooseScreen = chooseScreen;
 	}
 
 	public void handle() {
@@ -50,8 +53,11 @@ public class CellController {
 				}
 				if (this.mapHandler != null && !mapHandler.isPlaying()) {
 					if (this.unit != null) {
-						if(this.unit.isForChoose())
-							mapHandler.pickUnit(this.unit.clone());
+						if(this.unit.isForChoose()) {
+							Unit unitToSet = this.unit.clone();
+							mapHandler.pickUnit(unitToSet);
+							chooseScreen.addUnit(unitToSet);
+						}
 						else if(!this.unit.isMoving()) 
 							mapHandler.pickUnit(this.unit);
 					}
@@ -60,22 +66,7 @@ public class CellController {
 						mapHandler.pickUnit(null);
 					}
 				}
-				
 			}
-			
-			if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
-				if (this.mapHandler != null && !mapHandler.isPlaying()) {
-					if (this.unit != null) {
-						mapHandler.pickUnit(null);
-						this.unit = null;
-						Gdx.app.log("log", "delete");
-					}
-					else {
-					}
-				}
-				
-			}
-
 		} else
 			this.cell.changeTextureRegion(this.cell.getRegion());
 	}

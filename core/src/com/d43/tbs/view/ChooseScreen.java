@@ -56,6 +56,8 @@ public class ChooseScreen implements Screen {
 		for (int i = 0; i < a; i++)
 			for (int j = 0; j < b; j++)
 				map.getCell(i, j).setCell();
+		
+		map.initChooseScreen(this);
 
 		float unitSize = 40f;
 
@@ -99,7 +101,7 @@ public class ChooseScreen implements Screen {
 		// *********************************************************** CHOOSING ZONE
 		// ***********************************************************
 		choosingZone = new ChoosingZone(this.textureAtlas, textureAtlas.findRegion("0"), -5f, 10f, 1f, 1f);
-		choosingZone.initCells(this.allies.size, this.enemies.size);
+		choosingZone.initCells(this, this.allies.size, this.enemies.size);
 		for (int i = 0; i < this.allies.size; i++) {
 			choosingZone.getAlliesCell(i).setCell();
 //			choosingZone.getAlliesCell(i).setMapHandler(mapChoosing);
@@ -231,6 +233,10 @@ public class ChooseScreen implements Screen {
 			this.game.setGameUnits(unitsToExport);
 			this.game.startPlay();
 		}
+	}
+	
+	public void addUnit(Unit unit) {
+		units.add(unit);
 	}
 
 	@Override
