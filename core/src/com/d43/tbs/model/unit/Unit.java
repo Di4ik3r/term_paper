@@ -34,6 +34,8 @@ public abstract class Unit extends GameObject {
 	private TextureRegion textureRegion;
 	
 	private boolean isForChoose;
+	
+	private Vector2 location;
 
 	public Unit(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
@@ -179,7 +181,16 @@ public abstract class Unit extends GameObject {
 
 	public void moveTo(Vector2 locationToMove) {
 		this.locationToMove = locationToMove;
+
 		this.isMoving = true;
+	}
+	
+	public Vector2 getLocation() {
+		return this.location;
+	}
+	
+	public void setLocation(float x, float y) {
+		this.location = new Vector2(x, y);
 	}
 
 	@Override

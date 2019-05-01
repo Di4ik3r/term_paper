@@ -54,22 +54,22 @@ public class GameScreen implements Screen {
 			for (int j = 0; j < b; j++)
 				map.getCell(i, j).setCell();
 
-		float unitSize = 40f;
+//		float unitSize = 40f;
 
 		// *********************************************************** ALLIES
 		// ***********************************************************
-		float archerKoef = 70f / 35f;
-		float knightKoef = 73f / 35f;
-		Unit archer = new Archer(textureAtlas.findRegion("archer"), -360, 210, unitSize, unitSize * archerKoef);
-		Unit archer1 = new Archer(textureAtlas.findRegion("archer"), -390, 210, unitSize, unitSize * archerKoef);
-		Unit knight = new Knight(textureAtlas.findRegion("knight"), -390, 210, unitSize, unitSize * knightKoef);
-		Unit knight1 = new Knight(textureAtlas.findRegion("knight"), -390, 210, unitSize, unitSize * knightKoef);
-		allies = new Array<Unit>();
-		allies.add(archer);
-		allies.add(archer1);
-		allies.add(knight);
-		allies.add(knight1);
-		this.initUnits(allies, false);
+//		float archerKoef = 70f / 35f;
+//		float knightKoef = 73f / 35f;
+//		Unit archer = new Archer(textureAtlas.findRegion("archer"), -360, 210, unitSize, unitSize * archerKoef);
+//		Unit archer1 = new Archer(textureAtlas.findRegion("archer"), -390, 210, unitSize, unitSize * archerKoef);
+//		Unit knight = new Knight(textureAtlas.findRegion("knight"), -390, 210, unitSize, unitSize * knightKoef);
+//		Unit knight1 = new Knight(textureAtlas.findRegion("knight"), -390, 210, unitSize, unitSize * knightKoef);
+//		allies = new Array<Unit>();
+//		allies.add(archer);
+//		allies.add(archer1);
+//		allies.add(knight);
+//		allies.add(knight1);
+//		this.initUnits(allies, false);
 
 //		for(int i = 0; i < allies.size; i++)
 //		{
@@ -84,20 +84,20 @@ public class GameScreen implements Screen {
 
 		// *********************************************************** ENEMIES
 		// ***********************************************************
-		float zombieKoef = 68f / 41f;
-		float orcKoef = 70f / 35f;
-		Unit zombie = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * zombieKoef);
-		Unit zombie1 = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * zombieKoef);
-		Unit zombie2 = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * zombieKoef);
-		Unit orc = new Orc(textureAtlas.findRegion("orc"), -390, 210, unitSize, unitSize * orcKoef);
-		Unit orc1 = new Orc(textureAtlas.findRegion("orc"), -390, 210, unitSize, unitSize * orcKoef);
-		enemies = new Array<Unit>();
-		enemies.add(zombie);
-		enemies.add(zombie1);
-		enemies.add(zombie2);
-		enemies.add(orc);
-		enemies.add(orc1);
-		this.initUnits(enemies, true);
+//		float zombieKoef = 68f / 41f;
+//		float orcKoef = 70f / 35f;
+//		Unit zombie = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * zombieKoef);
+//		Unit zombie1 = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * zombieKoef);
+//		Unit zombie2 = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * zombieKoef);
+//		Unit orc = new Orc(textureAtlas.findRegion("orc"), -390, 210, unitSize, unitSize * orcKoef);
+//		Unit orc1 = new Orc(textureAtlas.findRegion("orc"), -390, 210, unitSize, unitSize * orcKoef);
+//		enemies = new Array<Unit>();
+//		enemies.add(zombie);
+//		enemies.add(zombie1);
+//		enemies.add(zombie2);
+//		enemies.add(orc);
+//		enemies.add(orc1);
+//		this.initUnits(enemies, true);
 
 		// *********************************************************** DEFEATE ZONE
 		// ***********************************************************
@@ -130,19 +130,28 @@ public class GameScreen implements Screen {
 
 		// *********************************************************** UNITS CONTAINER
 		// ***********************************************************
-		units = new Array<Unit>();
-		for (int i = 0; i < allies.size; i++)
-			units.add(allies.get(i));
-		for (int i = 0; i < enemies.size; i++)
-			units.add(enemies.get(i));
-		this.sortUnits();
+//		units = new Array<Unit>();
+//		for (int i = 0; i < allies.size; i++)
+//			units.add(allies.get(i));
+//		for (int i = 0; i < enemies.size; i++)
+//			units.add(enemies.get(i));
+//		this.sortUnits();
 
 		this.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
 	}
 	
 	public void setUnits(Array<Unit> units) {
 		this.units = units;
+		this.allies= new Array<Unit>();
+		this.enemies = new Array<Unit>();
+		for (int i = 0; i < units.size; i++) {
+//			units.get(i).setCell(map.getCell((int)units.get(i).getLocation().x, (int)units.get(i).getLocation().y));
+			if(units.get(i).isEnemy())
+				enemies.add(units.get(i));
+			else 
+				allies.add(units.get(i));
+		}
+//		this.sortUnits();
 	}
 
 	private void sortUnits() {

@@ -222,7 +222,13 @@ public class ChooseScreen implements Screen {
 		this.sortUnits();
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-//			this.game.setGameUnits(units);
+			Array<Unit> unitsToExport = new Array<Unit>();
+			for(int i = 0; i < map.getRows(); i++)
+				for(int j = 0; j < map.getCols(); j++)
+					if(map.getCell(i, j).containsUnit())
+						unitsToExport.add(map.getCell(i, j).getUnit());
+						
+			this.game.setGameUnits(unitsToExport);
 			this.game.startPlay();
 		}
 	}

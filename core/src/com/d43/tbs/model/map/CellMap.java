@@ -79,6 +79,8 @@ public class CellMap extends GameObject{
 	}
 	
 	public void placeUnits(Array<Unit> units) {
+		for(int i = 0; i < units.size; i++)
+			units.get(i).setCell(this.getCell((int)units.get(i).getLocation().x, (int)units.get(i).getLocation().y));
 //		for(int i = 0; i < this.cols; i++)
 //			for(int j = 0; j < this.rows; j++)
 //				cells[i][j].getController().setUnitOn(-1);
