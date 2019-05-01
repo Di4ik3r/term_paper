@@ -207,7 +207,8 @@ public abstract class Unit extends GameObject {
 //				"(" + Float.toString(this.previousLocation.x) + ", " + Float.toString(this.previousLocation.y) + ") : ("
 //						+ Float.toString(this.locationToMove.x) + ", " + Float.toString(this.locationToMove.y) + ");");
 		if (this.isMoving) {
-			if (this.cell.getBounds().contains(this.getBounds().getX()+20, this.getBounds().getY())) {
+			if (this.cell.getBounds().contains(this.getBounds().getX() + this.getBounds().getBoundingRectangle().width/2, this.getBounds().getY() + this.getBounds().getBoundingRectangle().height/4)) {
+//			if (this.cell.getBounds().contains(this.getBounds().getX(), this.getBounds().getY())) {
 				this.getBounds().setPosition(this.locationToMove.x, this.locationToMove.y);
 				this.isMoving = false;
 				this.locationToMove = null;
