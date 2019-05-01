@@ -191,7 +191,7 @@ public class ChooseScreen implements Screen {
 		batch.begin();
 //			badLogic.draw(batch);
 			map.draw(batch);
-			batch.draw(this.textureAtlas.findRegion("grass_behind"), -Gdx.graphics.getWidth()/2, -Gdx.graphics.getHeight()/2);
+//			batch.draw(this.textureAtlas.findRegion("grass_behind"), -Gdx.graphics.getWidth()/2, -Gdx.graphics.getHeight()/2);
 			
 			choosingZone.draw(batch);
 			
@@ -206,7 +206,7 @@ public class ChooseScreen implements Screen {
 //			for (int i = 0; i < enemies.size; i++)
 //				enemies.get(i).draw(batch);
 		
-			batch.draw(this.textureAtlas.findRegion("grass_above"), -Gdx.graphics.getWidth()/2, -Gdx.graphics.getHeight()/2);
+//			batch.draw(this.textureAtlas.findRegion("grass_above"), -Gdx.graphics.getWidth()/2, -Gdx.graphics.getHeight()/2);
 		batch.end();
 		
 

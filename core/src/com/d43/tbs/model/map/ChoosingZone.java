@@ -33,7 +33,7 @@ public class ChoosingZone extends GameObject {
 		for(int i = 0; i < alliesCount; i++) {
 //			Cell cell = new Cell(regions, (-8 + i*0.99f)*multiplier, (-3.5f + 11f*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 //			Cell cell = new Cell(regions, (-8 + i*1f)*multiplier, (-3.5f + 11*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
-			Cell cell = new Cell(regions, (-8 + i*1f)*multiplier, (-3.5f + 11.1f*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
+			Cell cell = new Cell(regions, (-7 + i*1f)*multiplier, (-3.5f + 11.1f*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 			cell.setForDefeated(true);
 			this.allies[i] = cell;
 		}
@@ -42,7 +42,7 @@ public class ChoosingZone extends GameObject {
 //			Cell cell = new Cell(regions, (2f + i*0.99f)*multiplier, (-3.5f + 11f*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 //			Cell cell = new Cell(regions, (-8 + i*1f)*multiplier, (-3.5f + 10f*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 //			Cell cell = new Cell(regions, (-8 + i*1f)*multiplier, (-3.5f + 10*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
-			Cell cell = new Cell(regions, (-8 + i*1f)*multiplier, (-3.5f + 10.1f*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
+			Cell cell = new Cell(regions, (5 + i*1f)*multiplier, (-3.5f + 10.1f*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 			cell.setForDefeated(true);
 			this.enemies[i] = cell;
 		}
