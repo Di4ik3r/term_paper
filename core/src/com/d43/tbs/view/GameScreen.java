@@ -133,31 +133,32 @@ public class GameScreen implements Screen {
 
 		this.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
-	
+
 	public void setUnits(Array<Unit> units) {
 		this.units = units;
-		this.allies= new Array<Unit>();
+		this.allies = new Array<Unit>();
 		this.enemies = new Array<Unit>();
 		for (int i = 0; i < units.size; i++) {
 //			units.get(i).setCell(map.getCell((int)units.get(i).getLocation().x, (int)units.get(i).getLocation().y));
-			units.get(i).changeSpeed(5f, 4f);
-			if(units.get(i).isEnemy())
+			units.get(i).changeSpeed(8f, 7f);
+			if (units.get(i).isEnemy())
 				enemies.add(units.get(i));
-			else 
+			else
 				allies.add(units.get(i));
 		}
 //		this.sortUnits();
 	}
 
 	private void sortUnits() {
-//		for(int j = 0; j < units.size; j++)
-		for(int j = 0; j < units.size; j++)
-			for(int i = 0; i < units.size-1; i++)
-				if(units.get(i).getCell() != null && units.get(i+1).getCell() != null) 
-					if(map.cellExist(units.get(i).getCell().getBounds()) && map.cellExist(units.get(i+1).getCell().getBounds())) 
-						if(map.findCellCoord(units.get(i).getCell().getBounds()).y < map.findCellCoord(units.get(i+1).getCell().getBounds()).y)
-							units.swap(i, i+1);
-		
+		for (int j = 0; j < units.size; j++)
+			for (int i = 0; i < units.size - 1; i++)
+				if (units.get(i).getCell() != null && units.get(i + 1).getCell() != null)
+					if (map.cellExist(units.get(i).getCell().getBounds())
+							&& map.cellExist(units.get(i + 1).getCell().getBounds()))
+						if (map.findCellCoord(units.get(i).getCell().getBounds()).y < map
+								.findCellCoord(units.get(i + 1).getCell().getBounds()).y)
+							units.swap(i, i + 1);
+
 	}
 
 //	private void generateCoord(int row, int col, boolean isEnemy) {
@@ -187,23 +188,23 @@ public class GameScreen implements Screen {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 //			badLogic.draw(batch);
-			map.draw(batch);
-			batch.draw(this.textureAtlas.findRegion("grass_behind"), -Gdx.graphics.getWidth() / 2,
+		map.draw(batch);
+		batch.draw(this.textureAtlas.findRegion("grass_behind"), -Gdx.graphics.getWidth() / 2,
 				-Gdx.graphics.getHeight() / 2);
 //			for (int i = 0; i < allies.size; i++)
 //				allies.get(i).draw(batch);
 
-			for (int i = 0; i < units.size; i++)
-				if(units.get(i).isAlive())
-					units.get(i).draw(batch);
-			defeatedZone.draw(batch);
+		for (int i = 0; i < units.size; i++)
+			if (units.get(i).isAlive())
+				units.get(i).draw(batch);
+		defeatedZone.draw(batch);
 
 //			units.get(1).draw(batch);
 
 //			for (int i = 0; i < enemies.size; i++)
 //				enemies.get(i).draw(batch);
 
-			batch.draw(this.textureAtlas.findRegion("grass_above"), -Gdx.graphics.getWidth() / 2,
+		batch.draw(this.textureAtlas.findRegion("grass_above"), -Gdx.graphics.getWidth() / 2,
 				-Gdx.graphics.getHeight() / 2);
 		batch.end();
 
