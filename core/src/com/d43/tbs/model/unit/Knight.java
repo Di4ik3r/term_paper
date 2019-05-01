@@ -18,5 +18,9 @@ public class Knight extends MeleeUnit{
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
 	}
+	
+	public Unit clone() {
+		return new Knight(this.getTextureRegion(), this.getBounds().getX(), this.getBounds().getY(), this.getBounds().getBoundingRectangle().width, this.getBounds().getBoundingRectangle().height);
+	}
 
 }

@@ -1,22 +1,19 @@
 package com.d43.tbs.model.map;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.d43.tbs.control.MapPlaying;
+import com.d43.tbs.control.MapHandler;
 import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.unit.Unit;
 
-public class DefeatedZone extends GameObject {
+public class ChoosingZone extends GameObject {
 	private Cell[] allies, enemies;
 	
 	private TextureAtlas textureAtlas;
 	
-	public DefeatedZone(TextureAtlas textureAtlas, TextureRegion textureRegion, float x, float y, float width, float height) {
+	public ChoosingZone(TextureAtlas textureAtlas, TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
 		
 		this.textureAtlas = textureAtlas;
@@ -51,12 +48,19 @@ public class DefeatedZone extends GameObject {
 		}
 	}
 	
+	public void setMapHandler(MapHandler mapHandler) {
+		for(int i = 0; i < allies.length; i++)
+			allies[i].setMapHandler(mapHandler);
+		
+		for(int i = 0; i < enemies.length; i++)
+			enemies[i].setMapHandler(mapHandler);
+	}
+	
 	public void addAllies(Unit unit) {
 		unit.setAlive(false);
 		for(int i = 0; i < allies.length; i++)
 			if(!allies[i].containsUnit()) {
 				unit.setCell(allies[i]);
-				unit.setHp(0);
 //				return;
 			}
 	}
@@ -66,7 +70,6 @@ public class DefeatedZone extends GameObject {
 		for(int i = 0; i < enemies.length; i++)
 			if(!enemies[i].containsUnit()) {
 				unit.setCell(enemies[i]);
-				unit.setHp(0);
 //				return;
 			}
 	}

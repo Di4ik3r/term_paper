@@ -1,10 +1,10 @@
 package com.d43.tbs.model;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.physics.bullet.linearmath.int4;
 
 public abstract class GameObject {
 
@@ -35,4 +35,8 @@ public abstract class GameObject {
 	public void changeTextureRegion(TextureRegion textureRegion) {
 		this.object.setRegion(textureRegion);
 	}
+	
+//	public Texture getTextureRegion() {
+//		return object.getTexture();
+//	}
 }

@@ -1,6 +1,5 @@
-package com.d43.tbs.utils;
+package com.d43.tbs.control;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
@@ -9,26 +8,15 @@ import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.model.map.CellMap;
 import com.d43.tbs.model.map.DefeatedZone;
 import com.d43.tbs.model.unit.Unit;
+import com.d43.tbs.utils.Bot;
+import com.d43.tbs.utils.CellCalculator;
 
-public class MapChecker {
-
-	private CellMap map;
-	private Array<Unit> allies;
-	private Array<Unit> enemies;
-
-	private Unit pickedUnit;
-	
-	private TextureAtlas textureAtlas;
-	
-	private Array<Cell> availableCells;
+public class MapPlaying extends MapHandler{
 	
 	private DefeatedZone defeatedZone;
-	
 	private Bot bot;
-	
-	private Unit movingUnit;
 
-	public MapChecker(CellMap cells, DefeatedZone defeatedZone, Array<Unit> allies, Array<Unit> enemies) {
+	public MapPlaying(CellMap cells, DefeatedZone defeatedZone, Array<Unit> allies, Array<Unit> enemies) {
 		this.map = cells;
 		this.allies = allies;
 		this.enemies = enemies;
@@ -40,6 +28,10 @@ public class MapChecker {
 		this.bot = new Bot(this.allies, this.enemies, this, this.map);
 		
 		this.movingUnit = null;
+	}
+	
+	public boolean isPlaying() {
+		return true;
 	}
 
 	// ********************** Map Control *********************************

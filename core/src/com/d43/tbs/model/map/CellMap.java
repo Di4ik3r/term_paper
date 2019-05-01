@@ -7,14 +7,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.d43.tbs.control.MapHandler;
 import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.unit.Unit;
-import com.d43.tbs.utils.MapChecker;
 
 public class CellMap extends GameObject{
 	
 	private Cell[][] map;
 	private int rows, cols;
+	
+	private Array<Unit> choosingUnits;
 	
 	private TextureAtlas textureAtlas;
 	
@@ -22,6 +24,8 @@ public class CellMap extends GameObject{
 		super(textureRegion, x, y, width, height);
 		
 		this.textureAtlas = textureAtlas;
+		
+		this.choosingUnits = new Array<Unit>();
 	}
 	
 	public void initCells(int rows, int cols) {
@@ -46,9 +50,14 @@ public class CellMap extends GameObject{
 //					cell = new Cell(regions, (-8 + i*0.99f)*multiplier, (-3.5f + j*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 //				cell = new Cell(regions, (-8 + i*0.99f)*multiplier, (-4.3f + j*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 //				cell = new Cell(regions, (-8 + i*1f)*multiplier, (-4.3f + j*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
-				cell = new Cell(regions, (-8 + i*1f)*multiplier, (-4.5f + j*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
+//				cell = new Cell(regions, (-8 + i*1f)*multiplier, (-4.5f + j*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
+				cell = new Cell(regions, (-8 + i*1f)*multiplier, (-4.4f + j*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 				map[i][j] = cell;
 			}
+	}
+	
+	public void addChoosingUnit(Unit unit) {
+		this.choosingUnits.add(unit);
 	}
 	
 	public void reDrawCells() {
@@ -63,10 +72,10 @@ public class CellMap extends GameObject{
 		return this.cols;
 	}
 	
-	public void setMapChecker(MapChecker mapChecker) {
+	public void setMapHandler(MapHandler mapHandler) {
 		for(int i = 0; i < this.rows; i++)
 			for(int j = 0; j < this.cols; j++)
-				map[i][j].setMapChecker(mapChecker);
+				map[i][j].setMapHandler(mapHandler);
 	}
 	
 	public void placeUnits(Array<Unit> units) {
@@ -82,9 +91,13 @@ public class CellMap extends GameObject{
 	@Override
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
+//		for(int i = 0; i < this.rows; i++)
+//			for(int j = 0; j < this.cols; j++)
+//				map[i][j].draw(batch);
+		
 		for(int i = 0; i < this.rows; i++)
-			for(int j = 0; j < this.cols; j++)
-			map[i][j].draw(batch);
+			for(int j = this.cols-1; j >= 0; j--)
+				map[i][j].draw(batch);
 	}
 	
 	public Cell[][] getCells() {

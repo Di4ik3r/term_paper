@@ -20,4 +20,8 @@ public class Zombie extends MeleeUnit {
 		super.draw(batch);
 //		this.controller.handle();
 	}
+	
+	public Unit clone() {
+		return new Zombie(this.getTextureRegion(), this.getBounds().getX(), this.getBounds().getY(), this.getBounds().getBoundingRectangle().width, this.getBounds().getBoundingRectangle().height);
+	}
 }

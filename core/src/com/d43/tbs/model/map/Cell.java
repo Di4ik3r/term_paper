@@ -7,9 +7,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.control.CellController;
+import com.d43.tbs.control.MapHandler;
 import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.unit.Unit;
-import com.d43.tbs.utils.MapChecker;
 
 public class Cell extends GameObject {
 
@@ -77,8 +77,8 @@ public class Cell extends GameObject {
 		return this.unit != null ? true : false;
 	}
 
-	public void setMapChecker(MapChecker mapChecker) {
-		this.controller.setMapChecker(mapChecker);
+	public void setMapHandler(MapHandler mapHandler) {
+		this.controller.setMapHandler(mapHandler);
 	}
 
 //	public Polygon getLocation() {
@@ -92,10 +92,17 @@ public class Cell extends GameObject {
 	public CellController getController() {
 		return this.controller;
 	}
+	
+	public void chooseUnitIssue() {
+		this.controller.unPickUnitChoose();
+	}
 
 	@Override
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
 		controller.handle();
+		
+		if(this.unit != null)
+			this.unit.draw(batch);
 	}
 }

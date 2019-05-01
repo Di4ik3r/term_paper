@@ -3,25 +3,39 @@ package com.d43.tbs;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Array;
+import com.d43.tbs.model.unit.Unit;
 import com.d43.tbs.utils.Assets;
+import com.d43.tbs.view.ChooseScreen;
 import com.d43.tbs.view.GameScreen;
 
-public class TurnBaseStrategy extends Game {
+public class TurnBasedStrategy extends Game {
 
-	private Screen gameScreen;
+	private Screen chooseScreen, gameScreen;
 	private Assets assets;
 	
 	@Override
 	public void create() {
 		assets = new Assets();
+		
+		chooseScreen = new ChooseScreen();
+		((ChooseScreen)chooseScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
+		((ChooseScreen)chooseScreen).setGame(this);
 		gameScreen = new GameScreen();
 		((GameScreen)gameScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
+		this.setScreen(chooseScreen);
+	}
+	
+	public void setGameUnits(Array<Unit> units) {
+	 ((GameScreen)gameScreen).setUnits(units);
+	}
+	public void startPlay() {
 		this.setScreen(gameScreen);
 	}
 	
 	public void dispose() {
 		super.dispose();
-		gameScreen.dispose();
+		this.getScreen().dispose();
 		assets.dispose();
 	}
 	

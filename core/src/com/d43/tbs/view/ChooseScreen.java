@@ -1,15 +1,17 @@
 package com.d43.tbs.view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
-import com.d43.tbs.control.MapPlaying;
+import com.d43.tbs.TurnBasedStrategy;
+import com.d43.tbs.control.MapChoosing;
 import com.d43.tbs.model.map.CellMap;
-import com.d43.tbs.model.map.DefeatedZone;
+import com.d43.tbs.model.map.ChoosingZone;
 import com.d43.tbs.model.unit.Archer;
 import com.d43.tbs.model.unit.Knight;
 import com.d43.tbs.model.unit.Orc;
@@ -17,35 +19,36 @@ import com.d43.tbs.model.unit.Unit;
 import com.d43.tbs.model.unit.Zombie;
 import com.d43.tbs.utils.Rnd;
 
-public class GameScreen implements Screen {
+public class ChooseScreen implements Screen {
 
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
 	private TextureAtlas textureAtlas;
 	public static float delta;
 	private UI ui;
+	
+	private TurnBasedStrategy game;
 
 //	private BadLogic badLogic;
 	Array<Unit> allies;
 	Array<Unit> enemies;
 	Array<Unit> units;
 	private CellMap map;
-	DefeatedZone defeatedZone;
+	ChoosingZone choosingZone;
 
-	private MapPlaying mapPlaying;
+	private MapChoosing mapChoosing;
 
 	@Override
 	public void show() {
 		batch = new SpriteBatch();
 //		badLogic = new BadLogic(textureAtlas.findRegion("0"), 0, 0, 1f, 1.7f);
-
+		
 //		this.background = new TextureRegion(this.textureAtlas.findRegion("grass"), 0, 0, 1366, 768);
 
 		// *********************************************************** MAP
 		// ***********************************************************
 //		map = new CellMap(this.textureAtlas, textureAtlas.findRegion("grass"), -5f, 10f, 1f, 1f);
-		map = new CellMap(this.textureAtlas, textureAtlas.findRegion("dirt"), -Gdx.graphics.getWidth() / 2,
-				-Gdx.graphics.getHeight() / 2, 1366, 768);
+		map = new CellMap(this.textureAtlas, textureAtlas.findRegion("dirt"),  -Gdx.graphics.getWidth()/2, -Gdx.graphics.getHeight()/2, 1366, 768);
 		int a, b;
 		a = 16;
 		b = 10;
@@ -58,17 +61,15 @@ public class GameScreen implements Screen {
 
 		// *********************************************************** ALLIES
 		// ***********************************************************
-		float archerKoef = 70f / 35f;
-		float knightKoef = 73f / 35f;
+		float archerKoef = 70f/35f;
+		float knightKoef = 73f/35f;
 		Unit archer = new Archer(textureAtlas.findRegion("archer"), -360, 210, unitSize, unitSize * archerKoef);
-		Unit archer1 = new Archer(textureAtlas.findRegion("archer"), -390, 210, unitSize, unitSize * archerKoef);
+		archer.setForChoose(true);
 		Unit knight = new Knight(textureAtlas.findRegion("knight"), -390, 210, unitSize, unitSize * knightKoef);
-		Unit knight1 = new Knight(textureAtlas.findRegion("knight"), -390, 210, unitSize, unitSize * knightKoef);
+		knight.setForChoose(true);
 		allies = new Array<Unit>();
 		allies.add(archer);
-		allies.add(archer1);
 		allies.add(knight);
-		allies.add(knight1);
 		this.initUnits(allies, false);
 
 //		for(int i = 0; i < allies.size; i++)
@@ -87,82 +88,80 @@ public class GameScreen implements Screen {
 		float zombieKoef = 68f / 41f;
 		float orcKoef = 70f / 35f;
 		Unit zombie = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * zombieKoef);
-		Unit zombie1 = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * zombieKoef);
-		Unit zombie2 = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * zombieKoef);
+		zombie.setForChoose(true);
 		Unit orc = new Orc(textureAtlas.findRegion("orc"), -390, 210, unitSize, unitSize * orcKoef);
-		Unit orc1 = new Orc(textureAtlas.findRegion("orc"), -390, 210, unitSize, unitSize * orcKoef);
+		orc.setForChoose(true);
 		enemies = new Array<Unit>();
 		enemies.add(zombie);
-		enemies.add(zombie1);
-		enemies.add(zombie2);
 		enemies.add(orc);
-		enemies.add(orc1);
 		this.initUnits(enemies, true);
 
-		// *********************************************************** DEFEATE ZONE
+		// *********************************************************** CHOOSING ZONE
 		// ***********************************************************
-		defeatedZone = new DefeatedZone(this.textureAtlas, textureAtlas.findRegion("0"), -5f, 10f, 1f, 1f);
-		defeatedZone.initCells(this.allies.size, this.enemies.size);
-		for (int i = 0; i < this.allies.size; i++)
-			defeatedZone.getAlliesCell(i).setCell();
-		for (int i = 0; i < this.enemies.size; i++)
-			defeatedZone.getEnemiesCell(i).setCell();
+		choosingZone = new ChoosingZone(this.textureAtlas, textureAtlas.findRegion("0"), -5f, 10f, 1f, 1f);
+		choosingZone.initCells(this.allies.size, this.enemies.size);
+		for (int i = 0; i < this.allies.size; i++) {
+			choosingZone.getAlliesCell(i).setCell();
+//			choosingZone.getAlliesCell(i).setMapHandler(mapChoosing);
+		}
+		for (int i = 0; i < this.enemies.size; i++) {
+			choosingZone.getEnemiesCell(i).setCell();
+//			choosingZone.getEnemiesCell(i).setMapHandler(mapChoosing);
+		}
 
-		// *********************************************************** MAP CHECKER
+		// *********************************************************** MAP HANDLER
 		// *************************************************************
-		this.mapPlaying = new MapPlaying(map, defeatedZone, allies, enemies);
-		this.mapPlaying.setAtlas(this.textureAtlas);
+		this.mapChoosing = new MapChoosing(map, choosingZone, allies, enemies);
+		this.mapChoosing.setAtlas(this.textureAtlas);
 
-		map.setMapHandler(this.mapPlaying);
+		map.setMapHandler(this.mapChoosing);
 		for (int i = 0; i < allies.size; i++) {
-			allies.get(i).setMapHandler(this.mapPlaying);
+			allies.get(i).setMapHandler(this.mapChoosing);
+			choosingZone.addAllies(allies.get(i));
 		}
-		map.placeUnits(allies);
 		for (int i = 0; i < enemies.size; i++) {
-			enemies.get(i).setMapHandler(this.mapPlaying);
+			enemies.get(i).setMapHandler(this.mapChoosing);
+			choosingZone.addEnemies(enemies.get(i));
 		}
-		map.placeUnits(enemies);
 
 		// *********************************************************** UI
 		// ***********************************************************
 		ui = new UI(this.textureAtlas);
 		ui.setUnits(allies, enemies);
-
+		
+		
 		// *********************************************************** UNITS CONTAINER
 		// ***********************************************************
 		units = new Array<Unit>();
-		for (int i = 0; i < allies.size; i++)
+		for(int i = 0; i < allies.size; i++)
 			units.add(allies.get(i));
-		for (int i = 0; i < enemies.size; i++)
+		for(int i = 0; i < enemies.size; i++)
 			units.add(enemies.get(i));
 		this.sortUnits();
-
+		
+		
+		// *********************************************************** HANDLER EXCEPTION CLUE
+		// ***********************************************************
+		this.choosingZone.setMapHandler(mapChoosing);
+		
+		
 		this.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 	}
 	
-	public void setUnits(Array<Unit> units) {
-		this.units = units;
+	public void setGame(TurnBasedStrategy game) {
+		this.game = game;
 	}
 
 	private void sortUnits() {
-//		for(int j = 0; j < units.size; j++)
-//			for(int i = 0; i < units.size-1; i++)
-					
 		for(int j = 0; j < units.size; j++)
 			for(int i = 0; i < units.size-1; i++)
 				if(units.get(i).getCell() != null && units.get(i+1).getCell() != null)
 					if(map.cellExist(units.get(i).getCell().getBounds()) && map.cellExist(units.get(i+1).getCell().getBounds()))
 						if(map.findCellCoord(units.get(i).getCell().getBounds()).y < map.findCellCoord(units.get(i+1).getCell().getBounds()).y)
 							units.swap(i, i+1);
-					
-//					else {
-//						if(units.get(i).isEnemy() && !units.get(i).isEnemy())
-//							units.swap(i, i+1);
-//					}
-		
 	}
-
+	
 //	private void generateCoord(int row, int col, boolean isEnemy) {
 //		if(isEnemy) {
 //			row = Rnd.generate(map.getRows() - map.getRows()/3, map.getRows()-1);
@@ -186,28 +185,30 @@ public class GameScreen implements Screen {
 
 		GameScreen.delta = delta;
 //		BadLogic.currentFrame = BadLogic.animation.getKeyFrame(stateTime, true);
-
+		
+		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 //			badLogic.draw(batch);
 			map.draw(batch);
-			defeatedZone.draw(batch);
-			batch.draw(this.textureAtlas.findRegion("grass_behind"), -Gdx.graphics.getWidth() / 2,
-				-Gdx.graphics.getHeight() / 2);
+			batch.draw(this.textureAtlas.findRegion("grass_behind"), -Gdx.graphics.getWidth()/2, -Gdx.graphics.getHeight()/2);
+			
+			choosingZone.draw(batch);
+			
 //			for (int i = 0; i < allies.size; i++)
 //				allies.get(i).draw(batch);
-
+	
 			for (int i = 0; i < units.size; i++)
 				units.get(i).draw(batch);
-
+			
 //			units.get(1).draw(batch);
-
+			
 //			for (int i = 0; i < enemies.size; i++)
 //				enemies.get(i).draw(batch);
-
-			batch.draw(this.textureAtlas.findRegion("grass_above"), -Gdx.graphics.getWidth() / 2,
-				-Gdx.graphics.getHeight() / 2);
+		
+			batch.draw(this.textureAtlas.findRegion("grass_above"), -Gdx.graphics.getWidth()/2, -Gdx.graphics.getHeight()/2);
 		batch.end();
+		
 
 		ui.draw();
 //		ui.attachLabels();
@@ -217,8 +218,13 @@ public class GameScreen implements Screen {
 //		ui.setLabelX(String.format("%.3g%n", badLogic.getBounds().getX()));
 //		ui.setLabelY(String.format("%.3g%n", badLogic.getBounds().getY()));
 //		ui.setLabelSpeed(String.format("%.3g%n", badLogic.getSpeed()));
-
+		
 		this.sortUnits();
+		
+		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+//			this.game.setGameUnits(units);
+			this.game.startPlay();
+		}
 	}
 
 	@Override

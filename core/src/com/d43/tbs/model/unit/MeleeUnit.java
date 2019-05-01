@@ -1,9 +1,9 @@
 package com.d43.tbs.model.unit;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.d43.tbs.utils.MapChecker;
+import com.d43.tbs.control.MapPlaying;
 
-public class MeleeUnit extends Unit{
+public abstract class MeleeUnit extends Unit{
 
 	public MeleeUnit(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);

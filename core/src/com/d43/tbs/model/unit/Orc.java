@@ -19,4 +19,8 @@ public class Orc extends RangeUnit {
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
 	}
+	
+	public Unit clone() {
+		return new Orc(this.getTextureRegion(), this.getBounds().getX(), this.getBounds().getY(), this.getBounds().getBoundingRectangle().width, this.getBounds().getBoundingRectangle().height);
+	}
 }

@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.d43.tbs.control.MapPlaying;
 import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.model.map.CellMap;
 import com.d43.tbs.model.unit.Unit;
@@ -13,9 +14,9 @@ public class Bot {
 	Array<Unit> allies;
 	Array<Unit> enemies;
 	CellMap map;
-	MapChecker mapChecker;
+	MapPlaying mapChecker;
 	
-	public Bot(Array<Unit> allies, Array<Unit> enemies, MapChecker mapChecker, CellMap map) {
+	public Bot(Array<Unit> allies, Array<Unit> enemies, MapPlaying mapChecker, CellMap map) {
 		this.allies = allies;
 		this.enemies = enemies;
 		this.mapChecker = mapChecker;

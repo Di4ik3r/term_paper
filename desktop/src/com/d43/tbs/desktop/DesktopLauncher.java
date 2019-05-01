@@ -2,7 +2,7 @@ package com.d43.tbs.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.d43.tbs.TurnBaseStrategy;
+import com.d43.tbs.TurnBasedStrategy;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -16,6 +16,6 @@ public class DesktopLauncher {
 		config.foregroundFPS = 60;
 		config.vSyncEnabled = false;
 		
-		new LwjglApplication(new TurnBaseStrategy(), config);
+		new LwjglApplication(new TurnBasedStrategy(), config);
 	}
 }

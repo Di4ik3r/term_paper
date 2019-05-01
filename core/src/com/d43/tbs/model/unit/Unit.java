@@ -6,15 +6,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.d43.tbs.control.MapHandler;
 import com.d43.tbs.control.UnitController;
 import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.utils.IdCounter;
-import com.d43.tbs.utils.MapChecker;
+import com.d43.tbs.view.GameScreen;
 
 public abstract class Unit extends GameObject {
 
 	public static float SPEED_X = 8, SPEED_Y = 6;
+//	public static float SPEED_X = 4, SPEED_Y = 4;
 	public static Vector2 BASIC_SIZE = new Vector2(40f, 70f / 35f);
 
 	private int id, hp, rangeAttack, rangeMovement, damage;
@@ -28,6 +30,10 @@ public abstract class Unit extends GameObject {
 
 	private boolean isMoving;
 	private Vector2 locationToMove;
+	
+	private TextureRegion textureRegion;
+	
+	private boolean isForChoose;
 
 	public Unit(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
@@ -47,8 +53,26 @@ public abstract class Unit extends GameObject {
 
 		this.isMoving = false;
 		this.locationToMove = null;
+		
+		this.textureRegion = textureRegion;
+		
+		this.isForChoose = false;
+	}
+	
+	public boolean isForChoose() {
+		return this.isForChoose;
+	}
+	
+	public void setForChoose(boolean isForChoose) {
+		this.isForChoose = isForChoose;
+	}
+	
+	public TextureRegion getTextureRegion( ) {
+		return this.textureRegion;
 	}
 
+	public abstract Unit clone();
+	
 	public void damage(int damage) {
 		this.hp -= damage;
 		if (hp < 1)
@@ -75,8 +99,8 @@ public abstract class Unit extends GameObject {
 		this.controller.setUnit(this);
 	}
 
-	public void setMapChecker(MapChecker mapChecker) {
-		this.controller.setMapChecker(mapChecker);
+	public void setMapHandler(MapHandler mapHandler) {
+		this.controller.setMapHandler(mapHandler);
 	}
 
 	public void pickedUp() {

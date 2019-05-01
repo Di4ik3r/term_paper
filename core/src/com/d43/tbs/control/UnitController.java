@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Polygon;
 import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.model.unit.Unit;
-import com.d43.tbs.utils.MapChecker;
 
 public class UnitController {
 
@@ -15,7 +14,7 @@ public class UnitController {
 
 	private Unit unit;
 
-	private MapChecker mapChecker;
+	private MapHandler mapHandler;
 
 	public UnitController(int id, Polygon bounds) {
 		this.id = id;
@@ -35,8 +34,8 @@ public class UnitController {
 //				this.cell.getBounds().getY() + this.cell.getSize().height / 2 - this.cell.getSize().height / 4);
 	}
 
-	public void setMapChecker(MapChecker mapChecker) {
-		this.mapChecker = mapChecker;
+	public void setMapHandler(MapHandler mapHandler) {
+		this.mapHandler = mapHandler;
 	}
 
 	public void handle() {
