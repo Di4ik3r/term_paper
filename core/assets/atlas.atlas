@@ -90,11 +90,31 @@ zombie
   index: -1
 
 atlas2.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+choose_behind
+  rotate: false
+  xy: 2, 772
+  size: 1366, 768
+  orig: 1366, 768
+  offset: 0, 0
+  index: -1
+grass_behind
+  rotate: false
+  xy: 2, 2
+  size: 1366, 768
+  orig: 1366, 768
+  offset: 0, 0
+  index: -1
+
+atlas3.png
 size: 2048,1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-grass_behind
+choose_above
   rotate: false
   xy: 2, 2
   size: 1366, 768
