@@ -63,7 +63,11 @@ public class UI {
 			
 //			hps.get(i).setPosition(Gdx.graphics.getWidth()/2 + units.get(i).getBounds().getX(), Gdx.graphics.getHeight()/2 +  units.get(i).getBounds().getY());
 			hps.get(i).setPosition(Gdx.graphics.getWidth()/2 + units.get(i).getBounds().getX() + 25, Gdx.graphics.getHeight()/2 + units.get(i).getBounds().getY() + 5);
-			hps.get(i).setText(units.get(i).getHp());
+			if(units.get(i).getHp() > 0) {
+				hps.get(i).setText(units.get(i).getHp());
+			}
+			else
+				hps.get(i).setText("");
 		}
 	}
 	

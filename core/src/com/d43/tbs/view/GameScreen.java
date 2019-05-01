@@ -10,11 +10,7 @@ import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.control.MapPlaying;
 import com.d43.tbs.model.map.CellMap;
 import com.d43.tbs.model.map.DefeatedZone;
-import com.d43.tbs.model.unit.Archer;
-import com.d43.tbs.model.unit.Knight;
-import com.d43.tbs.model.unit.Orc;
 import com.d43.tbs.model.unit.Unit;
-import com.d43.tbs.model.unit.Zombie;
 import com.d43.tbs.utils.Rnd;
 
 public class GameScreen implements Screen {
@@ -157,19 +153,12 @@ public class GameScreen implements Screen {
 
 	private void sortUnits() {
 //		for(int j = 0; j < units.size; j++)
-//			for(int i = 0; i < units.size-1; i++)
-					
 		for(int j = 0; j < units.size; j++)
 			for(int i = 0; i < units.size-1; i++)
-				if(units.get(i).getCell() != null && units.get(i+1).getCell() != null)
-					if(map.cellExist(units.get(i).getCell().getBounds()) && map.cellExist(units.get(i+1).getCell().getBounds()))
+				if(units.get(i).getCell() != null && units.get(i+1).getCell() != null) 
+					if(map.cellExist(units.get(i).getCell().getBounds()) && map.cellExist(units.get(i+1).getCell().getBounds())) 
 						if(map.findCellCoord(units.get(i).getCell().getBounds()).y < map.findCellCoord(units.get(i+1).getCell().getBounds()).y)
 							units.swap(i, i+1);
-					
-//					else {
-//						if(units.get(i).isEnemy() && !units.get(i).isEnemy())
-//							units.swap(i, i+1);
-//					}
 		
 	}
 
@@ -201,14 +190,15 @@ public class GameScreen implements Screen {
 		batch.begin();
 //			badLogic.draw(batch);
 			map.draw(batch);
-			defeatedZone.draw(batch);
 			batch.draw(this.textureAtlas.findRegion("grass_behind"), -Gdx.graphics.getWidth() / 2,
 				-Gdx.graphics.getHeight() / 2);
 //			for (int i = 0; i < allies.size; i++)
 //				allies.get(i).draw(batch);
 
 			for (int i = 0; i < units.size; i++)
-				units.get(i).draw(batch);
+				if(units.get(i).isAlive())
+					units.get(i).draw(batch);
+			defeatedZone.draw(batch);
 
 //			units.get(1).draw(batch);
 
