@@ -171,7 +171,7 @@ public class MapPlaying extends MapHandler{
 		}
 		for (int i = 0; i < enemies.size; i++) {
 			if(enemies.get(i).getHp() < 1) {
-				defeatedZone.addEnemies(enemies.get(i));
+				defeatedZone.addUnit(enemies.get(i));
 //				enemies.removeIndex(i);
 			}
 		}
@@ -180,7 +180,7 @@ public class MapPlaying extends MapHandler{
 	public void checkAllies() {
 		for (int i = 0; i < allies.size; i++) {
 			if(allies.get(i).getHp() < 1) {
-				defeatedZone.addAllies(allies.get(i));
+				defeatedZone.addUnit(allies.get(i));
 //				allies.removeIndex(i);
 				this.paintToDefault();
 			}
@@ -188,9 +188,7 @@ public class MapPlaying extends MapHandler{
 	}
 	
 	public void killUnit(Unit unit) {
-		if(unit.isEnemy())
-			defeatedZone.addEnemies(unit);
-		else defeatedZone.addAllies(unit);
+		defeatedZone.addUnit(unit);
 	}
 
 	private boolean unitsAreDone() {

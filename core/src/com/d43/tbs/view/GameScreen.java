@@ -98,11 +98,9 @@ public class GameScreen implements Screen {
 		// *********************************************************** DEFEATE ZONE
 		// ***********************************************************
 		defeatedZone = new DefeatedZone(this.textureAtlas, textureAtlas.findRegion("0"), -5f, 10f, 1f, 1f);
-		defeatedZone.initCells(this.allies.size, this.enemies.size);
-		for (int i = 0; i < this.allies.size; i++)
-			defeatedZone.getAlliesCell(i).setCell();
-		for (int i = 0; i < this.enemies.size; i++)
-			defeatedZone.getEnemiesCell(i).setCell();
+		defeatedZone.initCells(this.units.size);
+		for (int i = 0; i < this.units.size; i++)
+			defeatedZone.getCell(i).setCell();
 
 		// *********************************************************** MAP CHECKER
 		// *************************************************************
@@ -142,7 +140,7 @@ public class GameScreen implements Screen {
 		this.enemies = new Array<Unit>();
 		for (int i = 0; i < units.size; i++) {
 //			units.get(i).setCell(map.getCell((int)units.get(i).getLocation().x, (int)units.get(i).getLocation().y));
-			units.get(i).changeSpeed(3.6f, 3.6f);
+			units.get(i).changeSpeed(5f, 4f);
 			if(units.get(i).isEnemy())
 				enemies.add(units.get(i));
 			else 
@@ -210,13 +208,6 @@ public class GameScreen implements Screen {
 		batch.end();
 
 		ui.draw();
-//		ui.attachLabels();
-		ui.setLabelX(Float.toString(Gdx.input.getX()));
-		ui.setLabelY(Float.toString(Gdx.input.getY()));
-
-//		ui.setLabelX(String.format("%.3g%n", badLogic.getBounds().getX()));
-//		ui.setLabelY(String.format("%.3g%n", badLogic.getBounds().getY()));
-//		ui.setLabelSpeed(String.format("%.3g%n", badLogic.getSpeed()));
 
 		this.sortUnits();
 	}

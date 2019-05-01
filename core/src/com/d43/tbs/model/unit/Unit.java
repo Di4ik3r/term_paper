@@ -15,7 +15,7 @@ import com.d43.tbs.view.GameScreen;
 
 public abstract class Unit extends GameObject {
 
-	public static float SPEED_X = 8, SPEED_Y = 6;
+	public static float SPEED_X = 8, SPEED_Y = 7;
 //	public static float SPEED_X = 4, SPEED_Y = 4;
 	public static Vector2 BASIC_SIZE = new Vector2(40f, 70f / 35f);
 
@@ -207,7 +207,7 @@ public abstract class Unit extends GameObject {
 //				"(" + Float.toString(this.previousLocation.x) + ", " + Float.toString(this.previousLocation.y) + ") : ("
 //						+ Float.toString(this.locationToMove.x) + ", " + Float.toString(this.locationToMove.y) + ");");
 		if (this.isMoving) {
-			if (this.cell.getBounds().contains(this.getBounds().getX(), this.getBounds().getY())) {
+			if (this.cell.getBounds().contains(this.getBounds().getX()+20, this.getBounds().getY())) {
 				this.getBounds().setPosition(this.locationToMove.x, this.locationToMove.y);
 				this.isMoving = false;
 				this.locationToMove = null;

@@ -12,7 +12,7 @@ import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.unit.Unit;
 
 public class DefeatedZone extends GameObject {
-	private Cell[] allies, enemies;
+	private Cell[] cells;
 	
 	private TextureAtlas textureAtlas;
 	
@@ -22,9 +22,8 @@ public class DefeatedZone extends GameObject {
 		this.textureAtlas = textureAtlas;
 	}
 	
-	public void initCells(int alliesCount, int enemiesCount) {
-		this.allies = new Cell[alliesCount];
-		this.enemies = new Cell[enemiesCount];
+	public void initCells(int count) {
+		this.cells = new Cell[count];
 		
 		Array<TextureRegion> regions = new Array<TextureRegion>(); 
 		regions.add(this.textureAtlas.findRegion("cell"));
@@ -33,74 +32,41 @@ public class DefeatedZone extends GameObject {
 		
 		int multiplier = 80;
 		
-		for(int i = 0; i < alliesCount; i++) {
+		for(int i = 0; i < cells.length; i++) {
 //			Cell cell = new Cell(regions, (-8 + i*0.99f)*multiplier, (-3.5f + 11f*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 //			Cell cell = new Cell(regions, (-8 + i*1f)*multiplier, (-3.5f + 11*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
-			Cell cell = new Cell(regions, (-8 + i*1f)*multiplier, (-3.5f + 11.1f*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
-			cell.setForDefeated(true);
-			this.allies[i] = cell;
-		}
-		
-		for(int i = enemiesCount-1; i >= 0; i--) {
-//			Cell cell = new Cell(regions, (2f + i*0.99f)*multiplier, (-3.5f + 11f*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
-//			Cell cell = new Cell(regions, (-8 + i*1f)*multiplier, (-3.5f + 10f*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
-//			Cell cell = new Cell(regions, (-8 + i*1f)*multiplier, (-3.5f + 10*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 			Cell cell = new Cell(regions, (-8 + i*1f)*multiplier, (-3.5f + 10.1f*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 			cell.setForDefeated(true);
-			this.enemies[i] = cell;
+			this.cells[i] = cell;
 		}
 	}
 	
-	public void addAllies(Unit unit) {
+	public void addUnit(Unit unit) {
 		unit.setAlive(false);
-		for(int i = 0; i < allies.length; i++)
-			if(!allies[i].containsUnit()) {
-				unit.setCell(allies[i]);
+		for(int i = cells.length-1; i >= 0; i--)
+			if(!cells[i].containsUnit()) {
+				unit.setCell(cells[i]);
 				unit.setHp(0);
 //				return;
 			}
 	}
 	
-	public void addEnemies(Unit unit) {
-		unit.setAlive(false);
-		for(int i = 0; i < enemies.length; i++)
-			if(!enemies[i].containsUnit()) {
-				unit.setCell(enemies[i]);
-				unit.setHp(0);
-//				return;
-			}
-	}
-	
-	public int getAlliesCount() {
-		return this.allies.length;
-	}
-	
-	public int getEnemiesCount() {
-		return this.enemies.length;
-	}		
+	public int getCount() {
+		return this.cells.length;
+	}	
 	
 	@Override
 	public void draw(SpriteBatch batch) {
-		for(int i = 0; i < enemies.length; i++) 
-			enemies[i].draw(batch);
-		
-		for(int i = 0; i < allies.length; i++) 
-			allies[i].draw(batch);
+		for(int i = 0; i < cells.length; i++) 
+			cells[i].draw(batch);
 	}
 	
-	public Cell[] getAlliesCells() {
-		return this.allies;
-	}
-	public Cell[] getEnemiesCells() {
-		return this.enemies;
+	public Cell[] getCells() {
+		return this.cells;
 	}
 	
-	public Cell getAlliesCell(int x) {
-		return this.allies[x];
-	}
-	
-	public Cell getEnemiesCell(int x) {
-		return this.enemies[x];
+	public Cell getCell(int x) {
+		return this.cells[x];
 	}
 	
 //	public Cell findCell(Vector2 location) {
