@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
+import com.d43.tbs.TurnBasedStrategy;
 import com.d43.tbs.control.MapPlaying;
 import com.d43.tbs.model.map.CellMap;
 import com.d43.tbs.model.map.DefeatedZone;
@@ -29,6 +30,8 @@ public class GameScreen implements Screen {
 	DefeatedZone defeatedZone;
 
 	private MapPlaying mapPlaying;
+	
+	private TurnBasedStrategy game;
 
 	@Override
 	public void show() {
@@ -106,6 +109,7 @@ public class GameScreen implements Screen {
 		// *************************************************************
 		this.mapPlaying = new MapPlaying(map, defeatedZone, allies, enemies);
 		this.mapPlaying.setAtlas(this.textureAtlas);
+		this.mapPlaying.setGame(game);
 
 		map.setMapHandler(this.mapPlaying);
 		for (int i = 0; i < allies.size; i++) {
@@ -134,6 +138,10 @@ public class GameScreen implements Screen {
 		this.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
+	public void setGame(TurnBasedStrategy game) {
+		this.game = game;
+	}
+	
 	public void setUnits(Array<Unit> units) {
 		this.units = units;
 		this.allies = new Array<Unit>();

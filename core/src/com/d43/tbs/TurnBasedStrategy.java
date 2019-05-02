@@ -8,10 +8,11 @@ import com.d43.tbs.model.unit.Unit;
 import com.d43.tbs.utils.Assets;
 import com.d43.tbs.view.ChooseScreen;
 import com.d43.tbs.view.GameScreen;
+import com.d43.tbs.view.ResultScreen;
 
 public class TurnBasedStrategy extends Game {
 
-	private Screen chooseScreen, gameScreen;
+	private Screen chooseScreen, gameScreen, resultScreen;
 	private Assets assets;
 	
 	@Override
@@ -21,9 +22,20 @@ public class TurnBasedStrategy extends Game {
 		chooseScreen = new ChooseScreen();
 		((ChooseScreen)chooseScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
 		((ChooseScreen)chooseScreen).setGame(this);
+		
 		gameScreen = new GameScreen();
 		((GameScreen)gameScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
+		((GameScreen)gameScreen).setGame(this);
+		
+		resultScreen = new ResultScreen();
+		((ResultScreen)resultScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
+		
 		this.setScreen(chooseScreen);
+	}
+	
+	public void endGame(String[] result) {
+		((ResultScreen)resultScreen).setResult(result);
+		this.setScreen(resultScreen);
 	}
 	
 	public void setGameUnits(Array<Unit> units) {

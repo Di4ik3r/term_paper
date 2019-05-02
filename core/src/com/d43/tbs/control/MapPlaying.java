@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.d43.tbs.TurnBasedStrategy;
 import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.model.map.CellMap;
 import com.d43.tbs.model.map.DefeatedZone;
@@ -15,6 +16,8 @@ public class MapPlaying extends MapHandler{
 	
 	private DefeatedZone defeatedZone;
 	private Bot bot;
+	
+	private TurnBasedStrategy game;
 
 	public MapPlaying(CellMap cells, DefeatedZone defeatedZone, Array<Unit> allies, Array<Unit> enemies) {
 		this.map = cells;
@@ -176,6 +179,7 @@ public class MapPlaying extends MapHandler{
 				
 				if(!enemiesHasAlive()) {
 					Gdx.app.log("log", "win");
+					this.endGame(true);
 				}
 			}
 		}
@@ -190,9 +194,42 @@ public class MapPlaying extends MapHandler{
 				
 				if(!alliesHasAlive()) {
 					Gdx.app.log("log", "defeat");
+					this.endGame(false);
 				}
 			}
 		}
+	}
+	
+	private void endGame(boolean win) {
+		this.game.endGame(this.formResult(win));
+	}
+	
+	private String[] formResult(boolean win) {
+		String[] result = new String[5];
+		
+		result[1] = win ? "You WIN" : "You LOSE";
+		
+		int aliveAlliesCount = 0;
+		for(int i = 0; i < allies.size; i++)
+			if(allies.get(i).isAlive())
+				aliveAlliesCount++;
+		result[1] = "Your team has " + Integer.toString(aliveAlliesCount) + " units alive";
+		
+		int aliveEnemiesCount = 0;
+		for(int i = 0; i < enemies.size; i++)
+			if(enemies.get(i).isAlive())
+				aliveEnemiesCount++;
+		result[2] = "Enemy team has " + Integer.toString(aliveEnemiesCount) + " units alive";
+		
+		result[3] = "You have slain " + Integer.toString(enemies.size - aliveEnemiesCount) + " enemy units";
+		
+		result[4] = "Enemy have slain " + Integer.toString(allies.size - aliveAlliesCount) + " your units"; 
+		
+		return result;
+	}
+	
+	public void setGame(TurnBasedStrategy game) {
+		this.game = game;
 	}
 	
 	public boolean alliesHasAlive() {

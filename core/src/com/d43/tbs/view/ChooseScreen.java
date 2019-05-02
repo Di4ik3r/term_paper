@@ -214,8 +214,6 @@ public class ChooseScreen implements Screen {
 
 		ui.draw();
 //		ui.attachLabels();
-		ui.setLabelX(Float.toString(Gdx.input.getX()));
-		ui.setLabelY(Float.toString(Gdx.input.getY()));
 
 //		ui.setLabelX(String.format("%.3g%n", badLogic.getBounds().getX()));
 //		ui.setLabelY(String.format("%.3g%n", badLogic.getBounds().getY()));
