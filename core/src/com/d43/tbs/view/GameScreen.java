@@ -189,23 +189,21 @@ public class GameScreen implements Screen {
 		batch.begin();
 //			badLogic.draw(batch);
 		map.draw(batch);
-		batch.draw(this.textureAtlas.findRegion("grass_behind"), -Gdx.graphics.getWidth() / 2,
-				-Gdx.graphics.getHeight() / 2);
+		defeatedZone.draw(batch);
+		batch.draw(this.textureAtlas.findRegion("game_behind"), -Gdx.graphics.getWidth() / 2, -Gdx.graphics.getHeight() / 2);
 //			for (int i = 0; i < allies.size; i++)
 //				allies.get(i).draw(batch);
 
 		for (int i = 0; i < units.size; i++)
-			if (units.get(i).isAlive())
+//			if (units.get(i).isAlive())
 				units.get(i).draw(batch);
-		defeatedZone.draw(batch);
 
 //			units.get(1).draw(batch);
 
 //			for (int i = 0; i < enemies.size; i++)
 //				enemies.get(i).draw(batch);
 
-		batch.draw(this.textureAtlas.findRegion("grass_above"), -Gdx.graphics.getWidth() / 2,
-				-Gdx.graphics.getHeight() / 2);
+		batch.draw(this.textureAtlas.findRegion("choose_above"), -Gdx.graphics.getWidth() / 2,-Gdx.graphics.getHeight() / 2);
 		batch.end();
 
 		ui.draw();

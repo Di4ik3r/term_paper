@@ -73,12 +73,13 @@ public class MapChoosing extends MapHandler {
 
 	public void pickUnit(Unit unit) {
 		
-		this.paintToDefault();
-		this.pickedUnit = unit;
-		
+		this.paintToDefault();		
 		
 		if (unit == null || unit.isMoving())
 			return;
+		
+		Unit newUnit = unit.clone();
+		this.pickedUnit = newUnit;
 
 		if (!this.pickedUnit.isReplaceable()) {
 			this.pickedUnit = null;
@@ -87,6 +88,10 @@ public class MapChoosing extends MapHandler {
 
 		this.calculateRange();
 		this.paintAvailableCell();
+	}
+	
+	public Unit getPickedUnit() {
+		return this.pickedUnit;
 	}
 
 	public void unitMove(Polygon bounds) {

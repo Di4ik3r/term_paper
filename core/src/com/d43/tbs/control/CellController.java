@@ -17,6 +17,7 @@ public class CellController {
 	
 	private ChooseScreen chooseScreen;
 
+	
 	public CellController(Polygon bounds) {
 		this.bounds = bounds;
 
@@ -54,9 +55,8 @@ public class CellController {
 				if (this.mapHandler != null && !mapHandler.isPlaying()) {
 					if (this.unit != null) {
 						if(this.unit.isForChoose()) {
-							Unit unitToSet = this.unit.clone();
-							mapHandler.pickUnit(unitToSet);
-							chooseScreen.addUnit(unitToSet);
+							mapHandler.pickUnit(this.unit);
+							chooseScreen.addUnit(((MapChoosing)mapHandler).getPickedUnit());
 						}
 						else if(!this.unit.isMoving()) 
 							mapHandler.pickUnit(this.unit);
