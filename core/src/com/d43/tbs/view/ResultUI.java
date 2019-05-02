@@ -27,10 +27,11 @@ public class ResultUI {
 	public void setResult(String[] result) {
 		this.result = result;
 		
-		float multiplier = 100f;
+		float multiplier = 70f;
 		labels = new Label[result.length];
+//		for(int i = labels.length-1; i >= 0; i--)
 		for(int i = 0; i < labels.length; i++)
-			labels[i] = createLabel(result[i], 330f,  (80 + i * multiplier));
+			labels[i] = createLabel(result[labels.length - i - 1], 330f,  (80 + i * multiplier));
 	}
 	
 //	public void initLabels() {

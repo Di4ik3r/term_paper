@@ -110,6 +110,7 @@ public class GameScreen implements Screen {
 		this.mapPlaying = new MapPlaying(map, defeatedZone, allies, enemies);
 		this.mapPlaying.setAtlas(this.textureAtlas);
 		this.mapPlaying.setGame(game);
+		this.mapPlaying.setScreen(this);
 
 		map.setMapHandler(this.mapPlaying);
 		for (int i = 0; i < allies.size; i++) {
@@ -205,7 +206,7 @@ public class GameScreen implements Screen {
 		for (int i = 0; i < units.size; i++)
 //			if (units.get(i).isAlive())
 				units.get(i).draw(batch);
-
+		
 //			units.get(1).draw(batch);
 
 //			for (int i = 0; i < enemies.size; i++)

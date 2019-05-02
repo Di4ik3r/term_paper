@@ -11,6 +11,7 @@ import com.d43.tbs.model.map.CellMap;
 import com.d43.tbs.model.map.DefeatedZone;
 import com.d43.tbs.model.unit.Unit;
 import com.d43.tbs.utils.CellCalculator;
+import com.d43.tbs.view.GameScreen;
 
 public class MapPlaying extends MapHandler{
 	
@@ -18,6 +19,9 @@ public class MapPlaying extends MapHandler{
 	private Bot bot;
 	
 	private TurnBasedStrategy game;
+	private GameScreen gameScreen;
+	
+	private boolean win;
 
 	public MapPlaying(CellMap cells, DefeatedZone defeatedZone, Array<Unit> allies, Array<Unit> enemies) {
 		this.map = cells;
@@ -179,7 +183,9 @@ public class MapPlaying extends MapHandler{
 				
 				if(!enemiesHasAlive()) {
 					Gdx.app.log("log", "win");
-					this.endGame(true);
+//					this.endGame(true);
+					win = false;
+					this.endGame();
 				}
 			}
 		}
@@ -194,20 +200,22 @@ public class MapPlaying extends MapHandler{
 				
 				if(!alliesHasAlive()) {
 					Gdx.app.log("log", "defeat");
-					this.endGame(false);
+					win = true;
+					this.endGame();
+//					this.endGame(false);
 				}
 			}
 		}
 	}
 	
-	private void endGame(boolean win) {
+	public void endGame() {
 		this.game.endGame(this.formResult(win));
 	}
 	
 	private String[] formResult(boolean win) {
 		String[] result = new String[5];
 		
-		result[1] = win ? "You WIN" : "You LOSE";
+		result[0] = win ? "You WIN" : "You LOSE";
 		
 		int aliveAlliesCount = 0;
 		for(int i = 0; i < allies.size; i++)
@@ -230,6 +238,10 @@ public class MapPlaying extends MapHandler{
 	
 	public void setGame(TurnBasedStrategy game) {
 		this.game = game;
+	}
+	
+	public void setScreen(GameScreen gameScreen) {
+		this.gameScreen = gameScreen;
 	}
 	
 	public boolean alliesHasAlive() {
