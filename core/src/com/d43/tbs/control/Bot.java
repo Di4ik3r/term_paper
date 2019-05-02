@@ -1,13 +1,14 @@
-package com.d43.tbs.utils;
+package com.d43.tbs.control;
 
 import java.util.concurrent.TimeUnit;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.d43.tbs.control.MapPlaying;
 import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.model.map.CellMap;
 import com.d43.tbs.model.unit.Unit;
+import com.d43.tbs.utils.CellCalculator;
+import com.d43.tbs.utils.Rnd;
 
 public class Bot {
 	

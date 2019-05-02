@@ -1,5 +1,6 @@
 package com.d43.tbs.control;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
@@ -8,7 +9,6 @@ import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.model.map.CellMap;
 import com.d43.tbs.model.map.DefeatedZone;
 import com.d43.tbs.model.unit.Unit;
-import com.d43.tbs.utils.Bot;
 import com.d43.tbs.utils.CellCalculator;
 
 public class MapPlaying extends MapHandler{
@@ -173,6 +173,10 @@ public class MapPlaying extends MapHandler{
 			if(enemies.get(i).getHp() < 1) {
 				defeatedZone.addUnit(enemies.get(i));
 //				enemies.removeIndex(i);
+				
+				if(!enemiesHasAlive()) {
+					Gdx.app.log("log", "win");
+				}
 			}
 		}
 	}
@@ -183,8 +187,26 @@ public class MapPlaying extends MapHandler{
 				defeatedZone.addUnit(allies.get(i));
 //				allies.removeIndex(i);
 				this.paintToDefault();
+				
+				if(!alliesHasAlive()) {
+					Gdx.app.log("log", "defeat");
+				}
 			}
 		}
+	}
+	
+	public boolean alliesHasAlive() {
+		for(int i = 0; i < this.allies.size; i++)
+			if(this.allies.get(i).isAlive())
+				return true;
+		return false;
+	}
+	
+	public boolean enemiesHasAlive() {
+		for(int i = 0; i < this.enemies.size; i++)
+			if(this.enemies.get(i).isAlive())
+				return true;
+		return false;
 	}
 	
 	public void killUnit(Unit unit) {

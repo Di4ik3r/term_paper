@@ -78,9 +78,12 @@ public class MapChoosing extends MapHandler {
 		if (unit == null || unit.isMoving())
 			return;
 		
-		Unit newUnit = unit.clone();
-		this.pickedUnit = newUnit;
-
+		if(unit.isForChoose()) {
+			Unit newUnit = unit.clone();
+			this.pickedUnit = newUnit;
+		}
+		else this.pickedUnit = unit;
+		
 		if (!this.pickedUnit.isReplaceable()) {
 			this.pickedUnit = null;
 			return;
