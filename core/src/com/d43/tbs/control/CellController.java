@@ -69,6 +69,17 @@ public class CellController {
 					}
 				}
 			}
+			
+			if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
+				if (this.mapHandler != null && !mapHandler.isPlaying()) {
+					if (this.unit != null && !this.unit.isForChoose()) {
+						this.mapHandler.pickUnit(null);
+						this.unit.setCell(this.mapHandler.map.getBlankCell());
+						chooseScreen.removeUnit(this.unit);
+//						chooseScreen.addUnit(this.unit);
+					}
+				}
+			}
 		} else
 			this.cell.changeTextureRegion(this.cell.getRegion());
 	}

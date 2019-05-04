@@ -23,6 +23,8 @@ public class CellMap extends GameObject{
 	
 	private ChooseScreen chooseScreen;
 	
+	private Cell blankCell;
+	
 	public CellMap(TextureAtlas textureAtlas, TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
 		
@@ -57,6 +59,12 @@ public class CellMap extends GameObject{
 				cell = new Cell(regions, (-8 + i*1f)*multiplier, (-4.4f + j*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 				map[i][j] = cell;
 			}
+		
+		this.blankCell = new Cell(regions, 1366, 768, 1f, 2f);
+	}
+	
+	public Cell getBlankCell() {
+		return this.blankCell;
 	}
 	
 	public void initChooseScreen(ChooseScreen chooseScreen) {

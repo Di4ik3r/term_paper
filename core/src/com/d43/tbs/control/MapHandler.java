@@ -9,17 +9,17 @@ import com.d43.tbs.model.unit.Unit;
 
 public abstract class MapHandler {
 
-	CellMap map;
-	Array<Unit> allies;
-	Array<Unit> enemies;
+	protected CellMap map;
+	protected Array<Unit> allies;
+	protected Array<Unit> enemies;
 
-	Unit pickedUnit;
+	protected Unit pickedUnit;
 	
-	TextureAtlas textureAtlas;
+	protected TextureAtlas textureAtlas;
 	
-	Array<Cell> availableCells;
+	protected Array<Cell> availableCells;
 	
-	Unit movingUnit;
+	protected Unit movingUnit;
 	
 	public abstract boolean isPlaying();
 	

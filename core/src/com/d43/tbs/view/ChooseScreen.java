@@ -239,6 +239,10 @@ public class ChooseScreen implements Screen {
 			return;
 		units.add(unit);
 	}
+	
+	public void removeUnit(Unit unit) {
+		this.units.removeValue(unit, true);
+	}
 
 	@Override
 	public void resize(int width, int height) {
