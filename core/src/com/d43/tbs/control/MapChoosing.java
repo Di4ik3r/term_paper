@@ -86,6 +86,7 @@ public class MapChoosing extends MapHandler {
 				}
 				else {
 					
+<<<<<<< HEAD
 					//adaskdjasdklasd
 					
 					this.pickedUnit.getBounds().setPosition(1366, 768);
@@ -93,6 +94,9 @@ public class MapChoosing extends MapHandler {
 					
 					
 					
+=======
+					//askdaskldhaskldahsdlqwheyoritu845oet
+>>>>>>> smth
 					
 					//askdaskldhaskldahsdlqwheyoritu845oet
 				}
