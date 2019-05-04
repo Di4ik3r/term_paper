@@ -89,6 +89,8 @@ public class MapChoosing extends MapHandler {
 					//asdasdasds
 					//asdasdasdklasdjaskld
 					//asdjaskdhasjkdashd
+					
+					//asdaskld
 				}
 			}
 			Unit newUnit = unit.clone();
