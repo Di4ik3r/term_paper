@@ -184,7 +184,7 @@ public class MapPlaying extends MapHandler{
 				if(!enemiesHasAlive()) {
 					Gdx.app.log("log", "win");
 //					this.endGame(true);
-					win = false;
+					win = true;
 					this.endGame();
 				}
 			}
@@ -200,7 +200,7 @@ public class MapPlaying extends MapHandler{
 				
 				if(!alliesHasAlive()) {
 					Gdx.app.log("log", "defeat");
-					win = true;
+					win = false;
 					this.endGame();
 //					this.endGame(false);
 				}
@@ -209,7 +209,7 @@ public class MapPlaying extends MapHandler{
 	}
 	
 	public void endGame() {
-		this.game.endGame(this.formResult(win));
+		this.gameScreen.endGame(this.formResult(win));
 	}
 	
 	private String[] formResult(boolean win) {

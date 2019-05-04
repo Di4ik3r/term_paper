@@ -220,6 +220,10 @@ public class GameScreen implements Screen {
 		this.sortUnits();
 	}
 
+	public void endGame(String[] result) {
+		ui.setResult(result);
+	}
+	
 	@Override
 	public void resize(int width, int height) {
 //		float aspectRation = (float)height/width;		

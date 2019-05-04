@@ -29,6 +29,9 @@ public class UI {
 	
 	private Array<Label> hps;
 	private Array<Unit> units;
+	
+	private String[] result;
+	private Label[] resultLabels;
 		
 	
 	public UI(TextureAtlas atlas) {
@@ -40,17 +43,23 @@ public class UI {
 		
 		this.skin = new Skin(Gdx.files.internal("skin.json"));
 		
-		this.labelX = this.createLabel(10, 80);
-		this.labelY = this.createLabel(10, 40);
-		this.labelSpeed = this.createLabel(10, 110);
-		
 		hps = new Array<Label>();
+	}
+	
+	public void setResult(String[] result) {
+		this.result = result;
+		
+		float multiplier = 70f;
+		resultLabels = new Label[result.length];
+//		for(int i = labels.length-1; i >= 0; i--)
+		for(int i = 0; i < resultLabels.length; i++)
+			resultLabels[i] = createLabel(result[resultLabels.length - i - 1], 0.6f, 330f,  (80 + i * multiplier));
 	}
 	
 	public void initLabels() {
 		hps = new Array<Label>();
 		for(int i = 0; i < units.size; i++) {
-			Label label = createLabel(0, 0);
+			Label label = createLabel("", 0.3f, 0, 0);
 			hps.add(label);
 		}
 	}
@@ -81,10 +90,10 @@ public class UI {
 		this.initLabels();
 	}
 	
-	private Label createLabel(float x, float y) {
-		Label label = new Label("", this.skin.get("default", LabelStyle.class));
+	private Label createLabel(String text, float fontScale, float x, float y) {
+		Label label = new Label(text, this.skin.get("default", LabelStyle.class));
 		label.setPosition(x, y);
-		label.setFontScale(0.3f);
+		label.setFontScale(fontScale);
 		
 		this.stage.addActor(label);
 		
