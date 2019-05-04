@@ -40,6 +40,7 @@ public class CellController {
 			if (this.unit != null && !this.unit.isReplaceable() && !this.unit.isEnemy())
 				this.cell.changeTextureRegion(this.cell.getRegions().get(2));
 
+//			if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 			if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 				if (!this.cell.isForDefeated()) {
 					if (this.unit != null)
@@ -57,6 +58,7 @@ public class CellController {
 						if(this.unit.isForChoose()) {
 							mapHandler.pickUnit(this.unit);
 							chooseScreen.addUnit(((MapChoosing)mapHandler).getPickedUnit());
+//							chooseScreen.addUnit(this.unit);
 						}
 						else if(!this.unit.isMoving()) 
 							mapHandler.pickUnit(this.unit);

@@ -1,10 +1,9 @@
 package com.d43.tbs.control;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.model.map.CellMap;
 import com.d43.tbs.model.map.ChoosingZone;
@@ -79,6 +78,17 @@ public class MapChoosing extends MapHandler {
 			return;
 		
 		if(unit.isForChoose()) {
+			if(this.pickedUnit != null) {
+				if(this.pickedUnit.equals(unit)) {
+					if(this.availableCells != null)
+						paintAvailableCell();
+					return;
+				}
+				else {
+					this.pickedUnit.getBounds().setPosition(2000, 1000);
+					pickedUnit = null;
+				}
+			}
 			Unit newUnit = unit.clone();
 			this.pickedUnit = newUnit;
 		}

@@ -2,6 +2,7 @@ package com.d43.tbs.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -37,7 +38,7 @@ public class ChooseScreen implements Screen {
 	ChoosingZone choosingZone;
 
 	private MapChoosing mapChoosing;
-
+	
 	@Override
 	public void show() {
 		batch = new SpriteBatch();
@@ -89,9 +90,9 @@ public class ChooseScreen implements Screen {
 		// ***********************************************************
 		float zombieKoef = 68f / 41f;
 		float orcKoef = 70f / 35f;
-		Unit zombie = new Zombie(textureAtlas.findRegion("zombie"), -390, 210, unitSize, unitSize * zombieKoef);
+		Unit zombie = new Zombie(textureAtlas.findRegion("zombie"), 390, 210, unitSize, unitSize * zombieKoef);
 		zombie.setForChoose(true);
-		Unit orc = new Orc(textureAtlas.findRegion("orc"), -390, 210, unitSize, unitSize * orcKoef);
+		Unit orc = new Orc(textureAtlas.findRegion("orc"), 390, 210, unitSize, unitSize * orcKoef);
 		orc.setForChoose(true);
 		enemies = new Array<Unit>();
 		enemies.add(zombie);
@@ -234,6 +235,8 @@ public class ChooseScreen implements Screen {
 	}
 	
 	public void addUnit(Unit unit) {
+		if(units.contains(unit, true))
+			return;
 		units.add(unit);
 	}
 

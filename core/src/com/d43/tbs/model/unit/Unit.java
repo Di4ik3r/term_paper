@@ -61,6 +61,12 @@ public abstract class Unit extends GameObject {
 		this.isForChoose = false;
 	}
 	
+	public boolean equals(Unit unit) {
+		if(this.getClass() == unit.getClass())
+			return true;
+		return false;
+	}
+	
 	public void changeSpeed(float x, float y) {
 		this.SPEED_X = x;
 		this.SPEED_Y = y;
