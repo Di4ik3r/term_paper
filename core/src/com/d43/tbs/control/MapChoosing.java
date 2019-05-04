@@ -79,6 +79,17 @@ public class MapChoosing extends MapHandler {
 			return;
 		
 		if(unit.isForChoose()) {
+			if(this.pickedUnit != null) {
+				if(this.pickedUnit.equals(unit)) {
+					if(this.availableCells != null)
+						paintAvailableCell();
+					return;
+				}
+				else {
+					this.pickedUnit.getBounds().setPosition(1366, 768);
+					pickedUnit = null;
+				}
+			}
 			Unit newUnit = unit.clone();
 			this.pickedUnit = newUnit;
 		}
