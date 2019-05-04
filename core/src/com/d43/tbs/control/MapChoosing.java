@@ -85,6 +85,9 @@ public class MapChoosing extends MapHandler {
 					return;
 				}
 				else {
+					
+					//adaskdjasdklasd
+					
 					this.pickedUnit.getBounds().setPosition(1366, 768);
 				}
 			}
