@@ -213,7 +213,7 @@ public class MapPlaying extends MapHandler{
 	}
 	
 	private String[] formResult(boolean win) {
-		String[] result = new String[5];
+		String[] result = new String[4];
 		
 		result[0] = win ? "You WIN" : "You LOSE";
 		
@@ -221,17 +221,21 @@ public class MapPlaying extends MapHandler{
 		for(int i = 0; i < allies.size; i++)
 			if(allies.get(i).isAlive())
 				aliveAlliesCount++;
-		result[1] = "Your team has " + Integer.toString(aliveAlliesCount) + " units alive";
+//		result[1] = "Your team has " + Integer.toString(aliveAlliesCount) + " units alive";
 		
 		int aliveEnemiesCount = 0;
 		for(int i = 0; i < enemies.size; i++)
 			if(enemies.get(i).isAlive())
 				aliveEnemiesCount++;
-		result[2] = "Enemy team has " + Integer.toString(aliveEnemiesCount) + " units alive";
+//		result[2] = "Enemy team has " + Integer.toString(aliveEnemiesCount) + " units alive";
 		
-		result[3] = "You have slain " + Integer.toString(enemies.size - aliveEnemiesCount) + " enemy units";
+		if(win)
+			result[1] = "Your team has " + Integer.toString(aliveAlliesCount) + " units alive";
+		else result[1] = "Enemy team has " + Integer.toString(aliveEnemiesCount) + " units alive";
 		
-		result[4] = "Enemy have slain " + Integer.toString(allies.size - aliveAlliesCount) + " your units"; 
+		result[2] = "You have slain " + Integer.toString(enemies.size - aliveEnemiesCount) + " enemy units";
+		
+		result[3] = "Enemy have slain " + Integer.toString(allies.size - aliveAlliesCount) + " your units"; 
 		
 		return result;
 	}
