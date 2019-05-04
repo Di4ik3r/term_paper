@@ -85,8 +85,7 @@ public class MapChoosing extends MapHandler {
 					return;
 				}
 				else {
-					this.pickedUnit.getBounds().setPosition(2000, 1000);
-					pickedUnit = null;
+					this.pickedUnit.getBounds().setPosition(1366, 768);
 				}
 			}
 			Unit newUnit = unit.clone();
