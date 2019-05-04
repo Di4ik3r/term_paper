@@ -15,7 +15,8 @@ import com.d43.tbs.view.GameScreen;
 
 public abstract class Unit extends GameObject {
 
-	public static float SPEED_X = 8, SPEED_Y = 7;
+//	public static float SPEED_X = 8, SPEED_Y = 7;
+	public static float SPEED_X = 9, SPEED_Y = 8;
 //	public static float SPEED_X = 4, SPEED_Y = 4;
 	public static Vector2 BASIC_SIZE = new Vector2(40f, 70f / 35f);
 
@@ -30,11 +31,11 @@ public abstract class Unit extends GameObject {
 
 	private boolean isMoving;
 	private Vector2 locationToMove;
-	
+
 	private TextureRegion textureRegion;
-	
+
 	private boolean isForChoose;
-	
+
 	private Vector2 location;
 
 	public Unit(TextureRegion textureRegion, float x, float y, float width, float height) {
@@ -55,37 +56,37 @@ public abstract class Unit extends GameObject {
 
 		this.isMoving = false;
 		this.locationToMove = null;
-		
+
 		this.textureRegion = textureRegion;
-		
+
 		this.isForChoose = false;
 	}
-	
+
 	public boolean equals(Unit unit) {
-		if(this.getClass() == unit.getClass())
+		if (this.getClass() == unit.getClass())
 			return true;
 		return false;
 	}
-	
+
 	public void changeSpeed(float x, float y) {
 		this.SPEED_X = x;
 		this.SPEED_Y = y;
 	}
-	
+
 	public boolean isForChoose() {
 		return this.isForChoose;
 	}
-	
+
 	public void setForChoose(boolean isForChoose) {
 		this.isForChoose = isForChoose;
 	}
-	
-	public TextureRegion getTextureRegion( ) {
+
+	public TextureRegion getTextureRegion() {
 		return this.textureRegion;
 	}
 
 	public abstract Unit clone();
-	
+
 	public void damage(int damage) {
 		this.hp -= damage;
 		if (hp < 1)
@@ -195,11 +196,11 @@ public abstract class Unit extends GameObject {
 
 		this.isMoving = true;
 	}
-	
+
 	public Vector2 getLocation() {
 		return this.location;
 	}
-	
+
 	public void setLocation(float x, float y) {
 		this.location = new Vector2(x, y);
 	}
@@ -213,7 +214,9 @@ public abstract class Unit extends GameObject {
 //				"(" + Float.toString(this.previousLocation.x) + ", " + Float.toString(this.previousLocation.y) + ") : ("
 //						+ Float.toString(this.locationToMove.x) + ", " + Float.toString(this.locationToMove.y) + ");");
 		if (this.isMoving) {
-			if (this.cell.getBounds().contains(this.getBounds().getX() + this.getBounds().getBoundingRectangle().width/2, this.getBounds().getY() + this.getBounds().getBoundingRectangle().height/4)) {
+			if (this.cell.getBounds().contains(
+					this.getBounds().getX() + this.getBounds().getBoundingRectangle().width / 2,
+					this.getBounds().getY() + this.getBounds().getBoundingRectangle().height / 4)) {
 //			if (this.cell.getBounds().contains(this.getBounds().getX(), this.getBounds().getY())) {
 				this.getBounds().setPosition(this.locationToMove.x, this.locationToMove.y);
 				this.isMoving = false;
@@ -221,12 +224,14 @@ public abstract class Unit extends GameObject {
 			} else {
 				float speedX = this.getBounds().getX() < this.locationToMove.x ? Unit.SPEED_X : -Unit.SPEED_X;
 				float speedY = this.getBounds().getY() < this.locationToMove.y ? Unit.SPEED_Y : -Unit.SPEED_Y;
-				
+
 				this.getBounds().setPosition(this.getBounds().getX() + speedX, this.getBounds().getY() + speedY);
-				
-				if (this.locationToMove.x - 10 < this.getBounds().getX() && this.getBounds().getX() < this.locationToMove.x + 10)
+
+				if (this.locationToMove.x - 10 < this.getBounds().getX()
+						&& this.getBounds().getX() < this.locationToMove.x + 10)
 					this.getBounds().setPosition(this.locationToMove.x, this.getBounds().getY());
-				if (this.locationToMove.y - 10 < this.getBounds().getY() && this.getBounds().getY() < this.locationToMove.y + 10)
+				if (this.locationToMove.y - 10 < this.getBounds().getY()
+						&& this.getBounds().getY() < this.locationToMove.y + 10)
 					this.getBounds().setPosition(this.getBounds().getX(), this.locationToMove.y);
 			}
 //			else if (this.previousLocation.x < this.locationToMove.x) {
