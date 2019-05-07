@@ -168,7 +168,7 @@ public class MapPlaying extends MapHandler {
 
 				if (this.unitsAreDone()) {
 					bot.makeBotsMove();
-					this.makeUnitsRaplaceable();
+//					this.makeUnitsRaplaceable();
 				}
 			}
 		}
