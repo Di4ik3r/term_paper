@@ -21,7 +21,6 @@ public class Zombie extends MeleeUnit {
 	@Override
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
-//		this.controller.handle();
 	}
 	
 	public Unit clone() {
@@ -31,10 +30,27 @@ public class Zombie extends MeleeUnit {
 	@Override
 	public void initAnimations(TextureAtlas atlas) {
 		Array<TextureRegion> regions = new Array<TextureRegion>();
-		regions.add(atlas.findRegion("zombie"));
+		regions.add(atlas.findRegion("zombie_idle", 1));
+		regions.add(atlas.findRegion("zombie_idle", 2));
+		regions.add(atlas.findRegion("zombie_idle", 3));
+		regions.add(atlas.findRegion("zombie_idle", 4));
+		regions.add(atlas.findRegion("zombie_idle", 5));
+		regions.add(atlas.findRegion("zombie_idle", 6));
 
-		this.idle = new Animation(regions, this, 2f, true);
+		this.idle = new Animation(regions, this, 1f, true);
 		this.idle.setSize(41, 68);
 		this.current = idle;
+		
+		Array<TextureRegion> regionsAttack = new Array<TextureRegion>();
+		regionsAttack.add(atlas.findRegion("knight_attack", 1));
+		regionsAttack.add(atlas.findRegion("knight_attack", 2));
+		regionsAttack.add(atlas.findRegion("knight_attack", 3));
+		regionsAttack.add(atlas.findRegion("knight_attack", 4));
+		regionsAttack.add(atlas.findRegion("knight_attack", 5));
+		regionsAttack.add(atlas.findRegion("knight_attack", 6));
+		regionsAttack.add(atlas.findRegion("knight_attack", 7));
+		this.attack = new Animation(regionsAttack, this, 0.5f, false);
+		this.attack.setSize(98, 96);
+		this.attack.setDeltaPosition(-33, 0);
 	}
 }

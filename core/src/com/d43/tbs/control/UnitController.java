@@ -43,12 +43,7 @@ public class UnitController {
 	}
 
 	public void handle() {
-		if (this.bounds.contains(Gdx.input.getX() - Gdx.graphics.getWidth() / 2,
-				-Gdx.input.getY() + Gdx.graphics.getHeight() / 2) && Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
-
-//			this.textureRegion = (TextureRegion)this.textureAtlas.findRegion("archer");
-//			Gdx.app.log("tag", this.textureRegion.toString());
-		}
+		
 	}
 
 	public void pickedUp() {

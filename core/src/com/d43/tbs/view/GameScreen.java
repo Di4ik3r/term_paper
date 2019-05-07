@@ -102,6 +102,7 @@ public class GameScreen implements Screen {
 		// ***********************************************************
 		defeatedZone = new DefeatedZone(this.textureAtlas, textureAtlas.findRegion("0"), -5f, 10f, 1f, 1f);
 		defeatedZone.initCells(this.units.size);
+		defeatedZone.setAllies(allies);
 		for (int i = 0; i < this.units.size; i++)
 			defeatedZone.getCell(i).setCell();
 

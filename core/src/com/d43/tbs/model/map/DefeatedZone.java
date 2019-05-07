@@ -16,6 +16,8 @@ public class DefeatedZone extends GameObject {
 	
 	private TextureAtlas textureAtlas;
 	
+	private Array<Unit> allies;
+	
 	public DefeatedZone(TextureAtlas textureAtlas, TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
 		
@@ -45,11 +47,16 @@ public class DefeatedZone extends GameObject {
 		unit.setAlive(false);
 		for(int i = cells.length-1; i >= 0; i--)
 			if(!cells[i].containsUnit()) {
-				unit.setDelay(1f);
+				if(unit.isEnemy() && allies.size != 1)
+					unit.setDelay(1f);
 				unit.setCell(cells[i]);
 				unit.setHp(0);
 //				return;
 			}
+	}
+	
+	public void setAllies(Array<Unit> allies) {
+		this.allies = allies;
 	}
 	
 	public int getCount() {
