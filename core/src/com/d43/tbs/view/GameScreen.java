@@ -18,7 +18,7 @@ public class GameScreen implements Screen {
 
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
-	private TextureAtlas textureAtlas;
+	public static TextureAtlas textureAtlas;
 	public static float delta;
 	private UI ui;
 
