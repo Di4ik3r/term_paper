@@ -23,23 +23,23 @@ public abstract class Unit extends GameObject {
 //	public static float SPEED_X = 4, SPEED_Y = 4;
 	public static Vector2 BASIC_SIZE = new Vector2(40f, 70f / 35f);
 
-	private int id, hp, rangeAttack, rangeMovement, damage;
-	private UnitController controller;
+	protected int id, hp, rangeAttack, rangeMovement, damage;
+	protected UnitController controller;
 	protected Cell cell;
-	private boolean isReplaceable;
-	private boolean isEnemy;
-	private boolean isAlive;
+	protected boolean isReplaceable;
+	protected boolean isEnemy;
+	protected boolean isAlive;
 
-	private Dimension size;
+	protected Dimension size;
 
-	private boolean isMoving;
-	private Vector2 locationToMove;
+	protected boolean isMoving;
+	protected Vector2 locationToMove;
 
-	private TextureRegion textureRegion;
+	protected TextureRegion textureRegion;
 
-	private boolean isForChoose;
+	protected boolean isForChoose;
 
-	private Vector2 location;
+	protected Vector2 location;
 
 	protected Animation current, idle, attack;
 	

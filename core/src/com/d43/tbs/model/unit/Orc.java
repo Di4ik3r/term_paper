@@ -30,10 +30,25 @@ public class Orc extends RangeUnit {
 	@Override
 	public void initAnimations(TextureAtlas atlas) {
 		Array<TextureRegion> regions = new Array<TextureRegion>();
-		regions.add(atlas.findRegion("orc"));
+		regions.add(atlas.findRegion("orc_idle", 1));
+		regions.add(atlas.findRegion("orc_idle", 2));
+		regions.add(atlas.findRegion("orc_idle", 3));
+		regions.add(atlas.findRegion("orc_idle", 4));
 
-		this.idle = new Animation(regions, this, 2f, true);
-		this.idle.setSize(36, 67);
+		this.idle = new Animation(regions, this, 1.3f, true);
+		this.idle.setSize(38, 67);
 		this.current = idle;
+		
+		Array<TextureRegion> regionsAttack = new Array<TextureRegion>();
+		regionsAttack.add(atlas.findRegion("orc_attack", 7));
+		regionsAttack.add(atlas.findRegion("orc_attack", 6));
+		regionsAttack.add(atlas.findRegion("orc_attack", 5));
+		regionsAttack.add(atlas.findRegion("orc_attack", 4));
+		regionsAttack.add(atlas.findRegion("orc_attack", 3));
+		regionsAttack.add(atlas.findRegion("orc_attack", 2));
+		regionsAttack.add(atlas.findRegion("orc_attack", 1));
+		this.attack = new Animation(regionsAttack, this, 0.8f, false);
+		this.attack.setSize(44, 67);
+		this.attack.setDeltaPosition(-5, 0);
 	}
 }
