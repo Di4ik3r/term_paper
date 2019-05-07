@@ -6,84 +6,140 @@ filter: Linear,Linear
 repeat: none
 0
   rotate: false
-  xy: 1370, 1420
+  xy: 1370, 1495
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
+archer_idle
+  rotate: false
+  xy: 1628, 1612
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: 1
 archer
+  rotate: false
+  xy: 1628, 1612
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+archer_idle
+  rotate: false
+  xy: 1665, 1687
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: 3
+archer_idle
   rotate: false
   xy: 2, 2
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
-  index: -1
+  index: 2
 cell
   rotate: false
-  xy: 45, 111
+  xy: 1444, 1468
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 cellBlocked
   rotate: false
-  xy: 45, 84
+  xy: 1444, 1441
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 cellMouseOn
   rotate: false
-  xy: 1407, 1393
+  xy: 83, 186
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 cellMouseOnBlocked
   rotate: false
-  xy: 1666, 1651
+  xy: 1699, 1726
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 cellPickable
   rotate: false
-  xy: 87, 111
+  xy: 1486, 1468
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 dirt
   rotate: false
-  xy: 2, 908
+  xy: 2, 983
   size: 1366, 768
   orig: 1366, 768
   offset: 0, 0
   index: -1
 grass_above
   rotate: false
-  xy: 2, 138
+  xy: 2, 213
   size: 1366, 768
   orig: 1366, 768
   offset: 0, 0
   index: -1
 knight
   rotate: false
-  xy: 1370, 1345
+  xy: 1370, 1420
   size: 35, 73
   orig: 35, 73
   offset: 0, 0
   index: -1
+knight_idle
+  rotate: false
+  xy: 1370, 1420
+  size: 35, 73
+  orig: 35, 73
+  offset: 0, 0
+  index: 1
+knight_idle
+  rotate: false
+  xy: 1628, 1678
+  size: 35, 73
+  orig: 35, 73
+  offset: 0, 0
+  index: 2
+knight_idle
+  rotate: false
+  xy: 2, 68
+  size: 35, 73
+  orig: 35, 73
+  offset: 0, 0
+  index: 3
+knight_idle
+  rotate: false
+  xy: 1370, 1345
+  size: 35, 73
+  orig: 35, 73
+  offset: 0, 0
+  index: 4
+knight_idle
+  rotate: false
+  xy: 1407, 1420
+  size: 35, 73
+  orig: 35, 73
+  offset: 0, 0
+  index: 5
 orc
   rotate: false
-  xy: 1628, 1609
+  xy: 45, 144
   size: 36, 67
   orig: 36, 67
   offset: 0, 0
   index: -1
 zombie
   rotate: false
-  xy: 2, 68
+  xy: 2, 143
   size: 41, 68
   orig: 41, 68
   offset: 0, 0

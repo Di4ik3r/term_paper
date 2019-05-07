@@ -205,7 +205,7 @@ public class GameScreen implements Screen {
 
 		for (int i = 0; i < units.size; i++)
 //			if (units.get(i).isAlive())
-				units.get(i).draw(batch);
+				units.get(i).draw(batch, delta);
 		
 //			units.get(1).draw(batch);
 

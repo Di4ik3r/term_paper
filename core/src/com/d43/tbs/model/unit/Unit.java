@@ -2,16 +2,17 @@ package com.d43.tbs.model.unit;
 
 import java.awt.Dimension;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.control.MapHandler;
 import com.d43.tbs.control.UnitController;
 import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.map.Cell;
+import com.d43.tbs.utils.Animation;
 import com.d43.tbs.utils.IdCounter;
-import com.d43.tbs.view.GameScreen;
 
 public abstract class Unit extends GameObject {
 
@@ -37,6 +38,8 @@ public abstract class Unit extends GameObject {
 	private boolean isForChoose;
 
 	private Vector2 location;
+	
+	protected Animation current, idle, attack;
 
 	public Unit(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
@@ -59,7 +62,26 @@ public abstract class Unit extends GameObject {
 
 		this.textureRegion = textureRegion;
 
-		this.isForChoose = false;
+		this.isForChoose = false;		
+	}
+	
+	public abstract void initAnimations(TextureAtlas atlas);
+	
+	public Array<Animation> getAnimations() {
+		Array<Animation> animations = new Array<Animation>();
+		animations.add(current);
+		animations.add(idle);
+		animations.add(attack);
+		
+		return animations;
+	}
+	
+	public void setAttack() {
+		this.current = attack;
+	}
+	
+	public void setIdle() {
+		this.current = idle;
 	}
 
 	public boolean equals(Unit unit) {
@@ -205,8 +227,10 @@ public abstract class Unit extends GameObject {
 		this.location = new Vector2(x, y);
 	}
 
-	@Override
-	public void draw(SpriteBatch batch) {
+	public void draw(SpriteBatch batch, float delta) {
+		this.current.update(delta);
+		this.changeTextureRegion(this.current.getFrame());
+		
 		super.draw(batch);
 
 		controller.handle();

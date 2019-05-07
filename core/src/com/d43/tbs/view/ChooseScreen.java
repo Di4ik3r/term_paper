@@ -2,7 +2,6 @@ package com.d43.tbs.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -68,8 +67,10 @@ public class ChooseScreen implements Screen {
 		float knightKoef = 73f/35f;
 		Unit archer = new Archer(textureAtlas.findRegion("archer"), -360, 210, unitSize, unitSize * archerKoef);
 		archer.setForChoose(true);
+		archer.initAnimations(this.textureAtlas);
 		Unit knight = new Knight(textureAtlas.findRegion("knight"), -390, 210, unitSize, unitSize * knightKoef);
 		knight.setForChoose(true);
+		knight.initAnimations(this.textureAtlas);
 		allies = new Array<Unit>();
 		allies.add(archer);
 		allies.add(knight);
@@ -92,8 +93,10 @@ public class ChooseScreen implements Screen {
 		float orcKoef = 70f / 35f;
 		Unit zombie = new Zombie(textureAtlas.findRegion("zombie"), 390, 210, unitSize, unitSize * zombieKoef);
 		zombie.setForChoose(true);
+		zombie.initAnimations(this.textureAtlas);
 		Unit orc = new Orc(textureAtlas.findRegion("orc"), 390, 210, unitSize, unitSize * orcKoef);
 		orc.setForChoose(true);
+		orc.initAnimations(this.textureAtlas);
 		enemies = new Array<Unit>();
 		enemies.add(zombie);
 		enemies.add(orc);
@@ -202,7 +205,7 @@ public class ChooseScreen implements Screen {
 //				allies.get(i).draw(batch);
 	
 			for (int i = 0; i < units.size; i++)
-				units.get(i).draw(batch);
+				units.get(i).draw(batch, delta);
 			
 //			units.get(1).draw(batch);
 			

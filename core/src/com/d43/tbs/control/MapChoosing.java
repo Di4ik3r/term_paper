@@ -89,6 +89,7 @@ public class MapChoosing extends MapHandler {
 				}
 			}
 			Unit newUnit = unit.clone();
+			newUnit.initAnimations(this.textureAtlas);
 			this.pickedUnit = newUnit;
 		}
 		else this.pickedUnit = unit;
