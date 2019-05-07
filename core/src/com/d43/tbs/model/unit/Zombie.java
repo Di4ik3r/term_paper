@@ -42,15 +42,13 @@ public class Zombie extends MeleeUnit {
 		this.current = idle;
 		
 		Array<TextureRegion> regionsAttack = new Array<TextureRegion>();
-		regionsAttack.add(atlas.findRegion("knight_attack", 1));
-		regionsAttack.add(atlas.findRegion("knight_attack", 2));
-		regionsAttack.add(atlas.findRegion("knight_attack", 3));
-		regionsAttack.add(atlas.findRegion("knight_attack", 4));
-		regionsAttack.add(atlas.findRegion("knight_attack", 5));
-		regionsAttack.add(atlas.findRegion("knight_attack", 6));
-		regionsAttack.add(atlas.findRegion("knight_attack", 7));
+		regionsAttack.add(atlas.findRegion("zombie_attack", 1));
+		regionsAttack.add(atlas.findRegion("zombie_attack", 2));
+		regionsAttack.add(atlas.findRegion("zombie_attack", 3));
+		regionsAttack.add(atlas.findRegion("zombie_attack", 4));
+		regionsAttack.add(atlas.findRegion("zombie_attack", 5));
 		this.attack = new Animation(regionsAttack, this, 0.5f, false);
-		this.attack.setSize(98, 96);
-		this.attack.setDeltaPosition(-33, 0);
+		this.attack.setSize(64, 72);
+		this.attack.setDeltaPosition(-10, 0);
 	}
 }

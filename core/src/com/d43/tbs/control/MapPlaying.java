@@ -267,7 +267,6 @@ public class MapPlaying extends MapHandler {
 	}
 
 	public void makeUnitsRaplaceable() {
-		Gdx.app.log("log", "replaceability changed");
 		for (int i = 0; i < allies.size; i++) {
 			allies.get(i).getCell().setRegion(this.textureAtlas.findRegion("cell"));
 			allies.get(i).setReplaceability(true);
