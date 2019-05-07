@@ -23,7 +23,7 @@ public class Arrow extends GameObject {
 		this.moving = true;
 		x = from.x;
 		y = from.y;
-		speed = 17;
+		speed = 15;
 	}
 	
 	public void setUnit(Unit unitTo) {
