@@ -40,7 +40,8 @@ public class Knight extends MeleeUnit{
 //		regions.add(atlas.findRegion("zombie"));
 		
 
-		this.idle = new Animation(regions, 1.5f);
+		this.idle = new Animation(regions, this, 1.5f, true);
+		this.idle.setSize(35, 73);
 		this.current = idle;
 	}
 

@@ -44,7 +44,8 @@ public class Bot {
 			attackCells = calculator.getAvailableCellsForAttack();
 			
 			if(attackCells.size > 0) {
-				attackCells.get(0).getUnit().damage(enemies.get(i).getDamage());
+//				attackCells.get(0).getUnit().damage(enemies.get(i).getDamage());
+				enemies.get(i).attack(attackCells.get(0).getUnit());
 				this.mapChecker.checkAllies();
 			}
 			else {

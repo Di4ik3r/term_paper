@@ -6,140 +6,196 @@ filter: Linear,Linear
 repeat: none
 0
   rotate: false
-  xy: 1370, 1495
+  xy: 1370, 1582
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
+archer_attack
+  rotate: false
+  xy: 2, 226
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: 8
+archer_attack
+  rotate: false
+  xy: 1370, 1508
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: 6
+archer_attack
+  rotate: false
+  xy: 1628, 1766
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: 4
+archer_attack
+  rotate: false
+  xy: 2, 152
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: 7
+archer_attack
+  rotate: false
+  xy: 52, 226
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: 5
+archer_attack
+  rotate: false
+  xy: 1370, 1434
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: 3
+archer_attack
+  rotate: false
+  xy: 1420, 1508
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: 1
+archer_attack
+  rotate: false
+  xy: 1628, 1692
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: 2
 archer_idle
   rotate: false
-  xy: 1628, 1612
+  xy: 102, 234
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
   index: 1
 archer
   rotate: false
-  xy: 1628, 1612
+  xy: 102, 234
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
   index: -1
 archer_idle
   rotate: false
-  xy: 1665, 1687
+  xy: 1420, 1442
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
   index: 3
 archer_idle
   rotate: false
-  xy: 2, 2
+  xy: 1470, 1516
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
   index: 2
 cell
   rotate: false
-  xy: 1444, 1468
+  xy: 136, 273
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 cellBlocked
   rotate: false
-  xy: 1444, 1441
+  xy: 1721, 1786
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 cellMouseOn
   rotate: false
-  xy: 83, 186
+  xy: 1504, 1555
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 cellMouseOnBlocked
   rotate: false
-  xy: 1699, 1726
+  xy: 1721, 1813
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 cellPickable
   rotate: false
-  xy: 1486, 1468
+  xy: 1763, 1813
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 dirt
   rotate: false
-  xy: 2, 983
+  xy: 2, 1070
   size: 1366, 768
   orig: 1366, 768
   offset: 0, 0
   index: -1
 grass_above
   rotate: false
-  xy: 2, 213
+  xy: 2, 300
   size: 1366, 768
   orig: 1366, 768
   offset: 0, 0
   index: -1
 knight
   rotate: false
-  xy: 1370, 1420
+  xy: 2, 77
   size: 35, 73
   orig: 35, 73
   offset: 0, 0
   index: -1
 knight_idle
   rotate: false
-  xy: 1370, 1420
+  xy: 2, 77
   size: 35, 73
   orig: 35, 73
   offset: 0, 0
   index: 1
 knight_idle
   rotate: false
-  xy: 1628, 1678
+  xy: 1370, 1359
   size: 35, 73
   orig: 35, 73
   offset: 0, 0
   index: 2
 knight_idle
   rotate: false
-  xy: 2, 68
+  xy: 1628, 1617
   size: 35, 73
   orig: 35, 73
   offset: 0, 0
   index: 3
 knight_idle
   rotate: false
-  xy: 1370, 1345
+  xy: 1678, 1695
   size: 35, 73
   orig: 35, 73
   offset: 0, 0
   index: 4
 knight_idle
   rotate: false
-  xy: 1407, 1420
+  xy: 2, 2
   size: 35, 73
   orig: 35, 73
   offset: 0, 0
   index: 5
 orc
   rotate: false
-  xy: 45, 144
+  xy: 52, 157
   size: 36, 67
   orig: 36, 67
   offset: 0, 0
   index: -1
 zombie
   rotate: false
-  xy: 2, 143
+  xy: 1678, 1770
   size: 41, 68
   orig: 41, 68
   offset: 0, 0

@@ -159,7 +159,8 @@ public class MapPlaying extends MapHandler{
 			Cell cell = map.findCell(bounds);
 			if(this.cellIsAvailable(cell)) {
 				Unit enemy = cell.getUnit();
-				enemy.damage(this.pickedUnit.getDamage());
+				this.pickedUnit.attack(enemy);
+//				enemy.damage(this.pickedUnit.getDamage());
 					
 				this.pickedUnit.getCell().setRegion(this.textureAtlas.findRegion("cellBlocked"));
 				this.pickedUnit.getCell().changeTextureRegion(this.textureAtlas.findRegion("cellBlocked"));

@@ -33,6 +33,10 @@ public abstract class GameObject {
 		return bounds;
 	}
 	
+	public Sprite getObject() {
+		return this.object;
+	}
+	
 	public void changeTextureRegion(TextureRegion textureRegion) {
 		this.object.setRegion(textureRegion);
 	}

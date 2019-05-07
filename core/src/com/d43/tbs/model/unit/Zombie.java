@@ -33,7 +33,8 @@ public class Zombie extends MeleeUnit {
 		Array<TextureRegion> regions = new Array<TextureRegion>();
 		regions.add(atlas.findRegion("zombie"));
 
-		this.idle = new Animation(regions, 2f);
+		this.idle = new Animation(regions, this, 2f, true);
+		this.idle.setSize(41, 68);
 		this.current = idle;
 	}
 }

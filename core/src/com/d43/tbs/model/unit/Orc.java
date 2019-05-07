@@ -32,7 +32,8 @@ public class Orc extends RangeUnit {
 		Array<TextureRegion> regions = new Array<TextureRegion>();
 		regions.add(atlas.findRegion("orc"));
 
-		this.idle = new Animation(regions, 2f);
+		this.idle = new Animation(regions, this, 2f, true);
+		this.idle.setSize(36, 67);
 		this.current = idle;
 	}
 }

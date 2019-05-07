@@ -77,10 +77,16 @@ public abstract class Unit extends GameObject {
 	}
 	
 	public void setAttack() {
-		this.current = attack;
+		this.current = this.attack;
+	}
+	
+	public void attack(Unit unit) {
+		this.current = this.attack;
+		unit.damage(this.damage);
 	}
 	
 	public void setIdle() {
+		this.idle.refresh();
 		this.current = idle;
 	}
 
@@ -230,6 +236,7 @@ public abstract class Unit extends GameObject {
 	public void draw(SpriteBatch batch, float delta) {
 		this.current.update(delta);
 		this.changeTextureRegion(this.current.getFrame());
+		this.getObject().setSize(this.current.getSize().x, this.current.getSize().y);
 		
 		super.draw(batch);
 
