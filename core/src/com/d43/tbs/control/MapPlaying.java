@@ -140,7 +140,7 @@ public class MapPlaying extends MapHandler{
 				
 				if (this.unitsAreDone()) {
 					bot.makeBotsMove();
-					this.makeUnitsRaplaceable();
+//					this.makeUnitsRaplaceable();
 //				Gdx.app.log("tag", "units are replaceable");
 				}
 			}
@@ -183,8 +183,6 @@ public class MapPlaying extends MapHandler{
 //				enemies.removeIndex(i);
 				
 				if(!enemiesHasAlive()) {
-					Gdx.app.log("log", "win");
-//					this.endGame(true);
 					win = true;
 					this.endGame();
 				}
@@ -200,10 +198,8 @@ public class MapPlaying extends MapHandler{
 				this.paintToDefault();
 				
 				if(!alliesHasAlive()) {
-					Gdx.app.log("log", "defeat");
 					win = false;
 					this.endGame();
-//					this.endGame(false);
 				}
 			}
 		}
@@ -280,7 +276,7 @@ public class MapPlaying extends MapHandler{
 		return k == j ? true : false;
 	}
 
-	private void makeUnitsRaplaceable() {
+	public void makeUnitsRaplaceable() {
 		for (int i = 0; i < allies.size; i++)
 		{
 			allies.get(i).getCell().setRegion(this.textureAtlas.findRegion("cell"));

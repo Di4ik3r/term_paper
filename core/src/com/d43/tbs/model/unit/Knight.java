@@ -1,31 +1,33 @@
 package com.d43.tbs.model.unit;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.utils.Animation;
 
-public class Knight extends MeleeUnit{
+public class Knight extends MeleeUnit {
 
 	public Knight(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
-		
+
 		this.setRangeMovement(3);
 		this.setRangeAttack(1);
 		this.setHp(72);
 		this.setDamage(19);
 	}
-	
+
 	@Override
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
 	}
-	
+
 	public Unit clone() {
-		return new Knight(this.getTextureRegion(), this.getBounds().getX(), this.getBounds().getY(), this.getBounds().getBoundingRectangle().width, this.getBounds().getBoundingRectangle().height);
+		return new Knight(this.getTextureRegion(), this.getBounds().getX(), this.getBounds().getY(),
+				this.getBounds().getBoundingRectangle().width, this.getBounds().getBoundingRectangle().height);
 	}
-	
+
 	@Override
 	public void initAnimations(TextureAtlas atlas) {
 		Array<TextureRegion> regions = new Array<TextureRegion>();
@@ -38,11 +40,22 @@ public class Knight extends MeleeUnit{
 		regions.add(atlas.findRegion("knight_idle", 5));
 //		regions.add(atlas.findRegion("knight"));
 //		regions.add(atlas.findRegion("zombie"));
-		
 
 		this.idle = new Animation(regions, this, 1.5f, true);
 		this.idle.setSize(35, 73);
 		this.current = idle;
+
+		Array<TextureRegion> regionsAttack = new Array<TextureRegion>();
+		regionsAttack.add(atlas.findRegion("knight_attack", 1));
+		regionsAttack.add(atlas.findRegion("knight_attack", 2));
+		regionsAttack.add(atlas.findRegion("knight_attack", 3));
+		regionsAttack.add(atlas.findRegion("knight_attack", 4));
+		regionsAttack.add(atlas.findRegion("knight_attack", 5));
+		regionsAttack.add(atlas.findRegion("knight_attack", 6));
+		regionsAttack.add(atlas.findRegion("knight_attack", 7));
+		this.attack = new Animation(regionsAttack, this, 0.5f, false);
+		this.attack.setSize(98, 96);
+		this.attack.setDeltaPosition(-33, 0);
 	}
 
 }

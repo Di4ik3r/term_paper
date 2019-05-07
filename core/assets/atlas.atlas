@@ -6,175 +6,224 @@ filter: Linear,Linear
 repeat: none
 0
   rotate: false
-  xy: 1370, 1582
+  xy: 1370, 1779
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 archer_attack
   rotate: false
-  xy: 2, 226
+  xy: 1628, 1865
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: 8
 archer_attack
   rotate: false
-  xy: 1370, 1508
+  xy: 1728, 1963
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: 6
 archer_attack
   rotate: false
-  xy: 1628, 1766
+  xy: 2, 227
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: 4
 archer_attack
   rotate: false
-  xy: 2, 152
+  xy: 102, 325
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: 7
 archer_attack
   rotate: false
-  xy: 52, 226
+  xy: 202, 423
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: 5
 archer_attack
   rotate: false
-  xy: 1370, 1434
+  xy: 1370, 1509
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: 3
 archer_attack
   rotate: false
-  xy: 1420, 1508
+  xy: 1470, 1607
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: 1
 archer_attack
   rotate: false
-  xy: 1628, 1692
+  xy: 1570, 1705
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: 2
 archer_idle
   rotate: false
-  xy: 102, 234
+  xy: 1778, 1971
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
   index: 1
 archer
   rotate: false
-  xy: 102, 234
+  xy: 1778, 1971
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
   index: -1
 archer_idle
   rotate: false
-  xy: 1420, 1442
+  xy: 52, 235
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
   index: 3
 archer_idle
   rotate: false
-  xy: 1470, 1516
+  xy: 152, 333
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
   index: 2
 cell
   rotate: false
-  xy: 136, 273
+  xy: 1420, 1556
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 cellBlocked
   rotate: false
-  xy: 1721, 1786
+  xy: 1812, 2010
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 cellMouseOn
   rotate: false
-  xy: 1504, 1555
+  xy: 1520, 1654
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 cellMouseOnBlocked
   rotate: false
-  xy: 1721, 1813
+  xy: 252, 470
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 cellPickable
   rotate: false
-  xy: 1763, 1813
+  xy: 252, 443
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 dirt
   rotate: false
-  xy: 2, 1070
+  xy: 2, 1267
   size: 1366, 768
   orig: 1366, 768
   offset: 0, 0
   index: -1
 grass_above
   rotate: false
-  xy: 2, 300
+  xy: 2, 497
   size: 1366, 768
   orig: 1366, 768
   offset: 0, 0
   index: -1
 knight
   rotate: false
-  xy: 2, 77
+  xy: 2, 152
   size: 35, 73
   orig: 35, 73
   offset: 0, 0
   index: -1
 knight_idle
   rotate: false
-  xy: 2, 77
+  xy: 2, 152
   size: 35, 73
   orig: 35, 73
   offset: 0, 0
   index: 1
+knight_attack
+  rotate: false
+  xy: 2, 399
+  size: 98, 96
+  orig: 98, 96
+  offset: 0, 0
+  index: 5
+knight_attack
+  rotate: false
+  xy: 1370, 1681
+  size: 98, 96
+  orig: 98, 96
+  offset: 0, 0
+  index: 2
+knight_attack
+  rotate: false
+  xy: 1628, 1939
+  size: 98, 96
+  orig: 98, 96
+  offset: 0, 0
+  index: 3
+knight_attack
+  rotate: false
+  xy: 2, 301
+  size: 98, 96
+  orig: 98, 96
+  offset: 0, 0
+  index: 4
+knight_attack
+  rotate: false
+  xy: 102, 399
+  size: 98, 96
+  orig: 98, 96
+  offset: 0, 0
+  index: 1
+knight_attack
+  rotate: false
+  xy: 1370, 1583
+  size: 98, 96
+  orig: 98, 96
+  offset: 0, 0
+  index: 6
+knight_attack
+  rotate: false
+  xy: 1470, 1681
+  size: 98, 96
+  orig: 98, 96
+  offset: 0, 0
+  index: 7
 knight_idle
   rotate: false
-  xy: 1370, 1359
+  xy: 1370, 1434
   size: 35, 73
   orig: 35, 73
   offset: 0, 0
   index: 2
 knight_idle
   rotate: false
-  xy: 1628, 1617
+  xy: 2, 77
   size: 35, 73
   orig: 35, 73
   offset: 0, 0
   index: 3
 knight_idle
   rotate: false
-  xy: 1678, 1695
+  xy: 1370, 1359
   size: 35, 73
   orig: 35, 73
   offset: 0, 0
@@ -188,14 +237,14 @@ knight_idle
   index: 5
 orc
   rotate: false
-  xy: 52, 157
+  xy: 1678, 1870
   size: 36, 67
   orig: 36, 67
   offset: 0, 0
   index: -1
 zombie
   rotate: false
-  xy: 1678, 1770
+  xy: 1628, 1795
   size: 41, 68
   orig: 41, 68
   offset: 0, 0

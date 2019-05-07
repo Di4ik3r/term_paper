@@ -20,6 +20,10 @@ public class UnitController {
 		this.id = id;
 		this.bounds = bounds;
 	}
+	
+	public MapHandler getMapHandler() {
+		return this.mapHandler;
+	}
 
 	public void setUnit(Unit unit) {
 		this.unit = unit;

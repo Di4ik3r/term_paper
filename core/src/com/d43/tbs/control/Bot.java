@@ -27,6 +27,7 @@ public class Bot {
 	public void makeBotsMove() {
 		Array<Cell> moveCells, attackCells;
 		for(int i = 0; i < this.enemies.size; i++) {
+			this.enemies.get(i).setDelay(i*0.5f);
 			if(!enemies.get(i).isAlive())
 				continue;
 			Vector2 coord = map.findCellCoord(this.enemies.get(i).getCell().getBounds());
@@ -51,6 +52,9 @@ public class Bot {
 			else {
 				enemies.get(i).setCell(moveCells.get(Rnd.generate(0, moveCells.size-1)));
 			}
+			
+			if(i == this.enemies.size - 1)
+				this.enemies.get(i).lastEnemy();
 		}
 	}
 	

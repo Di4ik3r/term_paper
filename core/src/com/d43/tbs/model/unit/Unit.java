@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.control.MapHandler;
+import com.d43.tbs.control.MapPlaying;
 import com.d43.tbs.control.UnitController;
 import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.map.Cell;
@@ -23,7 +24,7 @@ public abstract class Unit extends GameObject {
 
 	private int id, hp, rangeAttack, rangeMovement, damage;
 	private UnitController controller;
-	private Cell cell;
+	protected Cell cell;
 	private boolean isReplaceable;
 	private boolean isEnemy;
 	private boolean isAlive;
@@ -38,8 +39,13 @@ public abstract class Unit extends GameObject {
 	private boolean isForChoose;
 
 	private Vector2 location;
-	
+
 	protected Animation current, idle, attack;
+	
+	protected boolean delayed;
+	protected float delay, finalDelay;
+	
+	protected boolean markEndBotMove;
 
 	public Unit(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
@@ -62,30 +68,54 @@ public abstract class Unit extends GameObject {
 
 		this.textureRegion = textureRegion;
 
-		this.isForChoose = false;		
+		this.isForChoose = false;
+		
+		this.delayed = false;
+		this.delay = 0;
+		
+		this.markEndBotMove = false;
 	}
 	
-	public abstract void initAnimations(TextureAtlas atlas);
+	public void lastEnemy() {
+		this.markEndBotMove = true;
+	}
 	
+	public void setDelay(Float delay) {
+		this.finalDelay = delay;
+		this.delay = 0;
+		this.delayed = true;
+	}
+
+	public abstract void initAnimations(TextureAtlas atlas);
+
 	public Array<Animation> getAnimations() {
 		Array<Animation> animations = new Array<Animation>();
 		animations.add(current);
 		animations.add(idle);
 		animations.add(attack);
-		
+
 		return animations;
 	}
-	
+
 	public void setAttack() {
 		this.current = this.attack;
 	}
-	
+
 	public void attack(Unit unit) {
+		if (this.attack.getDeltaPosition() != null)
+			this.getBounds().setPosition(
+					this.cell.getBounds().getX() + this.attack.getDeltaPosition().x + this.cell.getSize().width / 2
+							- this.getSize().width / 2,
+					this.cell.getBounds().getY() + this.attack.getDeltaPosition().y + this.cell.getSize().height / 2
+							- this.cell.getSize().height / 4);
 		this.current = this.attack;
 		unit.damage(this.damage);
 	}
-	
+
 	public void setIdle() {
+		this.getBounds().setPosition(
+				this.cell.getBounds().getX() + this.cell.getSize().width / 2 - this.getSize().width / 2,
+				this.cell.getBounds().getY() + this.cell.getSize().height / 2 - this.cell.getSize().height / 4);
 		this.idle.refresh();
 		this.current = idle;
 	}
@@ -237,9 +267,23 @@ public abstract class Unit extends GameObject {
 		this.current.update(delta);
 		this.changeTextureRegion(this.current.getFrame());
 		this.getObject().setSize(this.current.getSize().x, this.current.getSize().y);
-		
+
 		super.draw(batch);
 
+		if(this.delayed) {
+			this.delay += delta;
+			if(this.finalDelay <= this.delay) {
+				this.delayed = false;
+				this.delay = 0;
+			}
+			else return;
+		}
+		
+		if(this.markEndBotMove == true) {
+			this.markEndBotMove = false;
+			((MapPlaying)this.controller.getMapHandler()).makeUnitsRaplaceable();
+		}
+		
 		controller.handle();
 //		Gdx.app.log("log",
 //				"(" + Float.toString(this.previousLocation.x) + ", " + Float.toString(this.previousLocation.y) + ") : ("

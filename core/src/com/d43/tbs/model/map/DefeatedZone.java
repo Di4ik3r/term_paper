@@ -45,6 +45,7 @@ public class DefeatedZone extends GameObject {
 		unit.setAlive(false);
 		for(int i = cells.length-1; i >= 0; i--)
 			if(!cells[i].containsUnit()) {
+				unit.setDelay(1f);
 				unit.setCell(cells[i]);
 				unit.setHp(0);
 //				return;
