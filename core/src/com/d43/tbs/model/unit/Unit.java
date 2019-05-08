@@ -49,6 +49,8 @@ public abstract class Unit extends GameObject {
 	protected boolean markEndBotMove;
 	
 	protected float attackAnimDelay;
+	
+	protected boolean toRight;
 
 	public Unit(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
@@ -77,6 +79,12 @@ public abstract class Unit extends GameObject {
 		this.delay = 0;
 		
 		this.markEndBotMove = false;
+		
+//		this.toRight = true;
+	}
+	
+	public void rotateRight(boolean toRight) {
+		
 	}
 	
 	public void lastEnemy() {
@@ -267,6 +275,8 @@ public abstract class Unit extends GameObject {
 	}
 
 	public void draw(SpriteBatch batch, float delta) {
+		this.current.flip(this.toRight);
+		
 		if(!this.isAlive && this.current == this.attack) {
 			this.current = this.idle;
 		}
