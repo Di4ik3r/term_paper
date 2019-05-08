@@ -47,6 +47,8 @@ public abstract class Unit extends GameObject {
 	protected float delay, finalDelay;
 	
 	protected boolean markEndBotMove;
+	
+	protected float attackAnimDelay;
 
 	public Unit(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
@@ -269,6 +271,9 @@ public abstract class Unit extends GameObject {
 			this.current = this.idle;
 		}
 		
+		this.getObject().setSize(this.current.getSize().x, this.current.getSize().y);
+		this.changeTextureRegion(this.current.getFrame());
+		
 		super.draw(batch);
 
 		if(this.delayed) {
@@ -280,8 +285,8 @@ public abstract class Unit extends GameObject {
 			else return;
 		}
 		
-		this.current.update(delta);
 		this.getObject().setSize(this.current.getSize().x, this.current.getSize().y);
+		this.current.update(delta);
 		this.changeTextureRegion(this.current.getFrame());
 		
 		if(this.markEndBotMove == true) {

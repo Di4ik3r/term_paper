@@ -16,6 +16,8 @@ public class Orc extends RangeUnit {
 		this.setHp(42);
 		this.setDamage(19);
 		this.setIsEnemy(true);
+		
+		this.attackAnimDelay = 0.75f;
 	}
 	
 	@Override

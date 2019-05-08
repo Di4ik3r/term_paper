@@ -38,6 +38,7 @@ public class Arrow extends GameObject {
 	}
 
 	public void draw(SpriteBatch batch, float delta) {
+		this.unitTo.setDelay(1f);
 		this.delay += delta;
 		
 		if(this.delayed) {
@@ -69,6 +70,7 @@ public class Arrow extends GameObject {
 		}
 		else {
 			this.bounds.setPosition(1366, 768);
+			this.unitTo.setDelay(0f);
 		}
 	}
 }
