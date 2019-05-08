@@ -277,8 +277,8 @@ public abstract class Unit extends GameObject {
 			else return;
 		}
 		
-		this.getObject().setSize(this.current.getSize().x, this.current.getSize().y);
 		this.current.update(delta);
+		this.getObject().setSize(this.current.getSize().x, this.current.getSize().y);
 		this.changeTextureRegion(this.current.getFrame());
 		
 		if(this.markEndBotMove == true) {

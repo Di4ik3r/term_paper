@@ -122,7 +122,7 @@ public class MapPlaying extends MapHandler {
 		if (this.pickedUnit != null) {
 			Cell cell = map.findCell(bounds);
 			if (this.cellIsAvailable(cell)) {
-				this.pickedUnit.setDelay(0.7f);
+//				this.pickedUnit.setDelay(0.7f);
 				this.movingUnit = this.pickedUnit;
 				this.pickedUnit.setCell(cell);
 
