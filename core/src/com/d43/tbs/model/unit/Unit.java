@@ -50,7 +50,7 @@ public abstract class Unit extends GameObject {
 	
 	protected float attackAnimDelay;
 	
-	protected boolean toRight;
+	protected boolean toRight, previousToRight;
 
 	public Unit(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
@@ -84,7 +84,8 @@ public abstract class Unit extends GameObject {
 	}
 	
 	public void rotateRight(boolean toRight) {
-		
+		this.previousToRight = this.toRight;
+		this.toRight = toRight;
 	}
 	
 	public void lastEnemy() {
@@ -275,14 +276,18 @@ public abstract class Unit extends GameObject {
 	}
 
 	public void draw(SpriteBatch batch, float delta) {
-		this.current.flip(this.toRight);
 		
 		if(!this.isAlive && this.current == this.attack) {
 			this.current = this.idle;
 		}
 		
+		TextureRegion currentFrame = this.current.getFrame();
+		if(this.previousToRight != this.toRight)
+			currentFrame.flip(true, false);
+			
+		
 		this.getObject().setSize(this.current.getSize().x, this.current.getSize().y);
-		this.changeTextureRegion(this.current.getFrame());
+		this.changeTextureRegion(currentFrame);
 		
 		super.draw(batch);
 
@@ -297,7 +302,10 @@ public abstract class Unit extends GameObject {
 		
 		this.getObject().setSize(this.current.getSize().x, this.current.getSize().y);
 		this.current.update(delta);
-		this.changeTextureRegion(this.current.getFrame());
+		currentFrame = this.current.getFrame();
+		if(this.previousToRight != this.toRight)
+			currentFrame.flip(true, false);
+		this.changeTextureRegion(currentFrame);
 		
 		if(this.markEndBotMove == true) {
 			this.markEndBotMove = false;

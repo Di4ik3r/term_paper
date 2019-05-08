@@ -124,6 +124,9 @@ public class MapPlaying extends MapHandler {
 			if (this.cellIsAvailable(cell)) {
 //				this.pickedUnit.setDelay(0.7f);
 				this.movingUnit = this.pickedUnit;
+				
+				checkSide(bounds);
+				
 				this.pickedUnit.setCell(cell);
 
 				this.pickedUnit.getCell().setRegion(this.textureAtlas.findRegion("cellBlocked"));
@@ -155,6 +158,9 @@ public class MapPlaying extends MapHandler {
 			Cell cell = map.findCell(bounds);
 			if (this.cellIsAvailable(cell)) {
 				Unit enemy = cell.getUnit();
+				
+				checkSide(bounds);
+				
 				this.pickedUnit.attack(enemy);
 //				enemy.damage(this.pickedUnit.getDamage());
 
@@ -180,6 +186,13 @@ public class MapPlaying extends MapHandler {
 			win = true;
 			this.endGame();
 		}
+	}
+	
+	private void checkSide(Polygon bounds) {
+		if(map.findCellCoord(this.pickedUnit.getCell().getBounds()).x <= map.findCellCoord(bounds).x)
+			this.pickedUnit.rotateRight(true);
+		else 
+			this.pickedUnit.rotateRight(false);
 	}
 
 	public void checkAllies() {

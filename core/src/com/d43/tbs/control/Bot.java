@@ -3,6 +3,7 @@ package com.d43.tbs.control;
 import java.util.concurrent.TimeUnit;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.model.map.Cell;
@@ -52,9 +53,14 @@ public class Bot {
 			if (attackCells.size > 0) {
 //				attackCells.get(0).getUnit().damage(enemies.get(i).getDamage());
 				enemies.get(i).attack(attackCells.get(0).getUnit());
+				
+//				checkSide(enemies.get(i), attackCells.get(0).getBounds());
+				
 				this.mapChecker.checkAllies();
 			} else {
-				enemies.get(i).setCell(moveCells.get(Rnd.generate(0, moveCells.size - 1)));
+				int rnd = Rnd.generate(0, moveCells.size - 1);
+//				checkSide(enemies.get(i), moveCells.get(rnd).getBounds());
+				enemies.get(i).setCell(moveCells.get(rnd));
 			}
 		}
 
@@ -65,6 +71,13 @@ public class Bot {
 			this.enemies.get(lastAliveIndex).lastEnemy();
 
 	}
+	
+//	private void checkSide(Unit pickedUnit, Polygon bounds) {
+//		if(map.findCellCoord(pickedUnit.getCell().getBounds()).x <= map.findCellCoord(bounds).x)
+//			pickedUnit.rotateRight(false);
+//		else 
+//			pickedUnit.rotateRight(true);
+//	}
 
 	private void sortEnemiesByAlive() {
 		for (int i = 0; i < this.enemies.size; i++) {

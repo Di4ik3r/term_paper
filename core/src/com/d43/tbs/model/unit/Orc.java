@@ -20,6 +20,7 @@ public class Orc extends RangeUnit {
 		this.attackAnimDelay = 0.75f;
 		
 		this.toRight = false;
+		this.previousToRight = false;
 	}
 	
 	@Override

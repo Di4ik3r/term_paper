@@ -18,6 +18,7 @@ public class Zombie extends MeleeUnit {
 		this.setIsEnemy(true);
 		
 		this.toRight = false;
+		this.previousToRight = false;
 	}
 	
 	@Override

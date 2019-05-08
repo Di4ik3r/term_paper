@@ -31,21 +31,6 @@ public class Animation {
 		
 		this.unit = unit;
 		
-		if(unit.isEnemy())
-			this.toRight = false;
-		else this.toRight = true;
-	}
-	
-	
-	public void flip(boolean toRight) {
-		boolean rotate;
-		if(this.toRight == toRight)
-			rotate = false;
-		else rotate = true;
-		this.toRight = toRight;
-		
-		for(int i = 0; i < this.frames.size; i++)
-			this.frames.get(i).flip(rotate, false);
 	}
 	
 	public void setDeltaPosition(float x, float y) {
