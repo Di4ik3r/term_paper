@@ -265,7 +265,10 @@ public abstract class Unit extends GameObject {
 	}
 
 	public void draw(SpriteBatch batch, float delta) {
-
+		if(!this.isAlive && this.current == this.attack) {
+			this.current = this.idle;
+		}
+		
 		super.draw(batch);
 
 		if(this.delayed) {
