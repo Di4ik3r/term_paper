@@ -265,9 +265,6 @@ public abstract class Unit extends GameObject {
 	}
 
 	public void draw(SpriteBatch batch, float delta) {
-		this.current.update(delta);
-		this.changeTextureRegion(this.current.getFrame());
-		this.getObject().setSize(this.current.getSize().x, this.current.getSize().y);
 
 		super.draw(batch);
 
@@ -279,6 +276,10 @@ public abstract class Unit extends GameObject {
 			}
 			else return;
 		}
+		
+		this.getObject().setSize(this.current.getSize().x, this.current.getSize().y);
+		this.current.update(delta);
+		this.changeTextureRegion(this.current.getFrame());
 		
 		if(this.markEndBotMove == true) {
 			this.markEndBotMove = false;

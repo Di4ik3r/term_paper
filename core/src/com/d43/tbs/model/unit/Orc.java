@@ -48,7 +48,7 @@ public class Orc extends RangeUnit {
 		regionsAttack.add(atlas.findRegion("orc_attack", 2));
 		regionsAttack.add(atlas.findRegion("orc_attack", 1));
 		this.attack = new Animation(regionsAttack, this, 0.8f, false);
-		this.attack.setSize(44, 67);
+		this.attack.setSize(40, 67);
 		this.attack.setDeltaPosition(-5, 0);
 	}
 }

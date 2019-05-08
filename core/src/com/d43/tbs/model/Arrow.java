@@ -15,8 +15,11 @@ public class Arrow extends GameObject {
 	private float x, y, speed;
 	
 	private Unit unitTo;
+	
+	private float delay, finalDelay;
+	private boolean delayed;
 
-	public Arrow(TextureRegion textureRegion, Vector2 from, Vector2 to, float width, float height) {
+	public Arrow(TextureRegion textureRegion, Vector2 from, Vector2 to, float width, float height, float delay) {
 		super(textureRegion, from.x, from.y, width, height);
 		this.from = from;
 		this.to = to;
@@ -24,14 +27,25 @@ public class Arrow extends GameObject {
 		x = from.x;
 		y = from.y;
 		speed = 15;
+		
+		this.delay = 0;
+		this.finalDelay = delay;
+		this.delayed = true;
 	}
 	
 	public void setUnit(Unit unitTo) {
 		this.unitTo = unitTo;
 	}
 
-	@Override
-	public void draw(SpriteBatch batch) {
+	public void draw(SpriteBatch batch, float delta) {
+		this.delay += delta;
+		
+		if(this.delayed) {
+			if(this.delay >= this.finalDelay)
+				this.delayed = false;
+			else return;
+		}
+		
 		super.draw(batch);
 		
 		if(this.moving) {

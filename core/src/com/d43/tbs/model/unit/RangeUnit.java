@@ -22,7 +22,7 @@ public abstract class RangeUnit extends Unit{
 		float width = 5f;
 		float height = 35f/5f * width;
 		
-		arrow = new Arrow(GameScreen.textureAtlas.findRegion("arrow"), from, to, width, height);
+		arrow = new Arrow(GameScreen.textureAtlas.findRegion("arrow"), from, to, width, height, this.finalDelay);
 		arrow.setUnit(unit);
 		if (this.attack.getDeltaPosition() != null)
 			this.getBounds().setPosition(
@@ -39,7 +39,7 @@ public abstract class RangeUnit extends Unit{
 		super.draw(batch, delta);
 		
 		if(arrow != null)
-			arrow.draw(batch);
+			arrow.draw(batch, delta);
 	}
 	
 	

@@ -122,6 +122,7 @@ public class MapPlaying extends MapHandler {
 		if (this.pickedUnit != null) {
 			Cell cell = map.findCell(bounds);
 			if (this.cellIsAvailable(cell)) {
+				this.pickedUnit.setDelay(0.7f);
 				this.movingUnit = this.pickedUnit;
 				this.pickedUnit.setCell(cell);
 
@@ -201,7 +202,7 @@ public class MapPlaying extends MapHandler {
 	private String[] formResult(boolean win) {
 		String[] result = new String[4];
 
-		result[0] = win ? "You WIN" : "You LOSE";
+		result[0] = win ? "You WON" : "You LOST";
 
 		int aliveAlliesCount = 0;
 		for (int i = 0; i < allies.size; i++)
