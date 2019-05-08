@@ -25,7 +25,7 @@ public class ChooseScreen implements Screen {
 	private OrthographicCamera camera;
 	private TextureAtlas textureAtlas;
 	public static float delta;
-	private UI ui;
+	private ChoosingUI ui;
 	
 	private TurnBasedStrategy game;
 
@@ -132,7 +132,7 @@ public class ChooseScreen implements Screen {
 
 		// *********************************************************** UI
 		// ***********************************************************
-		ui = new UI(this.textureAtlas);
+		ui = new ChoosingUI(this.textureAtlas);
 		ui.setUnits(allies, enemies);
 		
 		
