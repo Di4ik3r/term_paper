@@ -22,7 +22,6 @@ public class GameScreen implements Screen {
 	public static float delta;
 	private UI ui;
 
-//	private BadLogic badLogic;
 	Array<Unit> allies;
 	Array<Unit> enemies;
 	Array<Unit> units;
