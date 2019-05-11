@@ -33,9 +33,12 @@ public class Bot {
 		for (int i = 0; i < this.enemies.size; i++) {
 //			this.enemies.get(i).setDelay(i * 0.5f + 0.5f);
 //			this.enemies.get(i).setDelay(this.enemies.size - i * 1f + 0.2f);
-			this.enemies.get(i).setDelay(i * 0.5f + 1f);
+
 			if (!enemies.get(i).isAlive())
 				continue;
+
+			this.enemies.get(i).setDelay(i * 0.5f + 1f);
+
 			Vector2 coord = map.findCellCoord(this.enemies.get(i).getCell().getBounds());
 //			CellCalculator calculator = new CellCalculator(this.map, coord, this.enemies.get(i).getRangeMovement());
 //			this.enemies.get(i)
@@ -81,7 +84,8 @@ public class Bot {
 	private void sortEnemiesByType() {
 		for (int i = 0; i < this.enemies.size; i++)
 			for (int j = 0; j < this.enemies.size - 1; j++)
-				if (!RangeUnit.class.isAssignableFrom(enemies.get(j).getClass()) && RangeUnit.class.isAssignableFrom(enemies.get(j + 1).getClass()))
+				if (!RangeUnit.class.isAssignableFrom(enemies.get(j).getClass())
+						&& RangeUnit.class.isAssignableFrom(enemies.get(j + 1).getClass()))
 					enemies.swap(j, j + 1);
 
 	}
