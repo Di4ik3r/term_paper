@@ -38,10 +38,11 @@ public abstract class RangeUnit extends Unit{
 	public void draw(SpriteBatch batch, float delta) {
 		super.draw(batch, delta);
 		
-		if(arrow != null)
+		if(arrow != null) {
+			this.arrow.update();
 			arrow.draw(batch, delta);
+		
+		}
 	}
-	
-	
 
 }

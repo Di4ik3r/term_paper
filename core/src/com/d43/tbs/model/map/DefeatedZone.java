@@ -49,7 +49,9 @@ public class DefeatedZone extends GameObject {
 			if(!cells[i].containsUnit()) {
 //				if(unit.isEnemy() && allies.size != 1)
 //				unit.setDelay(this.cells.length * 0.09f);
-				unit.setDelay(1f);
+				if(unit.isEnemy())
+					unit.setDelay(1f);
+				else unit.setDelay(1.7f);
 				unit.setCell(cells[i]);
 				unit.setHp(0);
 //				return;

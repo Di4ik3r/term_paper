@@ -36,9 +36,14 @@ public class Arrow extends GameObject {
 	public void setUnit(Unit unitTo) {
 		this.unitTo = unitTo;
 	}
+	
+	public void update() {
+		this.to.x = unitTo.getBounds().getX() + unitTo.getObject().getWidth()/2;
+		this.to.y = unitTo.getBounds().getY() + unitTo.getObject().getHeight()/2;
+	}
 
 	public void draw(SpriteBatch batch, float delta) {
-		this.unitTo.setDelay(1f);
+//		this.unitTo.setDelay(1f);
 		this.delay += delta;
 		
 		if(this.delayed) {
@@ -70,7 +75,7 @@ public class Arrow extends GameObject {
 		}
 		else {
 			this.bounds.setPosition(1366, 768);
-			this.unitTo.setDelay(0f);
+//			this.unitTo.setDelay(0f);
 		}
 	}
 }

@@ -95,6 +95,7 @@ public abstract class Unit extends GameObject {
 		this.finalDelay = delay;
 		this.delay = 0;
 		this.delayed = true;
+//		Gdx.app.log("wtf is wrong w/ delay", "delay called; " + Float.toString(this.finalDelay) + "; " + Boolean.toString(delayed));
 	}
 
 	public abstract void initAnimations(TextureAtlas atlas);
@@ -275,8 +276,6 @@ public abstract class Unit extends GameObject {
 	}
 
 	public void draw(SpriteBatch batch, float delta) {
-		this.current.flip(this.toRight);
-		
 		if(!this.isAlive && this.current == this.attack) {
 			this.current = this.idle;
 		}
