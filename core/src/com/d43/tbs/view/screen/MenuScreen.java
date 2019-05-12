@@ -1,4 +1,4 @@
-package com.d43.tbs.view;
+package com.d43.tbs.view.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -6,55 +6,48 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Array;
+import com.d43.tbs.TurnBasedStrategy;
+import com.d43.tbs.control.MapChoosing;
+import com.d43.tbs.model.map.CellMap;
+import com.d43.tbs.model.map.ChoosingZone;
+import com.d43.tbs.model.unit.Unit;
+import com.d43.tbs.view.ui.MenuUI;
 
-public class ResultScreen implements Screen {
+public class MenuScreen implements Screen {
 
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
 	private TextureAtlas textureAtlas;
 	public static float delta;
-	private ResultUI ui;
-
-	String[] result;
+	private MenuUI ui;
+	
+	private TurnBasedStrategy game;
 
 	@Override
 	public void show() {
 		batch = new SpriteBatch();
-
-		// *********************************************************** UI
-		// ***********************************************************
-		ui = new ResultUI();
-		ui.setResult(this.result);
-
-		this.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-	}
-	
-	public void setResult(String[] result) {
-		this.result = result;
-	}
+		
+		this.ui = new MenuUI(this.textureAtlas);
+		this.ui.setGame(this.game);
+	}	
 
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-		GameScreen.delta = delta;
-//		BadLogic.currentFrame = BadLogic.animation.getKeyFrame(stateTime, true);
-
-		batch.setProjectionMatrix(camera.combined);
+		
 		batch.begin();
-			batch.draw(this.textureAtlas.findRegion("dirt"), -Gdx.graphics.getWidth() / 2, -Gdx.graphics.getHeight() / 2);
-			batch.draw(this.textureAtlas.findRegion("choose_behind"), -Gdx.graphics.getWidth() / 2, -Gdx.graphics.getHeight() / 2);
-			batch.draw(this.textureAtlas.findRegion("choose_above"), -Gdx.graphics.getWidth() / 2,-Gdx.graphics.getHeight() / 2);
+		
 		batch.end();
-
+		
 		ui.draw();
 	}
+	
 
 	@Override
 	public void resize(int width, int height) {
-//		float aspectRation = (float)height/width;		
 		camera = new OrthographicCamera(1366f, 768f);
 
 		camera.update();
@@ -78,10 +71,14 @@ public class ResultScreen implements Screen {
 	@Override
 	public void dispose() {
 		batch.dispose();
-		ui.dispose();
+//		ui.dispose();
 	}
 
 	public void setTextureAtlas(TextureAtlas textureAtlas) {
 		this.textureAtlas = textureAtlas;
+	}
+	
+	public void setGame(TurnBasedStrategy game) {
+		this.game = game;
 	}
 }

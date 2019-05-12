@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.control.MapHandler;
 import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.unit.Unit;
-import com.d43.tbs.view.ChooseScreen;
+import com.d43.tbs.view.screen.ChooseScreen;
 
 public class ChoosingZone extends GameObject {
 	private Cell[] allies, enemies;

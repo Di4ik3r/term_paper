@@ -1,5 +1,7 @@
 package com.d43.tbs.control;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.utils.Array;
@@ -10,8 +12,8 @@ import com.d43.tbs.model.unit.Unit;
 public abstract class MapHandler {
 
 	protected CellMap map;
-	protected Array<Unit> allies;
-	protected Array<Unit> enemies;
+	protected ArrayList<Unit> allies;
+	protected ArrayList<Unit> enemies;
 
 	protected Unit pickedUnit;
 	

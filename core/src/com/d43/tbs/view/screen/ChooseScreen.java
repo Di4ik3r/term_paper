@@ -1,4 +1,11 @@
-package com.d43.tbs.view;
+package com.d43.tbs.view.screen;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,7 +14,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.TurnBasedStrategy;
 import com.d43.tbs.control.MapChoosing;
 import com.d43.tbs.model.map.CellMap;
@@ -17,7 +23,7 @@ import com.d43.tbs.model.unit.Knight;
 import com.d43.tbs.model.unit.Orc;
 import com.d43.tbs.model.unit.Unit;
 import com.d43.tbs.model.unit.Zombie;
-import com.d43.tbs.utils.Rnd;
+import com.d43.tbs.view.ui.ChoosingUI;
 
 public class ChooseScreen implements Screen {
 
@@ -30,9 +36,9 @@ public class ChooseScreen implements Screen {
 	private TurnBasedStrategy game;
 
 //	private BadLogic badLogic;
-	Array<Unit> allies;
-	Array<Unit> enemies;
-	Array<Unit> units;
+	ArrayList<Unit> allies;
+	ArrayList<Unit> enemies;
+	ArrayList<Unit> units;
 	private CellMap map;
 	ChoosingZone choosingZone;
 
@@ -71,10 +77,9 @@ public class ChooseScreen implements Screen {
 		Unit knight = new Knight(textureAtlas.findRegion("knight"), -390, 210, unitSize, unitSize * knightKoef);
 		knight.setForChoose(true);
 		knight.initAnimations(this.textureAtlas);
-		allies = new Array<Unit>();
+		allies = new ArrayList<Unit>();
 		allies.add(archer);
 		allies.add(knight);
-		this.initUnits(allies, false);
 
 //		for(int i = 0; i < allies.size; i++)
 //		{
@@ -97,20 +102,19 @@ public class ChooseScreen implements Screen {
 		Unit orc = new Orc(textureAtlas.findRegion("orc"), 390, 210, unitSize, unitSize * orcKoef);
 		orc.setForChoose(true);
 		orc.initAnimations(this.textureAtlas);
-		enemies = new Array<Unit>();
+		enemies = new ArrayList<Unit>();
 		enemies.add(zombie);
 		enemies.add(orc);
-		this.initUnits(enemies, true);
 
 		// *********************************************************** CHOOSING ZONE
 		// ***********************************************************
 		choosingZone = new ChoosingZone(this.textureAtlas, textureAtlas.findRegion("0"), -5f, 10f, 1f, 1f);
-		choosingZone.initCells(this, this.allies.size, this.enemies.size);
-		for (int i = 0; i < this.allies.size; i++) {
+		choosingZone.initCells(this, this.allies.size(), this.enemies.size());
+		for (int i = 0; i < this.allies.size(); i++) {
 			choosingZone.getAlliesCell(i).setCell();
 //			choosingZone.getAlliesCell(i).setMapHandler(mapChoosing);
 		}
-		for (int i = 0; i < this.enemies.size; i++) {
+		for (int i = 0; i < this.enemies.size(); i++) {
 			choosingZone.getEnemiesCell(i).setCell();
 //			choosingZone.getEnemiesCell(i).setMapHandler(mapChoosing);
 		}
@@ -121,11 +125,11 @@ public class ChooseScreen implements Screen {
 		this.mapChoosing.setAtlas(this.textureAtlas);
 
 		map.setMapHandler(this.mapChoosing);
-		for (int i = 0; i < allies.size; i++) {
+		for (int i = 0; i < allies.size(); i++) {
 			allies.get(i).setMapHandler(this.mapChoosing);
 			choosingZone.addAllies(allies.get(i));
 		}
-		for (int i = 0; i < enemies.size; i++) {
+		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).setMapHandler(this.mapChoosing);
 			choosingZone.addEnemies(enemies.get(i));
 		}
@@ -138,10 +142,10 @@ public class ChooseScreen implements Screen {
 		
 		// *********************************************************** UNITS CONTAINER
 		// ***********************************************************
-		units = new Array<Unit>();
-		for(int i = 0; i < allies.size; i++)
+		units = new ArrayList<Unit>();
+		for(int i = 0; i < allies.size(); i++)
 			units.add(allies.get(i));
-		for(int i = 0; i < enemies.size; i++)
+		for(int i = 0; i < enemies.size(); i++)
 			units.add(enemies.get(i));
 		this.sortUnits();
 		
@@ -152,20 +156,22 @@ public class ChooseScreen implements Screen {
 		
 		
 		this.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-	}
+}
 	
 	public void setGame(TurnBasedStrategy game) {
 		this.game = game;
 	}
 
 	private void sortUnits() {
-		for(int j = 0; j < units.size; j++)
-			for(int i = 0; i < units.size-1; i++)
+		for(int j = 0; j < units.size(); j++)
+			for(int i = 0; i < units.size()-1; i++)
 				if(units.get(i).getCell() != null && units.get(i+1).getCell() != null)
 					if(map.cellExist(units.get(i).getCell().getBounds()) && map.cellExist(units.get(i+1).getCell().getBounds()))
-						if(map.findCellCoord(units.get(i).getCell().getBounds()).y < map.findCellCoord(units.get(i+1).getCell().getBounds()).y)
-							units.swap(i, i+1);
+						if(map.findCellCoord(units.get(i).getCell().getBounds()).y < map.findCellCoord(units.get(i+1).getCell().getBounds()).y) {
+							Unit buff = units.get(i);
+							units.set(i, units.get(i + 1));
+							units.set(i + 1, buff);
+						}
 	}
 	
 //	private void generateCoord(int row, int col, boolean isEnemy) {
@@ -204,7 +210,7 @@ public class ChooseScreen implements Screen {
 //			for (int i = 0; i < allies.size; i++)
 //				allies.get(i).draw(batch);
 	
-			for (int i = 0; i < units.size; i++)
+			for (int i = 0; i < units.size(); i++)
 				units.get(i).draw(batch, delta);
 			
 //			units.get(1).draw(batch);
@@ -226,26 +232,52 @@ public class ChooseScreen implements Screen {
 		this.sortUnits();
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-			Array<Unit> unitsToExport = new Array<Unit>();
+			ArrayList<Unit> unitsToExport = new ArrayList<Unit>();
 			for(int i = 0; i < map.getRows(); i++)
 				for(int j = 0; j < map.getCols(); j++)
 					if(map.getCell(i, j).containsUnit())
 						unitsToExport.add(map.getCell(i, j).getUnit());
+			
+//			try {
+//				 FileInputStream fis = new FileInputStream("temp.out");
+//				 ObjectInputStream oin = new ObjectInputStream(fis);
+//				 unitsToExport = (ArrayList<Unit>)oin.readObject();
+//			}catch(Exception ex) {
+//				Gdx.app.log("file read", ex.toString());
+//				return;
+//			}
 						
 			this.game.setGameUnits(unitsToExport);
-			this.game.startPlay();
+			this.game.play();
+		}
+		
+		if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+			ArrayList<Unit> unitsToExport = new ArrayList<Unit>();
+			for(int i = 0; i < map.getRows(); i++)
+				for(int j = 0; j < map.getCols(); j++)
+					if(map.getCell(i, j).containsUnit())
+						unitsToExport.add(map.getCell(i, j).getUnit());
+			try {
+				FileOutputStream fos = new FileOutputStream("temp.out");
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+			  	oos.writeObject(unitsToExport);
+				oos.flush();
+				oos.close();
+			} catch(Exception ex) {
+				return;
+			}
 		}
 	}
 	
-	public void addUnit(Unit unit) {
-		if(units.contains(unit, true))
-			return;
-		units.add(unit);
-	}
-	
-	public void removeUnit(Unit unit) {
-		this.units.removeValue(unit, true);
-	}
+//	public void addUnit(Unit unit) {
+//		if(units.contains(unit, true))
+//			return;
+//		units.add(unit);
+//	}
+//	
+//	public void removeUnit(Unit unit) {
+//		this.units.removeValue(unit, true);
+//	}
 
 	@Override
 	public void resize(int width, int height) {
@@ -279,23 +311,17 @@ public class ChooseScreen implements Screen {
 	public void setTextureAtlas(TextureAtlas textureAtlas) {
 		this.textureAtlas = textureAtlas;
 	}
-
-	private void initUnits(Array<Unit> units, boolean isEnemy) {
-		int row = 0, col = 0;
-
-		for (int i = 0; i < units.size; i++) {
-			if (isEnemy) {
-				row = Rnd.generate(map.getRows() - map.getRows() / 3, map.getRows() - 1);
-				col = Rnd.generate(0, map.getCols() - 1);
-			} else {
-				row = Rnd.generate(0, map.getRows() / 3);
-				col = Rnd.generate(0, map.getCols() - 1);
-			}
-
-//			generateCoord(row, col, isEnemy);
-
-			if (map.getCell(row, col).getUnit() == null)
-				units.get(i).setCell(map.getCell(row, col));
+	
+	public void addUnit(Unit unit) {
+//		if(units.contains(unit, true))
+		if(units.contains(unit))
+			return;
+			units.add(unit);
 		}
+	
+	public void removeUnit(Unit unit) {
+//		this.units.removeValue(unit, true);
+		this.units.remove(unit);
 	}
+
 }

@@ -1,8 +1,8 @@
 package com.d43.tbs.model.unit;
 
 import java.awt.Dimension;
+import java.io.Serializable;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,7 +16,7 @@ import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.utils.Animation;
 import com.d43.tbs.utils.IdCounter;
 
-public abstract class Unit extends GameObject {
+public abstract class Unit extends GameObject implements Serializable {
 
 //	public static float SPEED_X = 8, SPEED_Y = 7;
 	public static float SPEED_X = 9, SPEED_Y = 8;

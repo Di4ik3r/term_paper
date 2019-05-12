@@ -1,4 +1,6 @@
-package com.d43.tbs.view;
+package com.d43.tbs.view.screen;
+
+import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -13,6 +15,7 @@ import com.d43.tbs.model.map.CellMap;
 import com.d43.tbs.model.map.DefeatedZone;
 import com.d43.tbs.model.unit.Unit;
 import com.d43.tbs.utils.Rnd;
+import com.d43.tbs.view.ui.GameUI;
 
 public class GameScreen implements Screen {
 
@@ -20,11 +23,11 @@ public class GameScreen implements Screen {
 	private OrthographicCamera camera;
 	public static TextureAtlas textureAtlas;
 	public static float delta;
-	private UI ui;
+	private GameUI ui;
 
-	Array<Unit> allies;
-	Array<Unit> enemies;
-	Array<Unit> units;
+	ArrayList<Unit> allies;
+	ArrayList<Unit> enemies;
+	ArrayList<Unit> units;
 	private CellMap map;
 	DefeatedZone defeatedZone;
 
@@ -100,9 +103,9 @@ public class GameScreen implements Screen {
 		// *********************************************************** DEFEATE ZONE
 		// ***********************************************************
 		defeatedZone = new DefeatedZone(this.textureAtlas, textureAtlas.findRegion("0"), -5f, 10f, 1f, 1f);
-		defeatedZone.initCells(this.units.size);
+		defeatedZone.initCells(this.units.size());
 		defeatedZone.setAllies(allies);
-		for (int i = 0; i < this.units.size; i++)
+		for (int i = 0; i < this.units.size(); i++)
 			defeatedZone.getCell(i).setCell();
 
 		// *********************************************************** MAP CHECKER
@@ -113,18 +116,18 @@ public class GameScreen implements Screen {
 		this.mapPlaying.setScreen(this);
 
 		map.setMapHandler(this.mapPlaying);
-		for (int i = 0; i < allies.size; i++) {
+		for (int i = 0; i < allies.size(); i++) {
 			allies.get(i).setMapHandler(this.mapPlaying);
 		}
 		map.placeUnits(allies);
-		for (int i = 0; i < enemies.size; i++) {
+		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).setMapHandler(this.mapPlaying);
 		}
 		map.placeUnits(enemies);
 
 		// *********************************************************** UI
 		// ***********************************************************
-		ui = new UI(this.textureAtlas);
+		ui = new GameUI(GameScreen.textureAtlas);
 		ui.setUnits(allies, enemies);
 
 		// *********************************************************** UNITS CONTAINER
@@ -143,11 +146,11 @@ public class GameScreen implements Screen {
 		this.game = game;
 	}
 	
-	public void setUnits(Array<Unit> units) {
+	public void setUnits(ArrayList<Unit> units) {
 		this.units = units;
-		this.allies = new Array<Unit>();
-		this.enemies = new Array<Unit>();
-		for (int i = 0; i < units.size; i++) {
+		this.allies = new ArrayList<Unit>();
+		this.enemies = new ArrayList<Unit>();
+		for (int i = 0; i < units.size(); i++) {
 //			units.get(i).setCell(map.getCell((int)units.get(i).getLocation().x, (int)units.get(i).getLocation().y));
 //			units.get(i).changeSpeed(8f, 7f);
 			if (units.get(i).isEnemy())
@@ -159,14 +162,17 @@ public class GameScreen implements Screen {
 	}
 
 	private void sortUnits() {
-		for (int j = 0; j < units.size; j++)
-			for (int i = 0; i < units.size - 1; i++)
+		for (int j = 0; j < units.size(); j++)
+			for (int i = 0; i < units.size() - 1; i++)
 				if (units.get(i).getCell() != null && units.get(i + 1).getCell() != null)
 					if (map.cellExist(units.get(i).getCell().getBounds())
 							&& map.cellExist(units.get(i + 1).getCell().getBounds()))
 						if (map.findCellCoord(units.get(i).getCell().getBounds()).y < map
-								.findCellCoord(units.get(i + 1).getCell().getBounds()).y)
-							units.swap(i, i + 1);
+								.findCellCoord(units.get(i + 1).getCell().getBounds()).y) {
+								Unit buff = units.get(i);
+								units.set(i, units.get(i + 1));
+								units.set(i + 1, buff);
+							}
 
 	}
 
@@ -203,7 +209,7 @@ public class GameScreen implements Screen {
 //			for (int i = 0; i < allies.size; i++)
 //				allies.get(i).draw(batch);
 
-		for (int i = 0; i < units.size; i++)
+		for (int i = 0; i < units.size(); i++)
 //			if (units.get(i).isAlive())
 				units.get(i).draw(batch, delta);
 		

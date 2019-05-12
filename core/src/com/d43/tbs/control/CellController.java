@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Polygon;
 import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.model.unit.Unit;
-import com.d43.tbs.view.ChooseScreen;
+import com.d43.tbs.view.screen.ChooseScreen;
 
 public class CellController {
 

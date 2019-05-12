@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
-import com.d43.tbs.view.GameScreen;
+import com.d43.tbs.view.screen.GameScreen;
 
 public class BadLogicController {
 

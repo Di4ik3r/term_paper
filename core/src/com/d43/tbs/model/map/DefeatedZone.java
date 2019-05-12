@@ -1,13 +1,11 @@
 package com.d43.tbs.model.map;
 
-import com.badlogic.gdx.Gdx;
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.d43.tbs.control.MapPlaying;
 import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.unit.Unit;
 
@@ -16,7 +14,7 @@ public class DefeatedZone extends GameObject {
 	
 	private TextureAtlas textureAtlas;
 	
-	private Array<Unit> allies;
+	private ArrayList<Unit> allies;
 	
 	public DefeatedZone(TextureAtlas textureAtlas, TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
@@ -60,7 +58,7 @@ public class DefeatedZone extends GameObject {
 			}
 	}
 	
-	public void setAllies(Array<Unit> allies) {
+	public void setAllies(ArrayList<Unit> allies) {
 		this.allies = allies;
 	}
 	
