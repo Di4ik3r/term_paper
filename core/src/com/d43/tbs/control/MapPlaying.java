@@ -174,8 +174,10 @@ public class MapPlaying extends MapHandler {
 			}
 		}
 		for (int i = 0; i < enemies.size; i++)
-			if (enemies.get(i).getHp() < 1)
+			if (enemies.get(i).getHp() < 1) {
 				defeatedZone.addUnit(enemies.get(i));
+				enemies.removeIndex(i);
+			}
 		if (!enemiesHasAlive()) {
 			win = true;
 			this.endGame();
@@ -186,6 +188,7 @@ public class MapPlaying extends MapHandler {
 		for (int i = 0; i < allies.size; i++)
 			if (allies.get(i).getHp() < 1) {
 				defeatedZone.addUnit(allies.get(i));
+				allies.removeIndex(i);
 				this.paintToDefault();
 			}
 

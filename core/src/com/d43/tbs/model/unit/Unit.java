@@ -95,7 +95,7 @@ public abstract class Unit extends GameObject {
 		this.finalDelay = delay;
 		this.delay = 0;
 		this.delayed = true;
-//		Gdx.app.log("wtf is wrong w/ delay", "delay called; " + Float.toString(this.finalDelay) + "; " + Boolean.toString(delayed));
+		
 	}
 
 	public abstract void initAnimations(TextureAtlas atlas);

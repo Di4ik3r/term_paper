@@ -1,5 +1,6 @@
 package com.d43.tbs.control;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.utils.Array;
@@ -85,7 +86,8 @@ public class MapChoosing extends MapHandler {
 					return;
 				}
 				else {
-					this.pickedUnit.getBounds().setPosition(1366, 768);
+					if(this.pickedUnit.getCell() == null)
+						this.pickedUnit.getBounds().setPosition(1366, 768);
 				}
 			}
 			Unit newUnit = unit.clone();
