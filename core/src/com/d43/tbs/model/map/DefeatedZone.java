@@ -45,13 +45,18 @@ public class DefeatedZone extends GameObject {
 	
 	public void addUnit(Unit unit) {
 		unit.setAlive(false);
-		for(int i = cells.length-1; i >= 0; i--)
+//		for(int i = cells.length-1; i >= 0; i--)
+		for(int i = 0; i < cells.length; i++)
 			if(!cells[i].containsUnit()) {
-				if(unit.isEnemy() && allies.size != 1)
-					unit.setDelay(1f);
+//				if(unit.isEnemy() && allies.size != 1)
+//				unit.setDelay(this.cells.length * 0.09f);
+//				if(unit.isEnemy())
+//					unit.setDelay(1f);
+//				else unit.setDelay(1.7f);
+				unit.setDelay(1.51f);
 				unit.setCell(cells[i]);
 				unit.setHp(0);
-//				return;
+				return;
 			}
 	}
 	
@@ -65,7 +70,7 @@ public class DefeatedZone extends GameObject {
 	
 	@Override
 	public void draw(SpriteBatch batch) {
-		for(int i = 0; i < cells.length; i++) 
+		for(int i = 0; i < cells.length; i++)
 			cells[i].draw(batch);
 	}
 	

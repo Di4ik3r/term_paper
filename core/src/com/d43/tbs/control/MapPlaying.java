@@ -1,6 +1,5 @@
 package com.d43.tbs.control;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
@@ -22,6 +21,8 @@ public class MapPlaying extends MapHandler {
 	private GameScreen gameScreen;
 
 	private boolean win;
+	
+	private int alliesCount, enemiesCount;
 
 	public MapPlaying(CellMap cells, DefeatedZone defeatedZone, Array<Unit> allies, Array<Unit> enemies) {
 		this.map = cells;
@@ -35,6 +36,9 @@ public class MapPlaying extends MapHandler {
 		this.bot = new Bot(this.allies, this.enemies, this, this.map);
 
 		this.movingUnit = null;
+		
+		this.alliesCount = allies.size;
+		this.enemiesCount = enemies.size;
 	}
 
 	public boolean isPlaying() {
@@ -122,6 +126,7 @@ public class MapPlaying extends MapHandler {
 		if (this.pickedUnit != null) {
 			Cell cell = map.findCell(bounds);
 			if (this.cellIsAvailable(cell)) {
+//				this.pickedUnit.setDelay(0.7f);
 				this.movingUnit = this.pickedUnit;
 				this.pickedUnit.setCell(cell);
 
@@ -173,8 +178,10 @@ public class MapPlaying extends MapHandler {
 			}
 		}
 		for (int i = 0; i < enemies.size; i++)
-			if (enemies.get(i).getHp() < 1)
+			if (enemies.get(i).getHp() < 1) {
 				defeatedZone.addUnit(enemies.get(i));
+				enemies.removeIndex(i);
+			}
 		if (!enemiesHasAlive()) {
 			win = true;
 			this.endGame();
@@ -185,6 +192,7 @@ public class MapPlaying extends MapHandler {
 		for (int i = 0; i < allies.size; i++)
 			if (allies.get(i).getHp() < 1) {
 				defeatedZone.addUnit(allies.get(i));
+				allies.removeIndex(i);
 				this.paintToDefault();
 			}
 
@@ -201,18 +209,20 @@ public class MapPlaying extends MapHandler {
 	private String[] formResult(boolean win) {
 		String[] result = new String[4];
 
-		result[0] = win ? "You WIN" : "You LOSE";
+		result[0] = win ? "You WON" : "You LOST";
 
-		int aliveAlliesCount = 0;
-		for (int i = 0; i < allies.size; i++)
-			if (allies.get(i).isAlive())
-				aliveAlliesCount++;
+		int aliveAlliesCount = allies.size;
+//		int aliveAlliesCount = 0;
+//		for (int i = 0; i < allies.size; i++)
+//			if (allies.get(i).isAlive())
+//				aliveAlliesCount++;
 //		result[1] = "Your team has " + Integer.toString(aliveAlliesCount) + " units alive";
 
-		int aliveEnemiesCount = 0;
-		for (int i = 0; i < enemies.size; i++)
-			if (enemies.get(i).isAlive())
-				aliveEnemiesCount++;
+		int aliveEnemiesCount = enemies.size;
+//		int aliveEnemiesCount = 0;
+//		for (int i = 0; i < enemies.size; i++)
+//			if (enemies.get(i).isAlive())
+//				aliveEnemiesCount++;
 //		result[2] = "Enemy team has " + Integer.toString(aliveEnemiesCount) + " units alive";
 
 		if (win)
@@ -220,9 +230,9 @@ public class MapPlaying extends MapHandler {
 		else
 			result[1] = "Enemy team has " + Integer.toString(aliveEnemiesCount) + " units alive";
 
-		result[2] = "You have slain " + Integer.toString(enemies.size - aliveEnemiesCount) + " enemy units";
+		result[2] = "You have slain " + Integer.toString(enemiesCount - enemies.size) + " enemy units";
 
-		result[3] = "Enemy have slain " + Integer.toString(allies.size - aliveAlliesCount) + " your units";
+		result[3] = "Enemy have slain " + Integer.toString(alliesCount - allies.size) + " your units";
 
 		return result;
 	}

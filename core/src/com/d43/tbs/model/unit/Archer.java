@@ -18,6 +18,10 @@ public class Archer extends RangeUnit {
 		this.setRangeAttack(4);
 		this.setHp(33);
 		this.setDamage(11);
+		
+		this.attackAnimDelay = 0.5f;
+		
+		this.toRight = true;
 	}
 	
 	@Override

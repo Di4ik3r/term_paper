@@ -18,6 +18,8 @@ public class Animation {
 	
 	private Vector2 size;
 	private Vector2 position;
+	
+	private boolean toRight;
 
 	public Animation(Array<TextureRegion> frames, Unit unit, float cycleTime, boolean looping) {
 		this.frames = frames;
@@ -28,6 +30,22 @@ public class Animation {
 		this.looping = looping;
 		
 		this.unit = unit;
+		
+		if(unit.isEnemy())
+			this.toRight = false;
+		else this.toRight = true;
+	}
+	
+	
+	public void flip(boolean toRight) {
+		boolean rotate;
+		if(this.toRight == toRight)
+			rotate = false;
+		else rotate = true;
+		this.toRight = toRight;
+		
+		for(int i = 0; i < this.frames.size; i++)
+			this.frames.get(i).flip(rotate, false);
 	}
 	
 	public void setDeltaPosition(float x, float y) {
@@ -64,6 +82,6 @@ public class Animation {
 	}
 
 	public TextureRegion getFrame() {
-		return frames.get(frame);
+		return frames.get(frame) ;
 	}
 }

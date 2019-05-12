@@ -31,56 +31,56 @@ archer_attack
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 8
+  index: 1
 archer_attack
   rotate: false
   xy: 1470, 1599
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 1
+  index: 2
 archer_attack
   rotate: false
   xy: 1570, 1697
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 2
+  index: 3
 archer_attack
   rotate: false
   xy: 1628, 1783
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 3
+  index: 4
 archer_attack
   rotate: false
   xy: 1794, 1955
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 4
+  index: 5
 archer_attack
   rotate: false
   xy: 2, 145
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 5
+  index: 6
 archer_attack
   rotate: false
   xy: 268, 415
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 6
+  index: 7
 archer_attack
   rotate: false
   xy: 1370, 1427
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 7
+  index: 8
 archer_idle
   rotate: false
   xy: 1728, 1889
@@ -171,42 +171,42 @@ knight_attack
   size: 98, 96
   orig: 98, 96
   offset: 0, 0
-  index: 1
+  index: 6
 knight_attack
   rotate: false
   xy: 1370, 1673
   size: 98, 96
   orig: 98, 96
   offset: 0, 0
-  index: 2
+  index: 1
 knight_attack
   rotate: false
   xy: 1628, 1931
   size: 98, 96
   orig: 98, 96
   offset: 0, 0
-  index: 3
+  index: 2
 knight_attack
   rotate: false
   xy: 2, 293
   size: 98, 96
   orig: 98, 96
   offset: 0, 0
-  index: 4
+  index: 3
 knight_attack
   rotate: false
   xy: 102, 391
   size: 98, 96
   orig: 98, 96
   offset: 0, 0
-  index: 5
+  index: 4
 knight_attack
   rotate: false
   xy: 1370, 1575
   size: 98, 96
   orig: 98, 96
   offset: 0, 0
-  index: 6
+  index: 5
 knight_attack
   rotate: false
   xy: 1470, 1673
@@ -353,21 +353,21 @@ zombie_attack
   size: 64, 72
   orig: 64, 72
   offset: 0, 0
-  index: 4
+  index: 3
 zombie_attack
   rotate: false
   xy: 102, 317
   size: 64, 72
   orig: 64, 72
   offset: 0, 0
-  index: 5
+  index: 4
 zombie_attack
   rotate: false
   xy: 202, 415
   size: 64, 72
   orig: 64, 72
   offset: 0, 0
-  index: 3
+  index: 5
 zombie_idle
   rotate: false
   xy: 1420, 1501
@@ -381,51 +381,51 @@ zombie_idle
   size: 46, 72
   orig: 46, 72
   offset: 0, 0
-  index: 1
+  index: 6
 zombie_idle
   rotate: false
   xy: 1844, 1955
   size: 46, 72
   orig: 46, 72
   offset: 0, 0
-  index: 2
+  index: 1
 zombie_idle
   rotate: false
   xy: 2, 71
   size: 46, 72
   orig: 46, 72
   offset: 0, 0
-  index: 3
+  index: 2
 zombie_idle
   rotate: false
   xy: 318, 415
   size: 46, 72
   orig: 46, 72
   offset: 0, 0
-  index: 5
+  index: 3
 zombie_idle
   rotate: false
   xy: 1370, 1353
   size: 46, 72
   orig: 46, 72
   offset: 0, 0
-  index: 6
+  index: 5
 
 atlas2.png
 size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-choose_behind
+choose_above
   rotate: false
-  xy: 2, 2
+  xy: 2, 772
   size: 1366, 768
   orig: 1366, 768
   offset: 0, 0
   index: -1
 grass_above
   rotate: false
-  xy: 2, 772
+  xy: 2, 2
   size: 1366, 768
   orig: 1366, 768
   offset: 0, 0
@@ -436,16 +436,16 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-choose_above
+choose_behind
   rotate: false
-  xy: 2, 2
+  xy: 2, 772
   size: 1366, 768
   orig: 1366, 768
   offset: 0, 0
   index: -1
 grass_behind
   rotate: false
-  xy: 2, 772
+  xy: 2, 2
   size: 1366, 768
   orig: 1366, 768
   offset: 0, 0

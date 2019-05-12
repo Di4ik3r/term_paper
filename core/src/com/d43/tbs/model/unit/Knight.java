@@ -16,6 +16,8 @@ public class Knight extends MeleeUnit {
 		this.setRangeAttack(1);
 		this.setHp(72);
 		this.setDamage(19);
+		
+		this.toRight = true;
 	}
 
 	@Override
