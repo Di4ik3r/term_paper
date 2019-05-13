@@ -18,9 +18,7 @@ import com.d43.tbs.utils.IdCounter;
 
 public abstract class Unit extends GameObject implements Serializable {
 
-//	public static float SPEED_X = 8, SPEED_Y = 7;
 	public static float SPEED_X = 9, SPEED_Y = 8;
-//	public static float SPEED_X = 4, SPEED_Y = 4;
 	public static Vector2 BASIC_SIZE = new Vector2(40f, 70f / 35f);
 
 	protected int id, hp, rangeAttack, rangeMovement, damage;

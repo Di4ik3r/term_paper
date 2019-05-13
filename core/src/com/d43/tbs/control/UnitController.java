@@ -1,13 +1,13 @@
 package com.d43.tbs.control;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import java.io.Serializable;
+
 import com.badlogic.gdx.math.Polygon;
 import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.model.unit.Unit;
 
-public class UnitController {
-
+public class UnitController implements Serializable{
+	
 	private int id;
 	private Polygon bounds;
 	private Cell cell;

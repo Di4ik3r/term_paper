@@ -1,7 +1,7 @@
 package com.d43.tbs.model;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import java.io.Serializable;
+
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,6 +11,10 @@ public abstract class GameObject {
 
 	Polygon bounds;
 	Sprite object;
+	
+	public GameObject() {
+		
+	}
 	
 	public GameObject(TextureRegion textureRegion, float x, float y, float width, float height) {
 		this.object = new Sprite(textureRegion);

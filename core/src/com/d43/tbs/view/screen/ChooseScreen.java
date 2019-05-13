@@ -264,6 +264,7 @@ public class ChooseScreen implements Screen {
 				oos.flush();
 				oos.close();
 			} catch(Exception ex) {
+				Gdx.app.log("file write", ex.toString());
 				return;
 			}
 		}

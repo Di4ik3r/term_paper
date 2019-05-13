@@ -1,10 +1,10 @@
 package com.d43.tbs.model.unit;
 
-import com.badlogic.gdx.Gdx;
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.utils.Animation;
 
 public class Knight extends MeleeUnit {
@@ -32,7 +32,7 @@ public class Knight extends MeleeUnit {
 
 	@Override
 	public void initAnimations(TextureAtlas atlas) {
-		Array<TextureRegion> regions = new Array<TextureRegion>();
+		ArrayList<TextureRegion> regions = new ArrayList<TextureRegion>();
 //		for(int i = 1; i <= 3; i++)
 //			regions.add(atlas.findRegion("archer_idle_" + Integer.toString(i)));
 		regions.add(atlas.findRegion("knight_idle", 1));
@@ -47,7 +47,7 @@ public class Knight extends MeleeUnit {
 		this.idle.setSize(35, 73);
 		this.current = idle;
 
-		Array<TextureRegion> regionsAttack = new Array<TextureRegion>();
+		ArrayList<TextureRegion> regionsAttack = new ArrayList<TextureRegion>();
 		regionsAttack.add(atlas.findRegion("knight_attack", 1));
 		regionsAttack.add(atlas.findRegion("knight_attack", 2));
 		regionsAttack.add(atlas.findRegion("knight_attack", 3));

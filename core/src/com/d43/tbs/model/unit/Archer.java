@@ -1,9 +1,12 @@
 package com.d43.tbs.model.unit;
 
-import com.badlogic.gdx.Gdx;
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
 import com.d43.tbs.control.ArcherController;
 import com.d43.tbs.utils.Animation;
 
@@ -26,7 +29,7 @@ public class Archer extends RangeUnit {
 	
 	@Override
 	public void initAnimations(TextureAtlas atlas) {
-		Array<TextureRegion> regionsIdle = new Array<TextureRegion>();
+		ArrayList<TextureRegion> regionsIdle = new ArrayList<TextureRegion>();
 //		for(int i = 1; i <= 3; i++)
 //			regions.add(atlas.findRegion("archer_idle_" + Integer.toString(i)));
 		regionsIdle.add(atlas.findRegion("archer_idle", 1));
@@ -39,7 +42,7 @@ public class Archer extends RangeUnit {
 		this.idle.setSize(32, 64);
 		this.current = idle;
 		
-		Array<TextureRegion> regionsAttack = new Array<TextureRegion>();
+		ArrayList<TextureRegion> regionsAttack = new ArrayList<TextureRegion>();
 		regionsAttack.add(atlas.findRegion("archer_attack", 1));
 		regionsAttack.add(atlas.findRegion("archer_attack", 2));
 		regionsAttack.add(atlas.findRegion("archer_attack", 3));
