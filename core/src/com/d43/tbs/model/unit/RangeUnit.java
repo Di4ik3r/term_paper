@@ -8,7 +8,8 @@ import com.d43.tbs.view.screen.GameScreen;
 
 public abstract class RangeUnit extends Unit{
 	
-	private Arrow arrow;
+	private static final long serialVersionUID = 1411811067693051717L;
+	private transient Arrow arrow;
 	
 	public RangeUnit(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);

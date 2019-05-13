@@ -1,14 +1,12 @@
 package com.d43.tbs.utils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.model.unit.Unit;
 
-public class Animation implements Serializable {
+public class Animation {
 	private ArrayList<TextureRegion> frames;
 	private float maxFrameTime;
 	private float currentFrameTime;

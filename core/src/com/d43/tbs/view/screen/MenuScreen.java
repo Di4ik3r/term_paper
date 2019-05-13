@@ -6,12 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.TurnBasedStrategy;
-import com.d43.tbs.control.MapChoosing;
-import com.d43.tbs.model.map.CellMap;
-import com.d43.tbs.model.map.ChoosingZone;
-import com.d43.tbs.model.unit.Unit;
 import com.d43.tbs.view.ui.MenuUI;
 
 public class MenuScreen implements Screen {

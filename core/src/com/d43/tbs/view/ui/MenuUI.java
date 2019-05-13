@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.d43.tbs.TurnBasedStrategy;
 
@@ -25,7 +24,7 @@ public class MenuUI {
 	private BitmapFont font;
 
 	private TextButton btnNew, btnContinue, btnExit;
-	
+
 	private TurnBasedStrategy game;
 
 	public MenuUI(TextureAtlas atlas) {
@@ -38,8 +37,7 @@ public class MenuUI {
 
 		this.skin = new Skin(Gdx.files.internal("skin.json"));
 		skin.addRegions(this.atlas);
-		
-		
+
 		initButtons();
 
 //		stage.addActor(table);
@@ -49,21 +47,21 @@ public class MenuUI {
 		float centreX, centreY;
 		centreX = centreCoord().x;
 		centreY = centreCoord().y;
-		
+
 //		btnNew = createButton("New Game", centreX, centreY - 100);
 //		btnContinue = createButton("New Game", centreX, centreY);
 //		btnExit = createButton("New Game", centreX, centreY + 100);
 		btnNew = createButton("New Game", 0, +100);
 		btnNew.addListener(new ChangeListener() {
-			 @Override 
-			 public void changed(ChangeEvent event, Actor actor) {
-				 clickedOnStart();
-			 } 
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				clickedOnStart();
+			}
 		});
 		btnContinue = createButton("Continue", 0, 0);
 		btnExit = createButton("Exit", 0, -100);
 	}
-	
+
 	private void clickedOnStart() {
 		this.game.startNewGame();
 	}
@@ -85,7 +83,7 @@ public class MenuUI {
 	private TextButton createButton(String text, float x, float y) {
 		int lr = 40;
 		int ud = 20;
-		
+
 		TextButtonStyle btnStyle = new TextButtonStyle();
 		btnStyle.font = font;
 		btnStyle.up = skin.getDrawable("cell");
@@ -98,7 +96,7 @@ public class MenuUI {
 		TextButton btn = new TextButton(text, btnStyle);
 //		btn.setPosition(x, y);
 		btn.pad(ud, lr, ud, lr);
-		
+
 		Table table = new Table(skin);
 		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		table.setPosition(x, y);
@@ -112,7 +110,7 @@ public class MenuUI {
 		 */
 		return btn;
 	}
-	
+
 	public void setGame(TurnBasedStrategy game) {
 		this.game = game;
 	}

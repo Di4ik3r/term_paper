@@ -3,16 +3,12 @@ package com.d43.tbs.view.ui;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.d43.tbs.model.unit.Unit;
@@ -98,31 +94,6 @@ public class ChoosingUI {
 		this.stage.addActor(label);
 
 		return label;
-	}
-
-	private TextButton createButton(String text, float x, float y) {
-		BitmapFont font = new BitmapFont();
-		Skin skinn = new Skin();
-		skinn.addRegions(this.atlas);
-		TextButtonStyle styleBtn = new TextButtonStyle();
-
-		styleBtn.font = font;
-		styleBtn.up = skinn.getDrawable("cell");
-		styleBtn.down = skinn.getDrawable("cell");
-		styleBtn.checked = skinn.getDrawable("cell");
-
-		TextButton btn = new TextButton(text, styleBtn);
-		btn.setPosition(x, y);
-		this.stage.addActor(btn);
-
-		btn.addListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent event, Actor actor) {
-				Gdx.app.log("tag", "ConfirmButton pressed");
-			}
-		});
-
-		return btn;
 	}
 
 	public void setLabelX(String input) {

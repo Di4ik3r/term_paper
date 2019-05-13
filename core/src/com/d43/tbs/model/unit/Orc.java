@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.utils.Animation;
 
 public class Orc extends RangeUnit {
+
+	private static final long serialVersionUID = 4863104976572816411L;
 
 	public Orc(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
@@ -20,8 +21,6 @@ public class Orc extends RangeUnit {
 		this.setIsEnemy(true);
 		
 		this.attackAnimDelay = 0.75f;
-		
-		this.toRight = false;
 	}
 	
 	@Override

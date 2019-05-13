@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
@@ -233,22 +232,23 @@ public class ChooseScreen implements Screen {
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 			ArrayList<Unit> unitsToExport = new ArrayList<Unit>();
-			for(int i = 0; i < map.getRows(); i++)
-				for(int j = 0; j < map.getCols(); j++)
-					if(map.getCell(i, j).containsUnit())
-						unitsToExport.add(map.getCell(i, j).getUnit());
 			
-//			try {
-//				 FileInputStream fis = new FileInputStream("temp.out");
-//				 ObjectInputStream oin = new ObjectInputStream(fis);
-//				 unitsToExport = (ArrayList<Unit>)oin.readObject();
-//			}catch(Exception ex) {
-//				Gdx.app.log("file read", ex.toString());
-//				return;
-//			}
+//			for(int i = 0; i < map.getRows(); i++)
+//				for(int j = 0; j < map.getCols(); j++)
+//					if(map.getCell(i, j).containsUnit())
+//						unitsToExport.add(map.getCell(i, j).getUnit());
+			
+			try {
+				 FileInputStream fis = new FileInputStream("temp.out");
+				 ObjectInputStream oin = new ObjectInputStream(fis);
+				 unitsToExport = (ArrayList<Unit>)oin.readObject();
+				 oin.close();																	// видалити якщо не зчитує
+			}catch(Exception ex) {
+				Gdx.app.log("file read", ex.toString());
+				return;
+			}
 						
-			this.game.setGameUnits(unitsToExport);
-			this.game.play();
+			this.game.play(true, unitsToExport);
 		}
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
@@ -265,6 +265,7 @@ public class ChooseScreen implements Screen {
 				oos.close();
 			} catch(Exception ex) {
 				Gdx.app.log("file write", ex.toString());
+				ex.printStackTrace();
 				return;
 			}
 		}

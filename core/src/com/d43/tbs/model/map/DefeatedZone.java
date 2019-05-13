@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.unit.Unit;
@@ -52,7 +53,7 @@ public class DefeatedZone extends GameObject {
 //					unit.setDelay(1f);
 //				else unit.setDelay(1.7f);
 				unit.setDelay(1.51f);
-				unit.setCell(cells[i]);
+				unit.setCell(cells[i], new Vector2(0, 0));
 				unit.setHp(0);
 				return;
 			}

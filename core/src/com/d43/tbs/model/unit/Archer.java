@@ -4,16 +4,12 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonValue;
-import com.d43.tbs.control.ArcherController;
 import com.d43.tbs.utils.Animation;
 
 public class Archer extends RangeUnit {
 
-	private ArcherController controller;
-	
+	private static final long serialVersionUID = 7977309942227513876L;
+
 	public Archer(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
 		
@@ -23,8 +19,6 @@ public class Archer extends RangeUnit {
 		this.setDamage(11);
 		
 		this.attackAnimDelay = 0.5f;
-		
-		this.toRight = true;
 	}
 	
 	@Override

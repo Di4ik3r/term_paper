@@ -3,6 +3,7 @@ package com.d43.tbs.model.unit;
 import java.awt.Dimension;
 import java.io.Serializable;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -18,43 +19,35 @@ import com.d43.tbs.utils.IdCounter;
 
 public abstract class Unit extends GameObject implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static float SPEED_X = 9, SPEED_Y = 8;
 	public static Vector2 BASIC_SIZE = new Vector2(40f, 70f / 35f);
 
 	protected int id, hp, rangeAttack, rangeMovement, damage;
 	protected UnitController controller;
-	protected Cell cell;
+	protected transient Cell cell; // Не серіалізується
 	protected boolean isReplaceable;
 	protected boolean isEnemy;
 	protected boolean isAlive;
-
 	protected Dimension size;
-
 	protected boolean isMoving;
-	protected Vector2 locationToMove;
-
-	protected TextureRegion textureRegion;
-
+	protected transient TextureRegion textureRegion; // Не серіалізується
 	protected boolean isForChoose;
-
 	protected Vector2 location;
-
-	protected Animation current, idle, attack;
-	
+	protected Vector2 locationToMove;
+	protected Vector2 coordinates;
+	protected transient Animation current, idle, attack; // Не серіалізується
 	protected boolean delayed;
 	protected float delay, finalDelay;
-	
 	protected boolean markEndBotMove;
-	
 	protected float attackAnimDelay;
-	
-	protected boolean toRight;
 
 	public Unit(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
 
 		this.id = IdCounter.lastId++;
-		this.controller = new UnitController(this.id, this.getBounds());
+		this.controller = new UnitController(this.id);
 
 		this.hp = 0;
 		this.rangeAttack = 0;
@@ -72,28 +65,40 @@ public abstract class Unit extends GameObject implements Serializable {
 		this.textureRegion = textureRegion;
 
 		this.isForChoose = false;
-		
+
 		this.delayed = false;
 		this.delay = 0;
-		
+
 		this.markEndBotMove = false;
-		
-//		this.toRight = true;
+	}
+
+	public void reInit(TextureAtlas atlas, Cell cell, TextureRegion textureRegion, Animation idle, Animation attack) {
+		Gdx.app.log("unit", "reInit called");
+		super.reInit(textureRegion, this.location.x, this.location.y, this.size.width, this.size.height);
+
+		this.cell = cell;
+		this.textureRegion = textureRegion;
+		this.idle = idle;
+		this.attack = attack;
+
+		this.current = idle;
+
+		this.initAnimations(atlas);
 	}
 	
-	public void rotateRight(boolean toRight) {
-		
+	public Vector2 getCoordinates() {
+		return this.coordinates;
 	}
-	
+
 	public void lastEnemy() {
 		this.markEndBotMove = true;
 	}
-	
+
 	public void setDelay(Float delay) {
 		this.finalDelay = delay;
 		this.delay = 0;
 		this.delayed = true;
-		
+
 	}
 
 	public abstract void initAnimations(TextureAtlas atlas);
@@ -137,8 +142,8 @@ public abstract class Unit extends GameObject implements Serializable {
 	}
 
 	public void changeSpeed(float x, float y) {
-		this.SPEED_X = x;
-		this.SPEED_Y = y;
+		Unit.SPEED_X = x;
+		Unit.SPEED_Y = y;
 	}
 
 	public boolean isForChoose() {
@@ -189,7 +194,7 @@ public abstract class Unit extends GameObject implements Serializable {
 		controller.pickedUp();
 	}
 
-	public void setCell(Cell cell) {
+	public void setCell(Cell cell, Vector2 coordinates) {
 //		if(this.previousLocation == null)
 //			this.previousLocation = new Vector2(cell.locationForUnit().x, cell.locationForUnit().y);
 		if (this.cell != null)
@@ -198,9 +203,16 @@ public abstract class Unit extends GameObject implements Serializable {
 		this.setUnitToControl();
 		this.controller.setCell(cell);
 		this.cell.setUnit(this);
+		
+		this.coordinates = new Vector2(coordinates.x, coordinates.y);
 
-		this.moveTo(new Vector2(this.cell.getBounds().getX() + this.cell.getSize().width / 2 - this.getSize().width / 2,
-				this.cell.getBounds().getY() + this.cell.getSize().height / 2 - this.cell.getSize().height / 4));
+		Vector2 loc = new Vector2(
+				this.cell.getBounds().getX() + this.cell.getSize().width / 2 - this.getSize().width / 2,
+				this.cell.getBounds().getY() + this.cell.getSize().height / 2 - this.cell.getSize().height / 4);
+
+		this.location = new Vector2(loc.x, loc.y);
+
+		this.moveTo(loc);
 	}
 
 	public Cell getCell() {
@@ -274,42 +286,38 @@ public abstract class Unit extends GameObject implements Serializable {
 	}
 
 	public void draw(SpriteBatch batch, float delta) {
-		if(!this.isAlive && this.current == this.attack) {
+		if (!this.isAlive && this.current == this.attack) {
 			this.current = this.idle;
 		}
-		
+
 		this.getObject().setSize(this.current.getSize().x, this.current.getSize().y);
 		this.changeTextureRegion(this.current.getFrame());
-		
+
 		super.draw(batch);
 
-		if(this.delayed) {
+		if (this.delayed) {
 			this.delay += delta;
-			if(this.finalDelay <= this.delay) {
+			if (this.finalDelay <= this.delay) {
 				this.delayed = false;
 				this.delay = 0;
-			}
-			else return;
+			} else
+				return;
 		}
-		
+
 		this.getObject().setSize(this.current.getSize().x, this.current.getSize().y);
 		this.current.update(delta);
 		this.changeTextureRegion(this.current.getFrame());
-		
-		if(this.markEndBotMove == true) {
+
+		if (this.markEndBotMove == true) {
 			this.markEndBotMove = false;
-			((MapPlaying)this.controller.getMapHandler()).makeUnitsRaplaceable();
+			((MapPlaying) this.controller.getMapHandler()).makeUnitsRaplaceable();
 		}
-		
+
 		controller.handle();
-//		Gdx.app.log("log",
-//				"(" + Float.toString(this.previousLocation.x) + ", " + Float.toString(this.previousLocation.y) + ") : ("
-//						+ Float.toString(this.locationToMove.x) + ", " + Float.toString(this.locationToMove.y) + ");");
 		if (this.isMoving) {
 			if (this.cell.getBounds().contains(
 					this.getBounds().getX() + this.getBounds().getBoundingRectangle().width / 2,
 					this.getBounds().getY() + this.getBounds().getBoundingRectangle().height / 4)) {
-//			if (this.cell.getBounds().contains(this.getBounds().getX(), this.getBounds().getY())) {
 				this.getBounds().setPosition(this.locationToMove.x, this.locationToMove.y);
 				this.isMoving = false;
 				this.locationToMove = null;
@@ -326,34 +334,6 @@ public abstract class Unit extends GameObject implements Serializable {
 						&& this.getBounds().getY() < this.locationToMove.y + 10)
 					this.getBounds().setPosition(this.getBounds().getX(), this.locationToMove.y);
 			}
-//			else if (this.previousLocation.x < this.locationToMove.x) {
-//				this.getBounds().setPosition(this.getBounds().getX() + Unit.SPEED_X,
-//						this.straight(this.getBounds().getX() + Unit.SPEED_X));
-//			} else if (this.previousLocation.x > this.locationToMove.x) {
-//				this.getBounds().setPosition(this.getBounds().getX() - Unit.SPEED_X,
-//						this.straight(this.getBounds().getX() - Unit.SPEED_X));
-//			}
-
-//			else if (this.getBounds().getX() < this.locationToMove.x) {
-//				if (this.getBounds().getY() < this.locationToMove.y)
-//					this.getBounds().setPosition(this.getBounds().getX() + Unit.SPEED_X,
-//							this.getBounds().getY() + Unit.SPEED_Y);
-//				else if (this.getBounds().getY() > this.locationToMove.y)
-//					this.getBounds().setPosition(this.getBounds().getX() + Unit.SPEED_X,
-//							this.getBounds().getY() - Unit.SPEED_Y);
-//				else
-//					this.getBounds().setPosition(this.getBounds().getX() + Unit.SPEED_X, this.getBounds().getY());
-//			} else if (this.getBounds().getX() > this.locationToMove.x) {
-//				if (this.getBounds().getY() < this.locationToMove.y)
-//					this.getBounds().setPosition(this.getBounds().getX() - Unit.SPEED_X,
-//							this.getBounds().getY() + Unit.SPEED_Y);
-//				else if (this.getBounds().getY() > this.locationToMove.y)
-//					this.getBounds().setPosition(this.getBounds().getX() - Unit.SPEED_X,
-//							this.getBounds().getY() - Unit.SPEED_Y);
-//				else
-//					this.getBounds().setPosition(this.getBounds().getX() - Unit.SPEED_X, this.getBounds().getY());
-//			} 
 		}
-//		Gdx.app.log("log", Boolean.toString(this.isMoving));
 	}
 }

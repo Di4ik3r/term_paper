@@ -115,7 +115,7 @@ public class MapChoosing extends MapHandler {
 		if (this.pickedUnit != null) {
 			Cell cell = map.findCell(bounds);
 			this.movingUnit = this.pickedUnit;
-			this.pickedUnit.setCell(cell);
+			this.pickedUnit.setCell(cell, map.findCellCoord(cell));
 			this.pickedUnit.setLocation(map.findCellCoord(cell.getBounds()).x, map.findCellCoord(cell.getBounds()).y);
 
 			this.pickedUnit.getCell().setRegion(this.textureAtlas.findRegion("cell"));
