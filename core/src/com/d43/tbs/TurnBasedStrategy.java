@@ -11,6 +11,8 @@ import com.d43.tbs.view.screen.ChooseScreen;
 import com.d43.tbs.view.screen.GameScreen;
 import com.d43.tbs.view.screen.MenuScreen;
 
+//	cool
+
 public class TurnBasedStrategy extends Game {
 
 	private Screen menuScreen, chooseScreen, gameScreen;
