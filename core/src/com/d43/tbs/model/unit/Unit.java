@@ -73,7 +73,6 @@ public abstract class Unit extends GameObject implements Serializable {
 	}
 
 	public void reInit(TextureAtlas atlas, Cell cell, TextureRegion textureRegion, Animation idle, Animation attack) {
-		Gdx.app.log("unit", "reInit called");
 		super.reInit(textureRegion, this.location.x, this.location.y, this.size.width, this.size.height);
 
 		this.cell = cell;

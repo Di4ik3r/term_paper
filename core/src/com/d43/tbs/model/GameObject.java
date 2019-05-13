@@ -36,8 +36,6 @@ public abstract class GameObject implements Serializable {
 		this.bounds = new Polygon(new float[] { 0f, 0f, width, 0f, width, height, 0f, height });
 		this.bounds.setPosition(x, y);
 		this.bounds.setOrigin(width / 2f, height / 2f);
-		
-		Gdx.app.log("game object", "reInit called");
 	}
 
 	public void draw(SpriteBatch batch) {
