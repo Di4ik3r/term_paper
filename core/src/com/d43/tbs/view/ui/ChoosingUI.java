@@ -30,7 +30,7 @@ public class ChoosingUI {
 	private Array<Label> info;
 	private ArrayList<Unit> units;
 	
-	private TextButton btnSave, btnBack, btnExit;
+	private TextButton btnStart, btnSave, btnBack, btnExit;
 	
 	private ChooseScreen screen;
 
@@ -55,21 +55,32 @@ public class ChoosingUI {
 //		btnNew = createButton("New Game", centreX, centreY - 100);
 //		btnContinue = createButton("New Game", centreX, centreY);
 //		btnExit = createButton("New Game", centreX, centreY + 100);
-		btnSave = createButton("Save Map", 0, 150);
-		btnSave.addListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent event, Actor actor) {
-				screen.save();
-			}
-		});
-		btnBack = createButton("Back", 0, 0);
+		
+		btnBack = createButton("Back", -250, 270);
 		btnBack.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				screen.backToMenu();
 			}
 		});
-		btnExit = createButton("Exit", 0, -150);
+		
+		btnSave = createButton("Save Map", -100, 270);
+		btnSave.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				screen.save();
+			}
+		});
+		
+		btnStart = createButton("Start", 50, 270);
+		btnStart.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				screen.start();
+			}
+		});
+		
+		btnExit = createButton("Exit", 200, 270);
 		btnExit.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
@@ -121,9 +132,10 @@ public class ChoosingUI {
 		
 		float koef = 6;
 		String info1 = "Press RIGHT CLICK to delete unit from map";
-		Label lInfo1 = createLabel(info1, 0.3f, Gdx.graphics.getWidth()/2 - info1.length() * koef, Gdx.graphics.getHeight() - 170);
-		String info2 = "Press ENTER to start play";
-		Label lInfo2 = createLabel(info2, 0.3f, Gdx.graphics.getWidth()/2 - info2.length() * koef, Gdx.graphics.getHeight() - 210);
+//		Label lInfo1 = createLabel(info1, 0.3f, Gdx.graphics.getWidth()/2 - info1.length() * koef, Gdx.graphics.getHeight() - 170);
+		Label lInfo1 = createLabel(info1, 0.3f, Gdx.graphics.getWidth()/2 - info1.length() * koef, -60);
+//		String info2 = "Press ENTER to start play";
+//		Label lInfo2 = createLabel(info2, 0.3f, Gdx.graphics.getWidth()/2 - info2.length() * koef, Gdx.graphics.getHeight() - 210);
 	}
 
 	public void attachLabels() {

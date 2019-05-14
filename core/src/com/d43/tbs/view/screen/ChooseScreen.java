@@ -295,37 +295,50 @@ public class ChooseScreen implements Screen {
 		
 		this.sortUnits();
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-			ArrayList<Unit> unitsToExport = new ArrayList<Unit>();
-			
+//		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+//			ArrayList<Unit> unitsToExport = new ArrayList<Unit>();
+//			
 //			for(int i = 0; i < map.getRows(); i++)
 //				for(int j = 0; j < map.getCols(); j++)
 //					if(map.getCell(i, j).containsUnit())
 //						unitsToExport.add(map.getCell(i, j).getUnit());
-			
-			
-						
-			this.game.play(true, unitsToExport);
-		}
+//			
+//			
+//						
+//			this.game.play(false, unitsToExport);
+//		}
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-			ArrayList<Unit> unitsToExport = new ArrayList<Unit>();
-			for(int i = 0; i < map.getRows(); i++)
-				for(int j = 0; j < map.getCols(); j++)
-					if(map.getCell(i, j).containsUnit())
-						unitsToExport.add(map.getCell(i, j).getUnit());
-			try {
-				FileOutputStream fos = new FileOutputStream("temp.out");
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-			  	oos.writeObject(unitsToExport);
-				oos.flush();
-				oos.close();
-			} catch(Exception ex) {
-				Gdx.app.log("file write", ex.toString());
-				ex.printStackTrace();
-				return;
-			}
-		}
+//		if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+//			ArrayList<Unit> unitsToExport = new ArrayList<Unit>();
+//			for(int i = 0; i < map.getRows(); i++)
+//				for(int j = 0; j < map.getCols(); j++)
+//					if(map.getCell(i, j).containsUnit())
+//						unitsToExport.add(map.getCell(i, j).getUnit());
+//			try {
+//				FileOutputStream fos = new FileOutputStream("temp.out");
+//				ObjectOutputStream oos = new ObjectOutputStream(fos);
+//			  	oos.writeObject(unitsToExport);
+//				oos.flush();
+//				oos.close();
+//			} catch(Exception ex) {
+//				Gdx.app.log("file write", ex.toString());
+//				ex.printStackTrace();
+//				return;
+//			}
+//		}
+	}
+	
+	public void start() {
+		ArrayList<Unit> unitsToExport = new ArrayList<Unit>();
+		
+		for(int i = 0; i < map.getRows(); i++)
+			for(int j = 0; j < map.getCols(); j++)
+				if(map.getCell(i, j).containsUnit())
+					unitsToExport.add(map.getCell(i, j).getUnit());
+		
+		
+					
+		this.game.play(false, unitsToExport);
 	}
 	
 //	public void addUnit(Unit unit) {

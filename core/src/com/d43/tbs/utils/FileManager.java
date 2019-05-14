@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import com.badlogic.gdx.Gdx;
 import com.d43.tbs.model.unit.Unit;
@@ -36,6 +38,15 @@ public class FileManager {
 //		    System.out.println("Directory " + listOfFiles[i].getName());
 //		  }
 		}
+		
+		Collections.sort(names, new Comparator<String>() {
+	        @Override
+	        public int compare(String name1, String name2)
+	        {
+	            return  name1.compareTo(name2);
+	        }
+	    });
+		
 		return names;
 	}
 	
