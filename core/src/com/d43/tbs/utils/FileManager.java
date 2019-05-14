@@ -43,7 +43,10 @@ public class FileManager {
 	        @Override
 	        public int compare(String name1, String name2)
 	        {
-	            return  name1.compareTo(name2);
+//	            return  name1.compareTo(name2);
+	            int n1 = Integer.valueOf(name1.split("\\.")[0]);
+	            int n2 = Integer.valueOf(name2.split("\\.")[0]);
+	            return n1 > n2 ? 1 : n1 < n2 ? -1 : 0;
 	        }
 	    });
 		
