@@ -91,13 +91,17 @@ public class GameScreen implements Screen {
 
 // *********************************************************** UI
 // ***********************************************************
-		ui = new GameUI(GameScreen.textureAtlas);
+		ui = new GameUI(GameScreen.textureAtlas, this);
 		ui.setUnits(allies, enemies);
 
 // *********************************************************** UNITS CONTAINER
 // ***********************************************************
 	}
 
+	public void backToMenu() {
+		this.game.backToMenu();
+	}
+	
 	public void setGame(TurnBasedStrategy game) {
 		this.game = game;
 	}

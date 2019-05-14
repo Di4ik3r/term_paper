@@ -28,6 +28,17 @@ public class FileManager {
 		
 		File folder = new File("saves//");
 		File[] listOfFiles = folder.listFiles();
+		
+		for(int i = 0; i < listOfFiles.length; i++) {
+			for(int j = 0; j < listOfFiles.length - 1; j++) {
+				if(listOfFiles[j].lastModified() < listOfFiles[j + 1].lastModified())
+				{
+					File f = listOfFiles[j];
+					listOfFiles[j] = listOfFiles[j + 1];
+					listOfFiles[j + 1] = f;
+				}
+			}
+		}
 
 		for (int i = 0; i < listOfFiles.length; i++) {
 		  if (listOfFiles[i].isFile())
@@ -39,16 +50,15 @@ public class FileManager {
 //		  }
 		}
 		
-		Collections.sort(names, new Comparator<String>() {
-	        @Override
-	        public int compare(String name1, String name2)
-	        {
-//	            return  name1.compareTo(name2);
-	            int n1 = Integer.valueOf(name1.split("\\.")[0]);
-	            int n2 = Integer.valueOf(name2.split("\\.")[0]);
-	            return n1 > n2 ? 1 : n1 < n2 ? -1 : 0;
-	        }
-	    });
+//		Collections.sort(names, new Comparator<String>() {
+//	        @Override
+//	        public int compare(String name1, String name2)
+//	        {
+//	            int n1 = Integer.valueOf(name1.split("\\.")[0]);
+//	            int n2 = Integer.valueOf(name2.split("\\.")[0]);
+//	            return n1 > n2 ? 1 : n1 < n2 ? -1 : 0;
+//	        }
+//	    });
 		
 		return names;
 	}

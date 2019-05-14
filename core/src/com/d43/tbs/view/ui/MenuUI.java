@@ -44,7 +44,6 @@ public class MenuUI {
 
 		this.skin = new Skin(Gdx.files.internal("skin.json"));
 		skin.addRegions(this.atlas);
-		
 		font = new BitmapFont(Gdx.files.internal("font.fnt"));
 
 		initButtons();
