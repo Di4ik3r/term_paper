@@ -3,52 +3,113 @@ package com.d43.tbs.view.ui;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.d43.tbs.model.unit.Unit;
+import com.d43.tbs.view.screen.ChooseScreen;
 
 public class ChoosingUI {
 	private TextureAtlas atlas;
 
 	private Stage stage;
 	private Skin skin;
-	private Label labelX, labelY, labelSpeed;
-
-	private TextButton btnConfirm;
+	private BitmapFont font;
 
 	private Array<Label> hps;
-	private ArrayList<Unit> units;
-
-	private String[] result;
-	private Label[] resultLabels;
 	private Array<Label> info;
+	private ArrayList<Unit> units;
+	
+	private TextButton btnSave, btnBack, btnExit;
+	
+	private ChooseScreen screen;
 
-	public ChoosingUI(TextureAtlas atlas) {
+	public ChoosingUI(TextureAtlas atlas, ChooseScreen screen) {
 		this.atlas = atlas;
+		this.screen = screen;
 
 		this.stage = new Stage(new StretchViewport(1366, 768));
 		Gdx.input.setInputProcessor(stage);
 
 		this.skin = new Skin(Gdx.files.internal("skin.json"));
-
+		skin.addRegions(this.atlas);
+		font = new BitmapFont(Gdx.files.internal("font.fnt"));
+		
 		hps = new Array<Label>();
-
 		info = new Array<Label>();
+		
+		initButtons();
 	}
+	
+	private void initButtons() {
+//		btnNew = createButton("New Game", centreX, centreY - 100);
+//		btnContinue = createButton("New Game", centreX, centreY);
+//		btnExit = createButton("New Game", centreX, centreY + 100);
+		btnSave = createButton("Save Map", 0, 150);
+		btnSave.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				screen.save();
+			}
+		});
+		btnBack = createButton("Back", 0, 0);
+		btnBack.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				screen.backToMenu();
+			}
+		});
+		btnExit = createButton("Exit", 0, -150);
+		btnExit.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				Gdx.app.exit();
+			}
+		});
+	}
+	
+	private TextButton createButton(String text, float x, float y) {
+		int lr = 10;
+		int ud = 0;
+		float fontScale = 0.3f;
 
-	public void setResult(String[] result) {
-		this.result = result;
+		TextButtonStyle btnStyle = new TextButtonStyle();
+		btnStyle.font = font;
+		btnStyle.up = skin.getDrawable("cell");
+		btnStyle.down = skin.getDrawable("cellMouseOnBlocked");
+		btnStyle.over = skin.getDrawable("cellMouseOn");
+//		btnStyle.checked = skin.getDrawable("cellMouseOnBlocked");
+		btnStyle.pressedOffsetX = 1;
+		btnStyle.pressedOffsetY = -1;
 
-		float multiplier = 70f;
-		resultLabels = new Label[result.length];
-		for (int i = 0; i < resultLabels.length; i++)
-			resultLabels[i] = createLabel(result[resultLabels.length - i - 1], 0.6f, 330f, (80 + i * multiplier));
+		TextButton btn = new TextButton(text, btnStyle);
+//		btn.setPosition(x, y);
+		btn.pad(ud, lr, ud, lr);
+		btn.padBottom(ud + 7);
+		btn.getLabel().setFontScale(fontScale);
+
+		Table table = new Table(skin);
+		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		table.setPosition(x, y);
+		table.add(btn);
+		this.stage.addActor(table);
+		/*
+		 * btn.addListener(new ChangeListener() {
+		 * 
+		 * @Override public void changed(ChangeEvent event, Actor actor) {
+		 * Gdx.app.log("tag", "ConfirmButton pressed"); } });
+		 */
+		return btn;
 	}
 
 	private void initLabels() {
@@ -94,18 +155,6 @@ public class ChoosingUI {
 		this.stage.addActor(label);
 
 		return label;
-	}
-
-	public void setLabelX(String input) {
-		this.labelX.setText("x: " + input);
-	}
-
-	public void setLabelY(String input) {
-		this.labelY.setText("y: " + input);
-	}
-
-	public void setLabelSpeed(String input) {
-		this.labelSpeed.setText("Speed: " + input);
 	}
 
 	public void draw() {

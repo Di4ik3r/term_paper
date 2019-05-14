@@ -28,7 +28,6 @@ public class TurnBasedStrategy extends Game {
 		((ChooseScreen)chooseScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
 		((ChooseScreen)chooseScreen).setGame(this);
 		
-		
 		this.setScreen(menuScreen);
 	}
 	
@@ -36,6 +35,14 @@ public class TurnBasedStrategy extends Game {
 //		((ResultScreen)resultScreen).setResult(result);
 //		this.setScreen(resultScreen);
 //	}
+	
+	public void backToMenu() {
+		menuScreen = new MenuScreen();
+		((MenuScreen)menuScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
+		((MenuScreen)menuScreen).setGame(this);
+		
+		this.setScreen(menuScreen);
+	}
 	
 	public void startNewGame() {
 		this.setScreen(chooseScreen);

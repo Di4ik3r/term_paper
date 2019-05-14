@@ -107,7 +107,6 @@ public class GameScreen implements Screen {
 	}
 	
 	public void setUnits(ArrayList<Unit> units) {
-		Gdx.app.log("boolean issue", Boolean.toString(this.isFromFile));
 		if(this.isFromFile)
 			unitsFromFile(units);
 		else unitsFromInit(units);
@@ -117,7 +116,6 @@ public class GameScreen implements Screen {
 	
 	private void unitsFromFile(ArrayList<Unit> units) {
 		this.units = units;
-		Gdx.app.log("unitsFromFile", "end of iteration");
 		
 		for(int i = 0; i < units.size(); i++) {
 			Unit unit;
