@@ -2,8 +2,6 @@ package com.d43.tbs.utils;
 
 import java.util.Random;
 
-import com.badlogic.gdx.Gdx;
-
 public class Rnd {
 	
 	public static int generate(int a, int b) {

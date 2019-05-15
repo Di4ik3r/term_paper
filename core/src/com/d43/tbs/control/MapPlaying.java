@@ -107,14 +107,6 @@ public class MapPlaying extends MapHandler {
 		this.paintToDefault();
 		this.pickedUnit = unit;
 
-//		if (this.unitsAreDone()) {
-//			this.makeUnitsRaplaceable();
-//			Gdx.app.log("tag", "units are replaceable");
-//		} else if (!this.pickedUnit.isReplaceable()) {
-//			this.pickedUnit = null;
-//			return;
-//		}
-
 		if (!this.pickedUnit.isReplaceable()) {
 			this.pickedUnit = null;
 			return;
@@ -128,9 +120,8 @@ public class MapPlaying extends MapHandler {
 		if (this.pickedUnit != null) {
 			Cell cell = map.findCell(bounds);
 			if (this.cellIsAvailable(cell)) {
-//				this.pickedUnit.setDelay(0.7f);
 				this.movingUnit = this.pickedUnit;
-				this.pickedUnit.setCell(cell);
+				this.pickedUnit.setCell(cell, map.findCellCoord(cell));
 
 				this.pickedUnit.getCell().setRegion(this.textureAtlas.findRegion("cellBlocked"));
 				this.pickedUnit.getCell().changeTextureRegion(this.textureAtlas.findRegion("cellBlocked"));
@@ -143,17 +134,12 @@ public class MapPlaying extends MapHandler {
 
 				if (this.unitsAreDone()) {
 					bot.makeBotsMove();
-//					this.makeUnitsRaplaceable();
-//				Gdx.app.log("tag", "units are replaceable");
 				}
 			} else {
 				this.pickedUnit = null;
 				this.paintToDefault();
 			}
 		}
-
-//		Gdx.app.log("tag", "");
-//		this.map.returnMap();
 	}
 
 	public void unitAttack(Polygon bounds) {
@@ -162,7 +148,6 @@ public class MapPlaying extends MapHandler {
 			if (this.cellIsAvailable(cell)) {
 				Unit enemy = cell.getUnit();
 				this.pickedUnit.attack(enemy);
-//				enemy.damage(this.pickedUnit.getDamage());
 
 				this.pickedUnit.getCell().setRegion(this.textureAtlas.findRegion("cellBlocked"));
 				this.pickedUnit.getCell().changeTextureRegion(this.textureAtlas.findRegion("cellBlocked"));
@@ -175,7 +160,6 @@ public class MapPlaying extends MapHandler {
 
 				if (this.unitsAreDone()) {
 					bot.makeBotsMove();
-//					this.makeUnitsRaplaceable();
 				}
 			}
 		}

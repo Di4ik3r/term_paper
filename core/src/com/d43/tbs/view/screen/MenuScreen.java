@@ -1,17 +1,16 @@
 package com.d43.tbs.view.screen;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.TurnBasedStrategy;
-import com.d43.tbs.control.MapChoosing;
-import com.d43.tbs.model.map.CellMap;
-import com.d43.tbs.model.map.ChoosingZone;
 import com.d43.tbs.model.unit.Unit;
+import com.d43.tbs.utils.FileManager;
 import com.d43.tbs.view.ui.MenuUI;
 
 public class MenuScreen implements Screen {
@@ -23,15 +22,37 @@ public class MenuScreen implements Screen {
 	private MenuUI ui;
 	
 	private TurnBasedStrategy game;
+	
+	private FileManager fileManager;
 
 	@Override
 	public void show() {
 		batch = new SpriteBatch();
+		this.fileManager = new FileManager();
 		
-		this.ui = new MenuUI(this.textureAtlas);
-		this.ui.setGame(this.game);
-	}	
-
+		this.ui = new MenuUI(this.textureAtlas, this);
+	}
+	
+	public void play(ArrayList<Unit> units) {
+		this.game.play(true, units);
+	}
+	
+	public void startNewGame() {
+		this.game.startNewGame();
+	}
+	
+	public ArrayList<Unit> getUnits(String name) {
+		return fileManager.read(name);
+	}
+	
+	public ArrayList<String> getFileNames() {
+		return fileManager.getSaves();
+	}
+	
+	public void deleteFile(String name) {
+		this.fileManager.deleteFile(name);
+	}
+	
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -39,10 +60,14 @@ public class MenuScreen implements Screen {
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 		batch.begin();
-		
+			batch.draw(this.textureAtlas.findRegion("dirt"), 0,0);
 		batch.end();
 		
 		ui.draw();
+		
+		batch.begin();
+			batch.draw(this.textureAtlas.findRegion("menuBack"), 0, 0);
+		batch.end();
 	}
 	
 

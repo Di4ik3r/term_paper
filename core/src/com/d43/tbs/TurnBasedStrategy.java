@@ -30,11 +30,6 @@ public class TurnBasedStrategy extends Game {
 		((ChooseScreen)chooseScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
 		((ChooseScreen)chooseScreen).setGame(this);
 		
-		gameScreen = new GameScreen();
-		((GameScreen)gameScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
-		((GameScreen)gameScreen).setGame(this);
-		
-		
 		this.setScreen(menuScreen);
 	}
 	
@@ -43,16 +38,25 @@ public class TurnBasedStrategy extends Game {
 //		this.setScreen(resultScreen);
 //	}
 	
-	public void setGameUnits(ArrayList<Unit> units) {
-	 ((GameScreen)gameScreen).setUnits(units);
+	public void backToMenu() {
+		menuScreen = new MenuScreen();
+		((MenuScreen)menuScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
+		((MenuScreen)menuScreen).setGame(this);
+		
+		this.setScreen(menuScreen);
 	}
 	
 	public void startNewGame() {
 		this.setScreen(chooseScreen);
 	}
 	
-	public void play() {
+	public void play(boolean fromFile, ArrayList<Unit> units) {
+		gameScreen = new GameScreen();
+		((GameScreen)gameScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
 		this.setScreen(gameScreen);
+		((GameScreen)this.gameScreen).setFromFile(fromFile);
+		((GameScreen)gameScreen).setUnits(units);
+		((GameScreen)gameScreen).setGame(this);
 	}
 	
 	public void dispose() {

@@ -9,6 +9,8 @@ import com.d43.tbs.utils.Animation;
 
 public class Knight extends MeleeUnit {
 
+	private static final long serialVersionUID = -2032718479930939243L;
+
 	public Knight(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
 
@@ -16,8 +18,6 @@ public class Knight extends MeleeUnit {
 		this.setRangeAttack(1);
 		this.setHp(72);
 		this.setDamage(19);
-		
-		this.toRight = true;
 	}
 
 	@Override

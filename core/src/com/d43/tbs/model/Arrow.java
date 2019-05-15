@@ -5,8 +5,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.d43.tbs.model.unit.Unit;
 
-// cool
-
 public class Arrow extends GameObject {
 
 	protected Vector2 from, to;

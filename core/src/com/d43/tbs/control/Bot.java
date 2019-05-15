@@ -32,8 +32,6 @@ public class Bot {
 		sortEnemiesByAlive();
 
 		for (int i = 0; i < this.enemies.size(); i++) {
-//			this.enemies.get(i).setDelay(i * 0.5f + 0.5f);
-//			this.enemies.get(i).setDelay(this.enemies.size - i * 1f + 0.2f);
 
 			if (!enemies.get(i).isAlive())
 				continue;
@@ -41,33 +39,25 @@ public class Bot {
 			this.enemies.get(i).setDelay(i * 0.5f + 1f);
 
 			Vector2 coord = map.findCellCoord(this.enemies.get(i).getCell().getBounds());
-//			CellCalculator calculator = new CellCalculator(this.map, coord, this.enemies.get(i).getRangeMovement());
-//			this.enemies.get(i)
 
 			CellCalculator calculator = new CellCalculator(false, this.map, coord,
 					this.enemies.get(i).getRangeMovement(), this.enemies.get(i).getRangeAttack());
-//			String[] str = calculator.getStringRepresentation();
-
-//			Gdx.app.log("tag", "");
-//			for(int i = 0; i < str.length; i++)
-//				Gdx.app.log("tag", str[i]);
 
 			moveCells = calculator.getAvailableCellsForMove();
 			attackCells = calculator.getAvailableCellsForAttack();
 
 			if (attackCells.size > 0) {
-//				attackCells.get(0).getUnit().damage(enemies.get(i).getDamage());
 				this.enemies.get(i).setDelay(0f);
 				enemies.get(i).attack(attackCells.get(0).getUnit());
 				this.mapChecker.checkAllies();
 			} else {
-				enemies.get(i).setCell(moveCells.get(Rnd.generate(0, moveCells.size - 1)));
+				Cell cell = moveCells.get(Rnd.generate(0, moveCells.size - 1));
+				enemies.get(i).setCell(cell, map.findCellCoord(cell));
 			}
 		}
 
 		int lastAliveIndex = findLastAliveEnemy();
 
-//		if(i == this.enemies.size - 1)
 		if (lastAliveIndex >= 0)
 			this.enemies.get(lastAliveIndex).lastEnemy();
 
@@ -77,7 +67,6 @@ public class Bot {
 		for (int i = 0; i < this.enemies.size(); i++) {
 			for (int j = 0; j < this.enemies.size() - 1; j++) {
 				if (!enemies.get(j).isAlive() && enemies.get(j + 1).isAlive()) {
-//					enemies.swap(j, j + 1);
 					Unit buff = enemies.get(j);
 					enemies.set(j, enemies.get(j + 1));
 					enemies.set(j + 1, buff);

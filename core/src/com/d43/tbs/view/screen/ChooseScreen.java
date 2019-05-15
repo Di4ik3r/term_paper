@@ -1,10 +1,7 @@
 package com.d43.tbs.view.screen;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
@@ -23,6 +20,7 @@ import com.d43.tbs.model.unit.Knight;
 import com.d43.tbs.model.unit.Orc;
 import com.d43.tbs.model.unit.Unit;
 import com.d43.tbs.model.unit.Zombie;
+import com.d43.tbs.utils.FileManager;
 import com.d43.tbs.view.ui.ChoosingUI;
 
 public class ChooseScreen implements Screen {
@@ -44,9 +42,13 @@ public class ChooseScreen implements Screen {
 
 	private MapChoosing mapChoosing;
 	
+	private FileManager fileManager;
+	
 	@Override
 	public void show() {
 		batch = new SpriteBatch();
+		
+		fileManager = new FileManager();
 //		badLogic = new BadLogic(textureAtlas.findRegion("0"), 0, 0, 1f, 1.7f);
 		
 //		this.background = new TextureRegion(this.textureAtlas.findRegion("grass"), 0, 0, 1366, 768);
@@ -136,7 +138,7 @@ public class ChooseScreen implements Screen {
 
 		// *********************************************************** UI
 		// ***********************************************************
-		ui = new ChoosingUI(this.textureAtlas);
+		ui = new ChoosingUI(this.textureAtlas, this);
 		ui.setUnits(allies, enemies);
 		
 		
@@ -188,6 +190,68 @@ public class ChooseScreen implements Screen {
 //			generateCoord(row, col, isEnemy);
 //		else return;
 //	}
+	
+	public void backToMenu() {
+		this.game.backToMenu();
+	}
+	
+	public void save() {
+		ArrayList<Unit> unitsToExport = new ArrayList<Unit>();
+		for(int i = 0; i < map.getRows(); i++)
+			for(int j = 0; j < map.getCols(); j++)
+				if(map.getCell(i, j).containsUnit())
+					unitsToExport.add(map.getCell(i, j).getUnit());
+		fileManager.save(unitsToExport);
+	}
+	
+//	public void save() {
+//		ArrayList<Unit> unitsToExport = new ArrayList<Unit>();
+//		for(int i = 0; i < map.getRows(); i++)
+//			for(int j = 0; j < map.getCols(); j++)
+//				if(map.getCell(i, j).containsUnit())
+//					unitsToExport.add(map.getCell(i, j).getUnit());
+//		try {
+//			String name = Integer.toString(getSaveCount());
+//			FileOutputStream fos = new FileOutputStream("saves//" + name + ".out");
+//			ObjectOutputStream os = new ObjectOutputStream(fos);
+//		  	os.writeObject(unitsToExport);
+//			os.flush();
+//			os.close();
+//		} catch(Exception ex) {
+//			Gdx.app.log("file read", ex.toString());
+//			
+//			return;
+//		}
+//		increaseSaveCount();
+//	}
+//	
+//	private int getSaveCount() {
+//		try {
+//			FileInputStream fis = new FileInputStream("saveCount.out");
+//			ObjectInputStream oin = new ObjectInputStream(fis);
+//			int count = (Integer)oin.readObject();
+//			oin.close();
+//			return count;
+//		} catch(Exception ex) {
+//			Gdx.app.log("file read", ex.toString());
+//			return 0;
+//		}
+//	}
+//	
+//	private void increaseSaveCount() {
+//		try {
+//			int count = getSaveCount() + 1;
+//			FileOutputStream fos = new FileOutputStream("saveCount.out");
+//			ObjectOutputStream oos = new ObjectOutputStream(fos);
+//		  	oos.writeObject(count);
+//			oos.flush();
+//			oos.close();
+//		} catch(Exception ex) {
+//			Gdx.app.log("file write", ex.toString());
+//			ex.printStackTrace();
+//			return;
+//		}
+//	}
 
 	@Override
 	public void render(float delta) {
@@ -231,43 +295,50 @@ public class ChooseScreen implements Screen {
 		
 		this.sortUnits();
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-			ArrayList<Unit> unitsToExport = new ArrayList<Unit>();
-			for(int i = 0; i < map.getRows(); i++)
-				for(int j = 0; j < map.getCols(); j++)
-					if(map.getCell(i, j).containsUnit())
-						unitsToExport.add(map.getCell(i, j).getUnit());
-			
+//		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+//			ArrayList<Unit> unitsToExport = new ArrayList<Unit>();
+//			
+//			for(int i = 0; i < map.getRows(); i++)
+//				for(int j = 0; j < map.getCols(); j++)
+//					if(map.getCell(i, j).containsUnit())
+//						unitsToExport.add(map.getCell(i, j).getUnit());
+//			
+//			
+//						
+//			this.game.play(false, unitsToExport);
+//		}
+		
+//		if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+//			ArrayList<Unit> unitsToExport = new ArrayList<Unit>();
+//			for(int i = 0; i < map.getRows(); i++)
+//				for(int j = 0; j < map.getCols(); j++)
+//					if(map.getCell(i, j).containsUnit())
+//						unitsToExport.add(map.getCell(i, j).getUnit());
 //			try {
-//				 FileInputStream fis = new FileInputStream("temp.out");
-//				 ObjectInputStream oin = new ObjectInputStream(fis);
-//				 unitsToExport = (ArrayList<Unit>)oin.readObject();
-//			}catch(Exception ex) {
-//				Gdx.app.log("file read", ex.toString());
+//				FileOutputStream fos = new FileOutputStream("temp.out");
+//				ObjectOutputStream oos = new ObjectOutputStream(fos);
+//			  	oos.writeObject(unitsToExport);
+//				oos.flush();
+//				oos.close();
+//			} catch(Exception ex) {
+//				Gdx.app.log("file write", ex.toString());
+//				ex.printStackTrace();
 //				return;
 //			}
-						
-			this.game.setGameUnits(unitsToExport);
-			this.game.play();
-		}
+//		}
+	}
+	
+	public void start() {
+		ArrayList<Unit> unitsToExport = new ArrayList<Unit>();
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-			ArrayList<Unit> unitsToExport = new ArrayList<Unit>();
-			for(int i = 0; i < map.getRows(); i++)
-				for(int j = 0; j < map.getCols(); j++)
-					if(map.getCell(i, j).containsUnit())
-						unitsToExport.add(map.getCell(i, j).getUnit());
-			try {
-				FileOutputStream fos = new FileOutputStream("temp.out");
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-			  	oos.writeObject(unitsToExport);
-				oos.flush();
-				oos.close();
-			} catch(Exception ex) {
-				Gdx.app.log("file write", ex.toString());
-				return;
-			}
-		}
+		for(int i = 0; i < map.getRows(); i++)
+			for(int j = 0; j < map.getCols(); j++)
+				if(map.getCell(i, j).containsUnit())
+					unitsToExport.add(map.getCell(i, j).getUnit());
+		
+		
+					
+		this.game.play(false, unitsToExport);
 	}
 	
 //	public void addUnit(Unit unit) {

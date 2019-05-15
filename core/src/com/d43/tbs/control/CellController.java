@@ -3,6 +3,7 @@ package com.d43.tbs.control;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
 import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.model.unit.Unit;
 import com.d43.tbs.view.screen.ChooseScreen;
@@ -74,7 +75,7 @@ public class CellController {
 				if (this.mapHandler != null && !mapHandler.isPlaying()) {
 					if (this.unit != null && !this.unit.isForChoose()) {
 						this.mapHandler.pickUnit(null);
-						this.unit.setCell(this.mapHandler.map.getBlankCell());
+						this.unit.setCell(this.mapHandler.map.getBlankCell(), new Vector2(0, 0));
 						chooseScreen.removeUnit(this.unit);
 //						chooseScreen.addUnit(this.unit);
 					}
