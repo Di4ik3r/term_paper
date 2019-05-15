@@ -26,18 +26,18 @@ public abstract class Unit extends GameObject implements Serializable {
 
 	protected int id, hp, rangeAttack, rangeMovement, damage;
 	protected UnitController controller;
-	protected transient Cell cell; // Не серіалізується
+	protected transient Cell cell; 									// Не серіалізується
 	protected boolean isReplaceable;
 	protected boolean isEnemy;
 	protected boolean isAlive;
 	protected Dimension size;
 	protected boolean isMoving;
-	protected transient TextureRegion textureRegion; // Не серіалізується
+	protected transient TextureRegion textureRegion; 				// Не серіалізується
 	protected boolean isForChoose;
 	protected Vector2 location;
 	protected Vector2 locationToMove;
 	protected Vector2 coordinates;
-	protected transient Animation current, idle, attack; // Не серіалізується
+	protected transient Animation current, idle, attack; 			// Не серіалізується
 	protected boolean delayed;
 	protected float delay, finalDelay;
 	protected boolean markEndBotMove;

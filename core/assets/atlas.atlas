@@ -31,56 +31,56 @@ archer_attack
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 1
+  index: 8
 archer_attack
   rotate: false
   xy: 1470, 1599
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 2
+  index: 1
 archer_attack
   rotate: false
   xy: 1570, 1697
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 3
+  index: 2
 archer_attack
   rotate: false
   xy: 1628, 1783
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 4
+  index: 3
 archer_attack
   rotate: false
   xy: 1794, 1955
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 5
+  index: 4
 archer_attack
   rotate: false
   xy: 2, 145
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 6
+  index: 5
 archer_attack
   rotate: false
   xy: 268, 415
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 7
+  index: 6
 archer_attack
   rotate: false
   xy: 1370, 1427
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
-  index: 8
+  index: 7
 archer_idle
   rotate: false
   xy: 1728, 1889
@@ -381,35 +381,35 @@ zombie_idle
   size: 46, 72
   orig: 46, 72
   offset: 0, 0
-  index: 6
+  index: 1
 zombie_idle
   rotate: false
   xy: 1844, 1955
   size: 46, 72
   orig: 46, 72
   offset: 0, 0
-  index: 1
+  index: 2
 zombie_idle
   rotate: false
   xy: 2, 71
   size: 46, 72
   orig: 46, 72
   offset: 0, 0
-  index: 2
+  index: 3
 zombie_idle
   rotate: false
   xy: 318, 415
   size: 46, 72
   orig: 46, 72
   offset: 0, 0
-  index: 3
+  index: 5
 zombie_idle
   rotate: false
   xy: 1370, 1353
   size: 46, 72
   orig: 46, 72
   offset: 0, 0
-  index: 5
+  index: 6
 
 atlas2.png
 size: 2048,2048

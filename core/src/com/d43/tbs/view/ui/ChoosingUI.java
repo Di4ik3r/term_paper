@@ -64,7 +64,7 @@ public class ChoosingUI {
 			}
 		});
 		
-		btnSave = createButton("Save Map", -100, 270);
+		btnSave = createButton("Save level", -100, 270);
 		btnSave.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {

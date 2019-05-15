@@ -56,14 +56,14 @@ public class MenuUI {
 //		btnNew = createButton("New Game", centreX, centreY - 100);
 //		btnContinue = createButton("New Game", centreX, centreY);
 //		btnExit = createButton("New Game", centreX, centreY + 100);
-		btnNew = createButton("New Game", -300, 280);
+		btnNew = createButton("New Game", -310, 280);
 		btnNew.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				clickedOnStart();
 			}
 		});
-		btnContinue = createButton("Continue", 0, 280);
+		btnContinue = createButton("Choose level", 10, 280);
 		btnContinue.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
