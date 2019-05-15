@@ -12,6 +12,8 @@ import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.unit.Unit;
 import com.d43.tbs.view.ChooseScreen;
 
+// cool
+
 public class Cell extends GameObject {
 
 	private CellController controller;
