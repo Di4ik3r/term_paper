@@ -1,5 +1,7 @@
 package com.d43.tbs.control;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
@@ -10,7 +12,7 @@ import com.d43.tbs.model.map.CellMap;
 import com.d43.tbs.model.map.DefeatedZone;
 import com.d43.tbs.model.unit.Unit;
 import com.d43.tbs.utils.CellCalculator;
-import com.d43.tbs.view.GameScreen;
+import com.d43.tbs.view.screen.GameScreen;
 
 public class MapPlaying extends MapHandler {
 
@@ -24,7 +26,7 @@ public class MapPlaying extends MapHandler {
 	
 	private int alliesCount, enemiesCount;
 
-	public MapPlaying(CellMap cells, DefeatedZone defeatedZone, Array<Unit> allies, Array<Unit> enemies) {
+	public MapPlaying(CellMap cells, DefeatedZone defeatedZone, ArrayList<Unit> allies, ArrayList<Unit> enemies) {
 		this.map = cells;
 		this.allies = allies;
 		this.enemies = enemies;
@@ -37,8 +39,8 @@ public class MapPlaying extends MapHandler {
 
 		this.movingUnit = null;
 		
-		this.alliesCount = allies.size;
-		this.enemiesCount = enemies.size;
+		this.alliesCount = allies.size();
+		this.enemiesCount = enemies.size();
 	}
 
 	public boolean isPlaying() {
@@ -105,14 +107,6 @@ public class MapPlaying extends MapHandler {
 		this.paintToDefault();
 		this.pickedUnit = unit;
 
-//		if (this.unitsAreDone()) {
-//			this.makeUnitsRaplaceable();
-//			Gdx.app.log("tag", "units are replaceable");
-//		} else if (!this.pickedUnit.isReplaceable()) {
-//			this.pickedUnit = null;
-//			return;
-//		}
-
 		if (!this.pickedUnit.isReplaceable()) {
 			this.pickedUnit = null;
 			return;
@@ -126,9 +120,8 @@ public class MapPlaying extends MapHandler {
 		if (this.pickedUnit != null) {
 			Cell cell = map.findCell(bounds);
 			if (this.cellIsAvailable(cell)) {
-//				this.pickedUnit.setDelay(0.7f);
 				this.movingUnit = this.pickedUnit;
-				this.pickedUnit.setCell(cell);
+				this.pickedUnit.setCell(cell, map.findCellCoord(cell));
 
 				this.pickedUnit.getCell().setRegion(this.textureAtlas.findRegion("cellBlocked"));
 				this.pickedUnit.getCell().changeTextureRegion(this.textureAtlas.findRegion("cellBlocked"));
@@ -141,17 +134,12 @@ public class MapPlaying extends MapHandler {
 
 				if (this.unitsAreDone()) {
 					bot.makeBotsMove();
-//					this.makeUnitsRaplaceable();
-//				Gdx.app.log("tag", "units are replaceable");
 				}
 			} else {
 				this.pickedUnit = null;
 				this.paintToDefault();
 			}
 		}
-
-//		Gdx.app.log("tag", "");
-//		this.map.returnMap();
 	}
 
 	public void unitAttack(Polygon bounds) {
@@ -160,7 +148,6 @@ public class MapPlaying extends MapHandler {
 			if (this.cellIsAvailable(cell)) {
 				Unit enemy = cell.getUnit();
 				this.pickedUnit.attack(enemy);
-//				enemy.damage(this.pickedUnit.getDamage());
 
 				this.pickedUnit.getCell().setRegion(this.textureAtlas.findRegion("cellBlocked"));
 				this.pickedUnit.getCell().changeTextureRegion(this.textureAtlas.findRegion("cellBlocked"));
@@ -173,14 +160,13 @@ public class MapPlaying extends MapHandler {
 
 				if (this.unitsAreDone()) {
 					bot.makeBotsMove();
-//					this.makeUnitsRaplaceable();
 				}
 			}
 		}
-		for (int i = 0; i < enemies.size; i++)
+		for (int i = 0; i < enemies.size(); i++)
 			if (enemies.get(i).getHp() < 1) {
 				defeatedZone.addUnit(enemies.get(i));
-				enemies.removeIndex(i);
+				enemies.remove(i);
 			}
 		if (!enemiesHasAlive()) {
 			win = true;
@@ -189,10 +175,10 @@ public class MapPlaying extends MapHandler {
 	}
 
 	public void checkAllies() {
-		for (int i = 0; i < allies.size; i++)
+		for (int i = 0; i < allies.size(); i++)
 			if (allies.get(i).getHp() < 1) {
 				defeatedZone.addUnit(allies.get(i));
-				allies.removeIndex(i);
+				allies.remove(i);
 				this.paintToDefault();
 			}
 
@@ -211,14 +197,14 @@ public class MapPlaying extends MapHandler {
 
 		result[0] = win ? "You WON" : "You LOST";
 
-		int aliveAlliesCount = allies.size;
+		int aliveAlliesCount = allies.size();
 //		int aliveAlliesCount = 0;
 //		for (int i = 0; i < allies.size; i++)
 //			if (allies.get(i).isAlive())
 //				aliveAlliesCount++;
 //		result[1] = "Your team has " + Integer.toString(aliveAlliesCount) + " units alive";
 
-		int aliveEnemiesCount = enemies.size;
+		int aliveEnemiesCount = enemies.size();
 //		int aliveEnemiesCount = 0;
 //		for (int i = 0; i < enemies.size; i++)
 //			if (enemies.get(i).isAlive())
@@ -230,9 +216,9 @@ public class MapPlaying extends MapHandler {
 		else
 			result[1] = "Enemy team has " + Integer.toString(aliveEnemiesCount) + " units alive";
 
-		result[2] = "You have slain " + Integer.toString(enemiesCount - enemies.size) + " enemy units";
+		result[2] = "You have slain " + Integer.toString(enemiesCount - enemies.size()) + " enemy units";
 
-		result[3] = "Enemy have slain " + Integer.toString(alliesCount - allies.size) + " your units";
+		result[3] = "Enemy have slain " + Integer.toString(alliesCount - allies.size()) + " your units";
 
 		return result;
 	}
@@ -246,14 +232,14 @@ public class MapPlaying extends MapHandler {
 	}
 
 	public boolean alliesHasAlive() {
-		for (int i = 0; i < this.allies.size; i++)
+		for (int i = 0; i < this.allies.size(); i++)
 			if (this.allies.get(i).isAlive())
 				return true;
 		return false;
 	}
 
 	public boolean enemiesHasAlive() {
-		for (int i = 0; i < this.enemies.size; i++)
+		for (int i = 0; i < this.enemies.size(); i++)
 			if (this.enemies.get(i).isAlive())
 				return true;
 		return false;
@@ -267,7 +253,7 @@ public class MapPlaying extends MapHandler {
 		int k, j;
 		k = 0;
 		j = 0;
-		for (int i = 0; i < allies.size; i++)
+		for (int i = 0; i < allies.size(); i++)
 			if (allies.get(i).isAlive()) {
 				j += !allies.get(i).isReplaceable() ? 1 : 0;
 				k++;
@@ -277,7 +263,7 @@ public class MapPlaying extends MapHandler {
 	}
 
 	public void makeUnitsRaplaceable() {
-		for (int i = 0; i < allies.size; i++) {
+		for (int i = 0; i < allies.size(); i++) {
 			allies.get(i).getCell().setRegion(this.textureAtlas.findRegion("cell"));
 			allies.get(i).setReplaceability(true);
 		}

@@ -1,48 +1,62 @@
 package com.d43.tbs;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.model.unit.Unit;
 import com.d43.tbs.utils.Assets;
-import com.d43.tbs.view.ChooseScreen;
-import com.d43.tbs.view.GameScreen;
-import com.d43.tbs.view.ResultScreen;
+import com.d43.tbs.view.screen.ChooseScreen;
+import com.d43.tbs.view.screen.GameScreen;
+import com.d43.tbs.view.screen.MenuScreen;
+
+//	cool
 
 public class TurnBasedStrategy extends Game {
 
-	private Screen chooseScreen, gameScreen, resultScreen;
+	private Screen menuScreen, chooseScreen, gameScreen;
 	private Assets assets;
 	
 	@Override
 	public void create() {
 		assets = new Assets();
 		
+		menuScreen = new MenuScreen();
+		((MenuScreen)menuScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
+		((MenuScreen)menuScreen).setGame(this);
+		
 		chooseScreen = new ChooseScreen();
 		((ChooseScreen)chooseScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
 		((ChooseScreen)chooseScreen).setGame(this);
 		
-		gameScreen = new GameScreen();
-		((GameScreen)gameScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
-		((GameScreen)gameScreen).setGame(this);
+		this.setScreen(menuScreen);
+	}
+	
+//	public void endGame(String[] result) {
+//		((ResultScreen)resultScreen).setResult(result);
+//		this.setScreen(resultScreen);
+//	}
+	
+	public void backToMenu() {
+		menuScreen = new MenuScreen();
+		((MenuScreen)menuScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
+		((MenuScreen)menuScreen).setGame(this);
 		
-		resultScreen = new ResultScreen();
-		((ResultScreen)resultScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
-		
+		this.setScreen(menuScreen);
+	}
+	
+	public void startNewGame() {
 		this.setScreen(chooseScreen);
 	}
 	
-	public void endGame(String[] result) {
-		((ResultScreen)resultScreen).setResult(result);
-		this.setScreen(resultScreen);
-	}
-	
-	public void setGameUnits(Array<Unit> units) {
-	 ((GameScreen)gameScreen).setUnits(units);
-	}
-	public void startPlay() {
+	public void play(boolean fromFile, ArrayList<Unit> units) {
+		gameScreen = new GameScreen();
+		((GameScreen)gameScreen).setTextureAtlas(assets.getManager().get("atlas.atlas", TextureAtlas.class));
 		this.setScreen(gameScreen);
+		((GameScreen)this.gameScreen).setFromFile(fromFile);
+		((GameScreen)gameScreen).setUnits(units);
+		((GameScreen)gameScreen).setGame(this);
 	}
 	
 	public void dispose() {

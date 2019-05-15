@@ -1,9 +1,10 @@
 package com.d43.tbs.model.unit;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.utils.Animation;
 
 public class Zombie extends MeleeUnit {
@@ -16,8 +17,6 @@ public class Zombie extends MeleeUnit {
 		this.setHp(16);
 		this.setDamage(24);
 		this.setIsEnemy(true);
-		
-		this.toRight = false;
 	}
 	
 	@Override
@@ -31,7 +30,7 @@ public class Zombie extends MeleeUnit {
 
 	@Override
 	public void initAnimations(TextureAtlas atlas) {
-		Array<TextureRegion> regions = new Array<TextureRegion>();
+		ArrayList<TextureRegion> regions = new ArrayList<TextureRegion>();
 		regions.add(atlas.findRegion("zombie_idle", 1));
 		regions.add(atlas.findRegion("zombie_idle", 2));
 		regions.add(atlas.findRegion("zombie_idle", 3));
@@ -43,7 +42,7 @@ public class Zombie extends MeleeUnit {
 		this.idle.setSize(41, 68);
 		this.current = idle;
 		
-		Array<TextureRegion> regionsAttack = new Array<TextureRegion>();
+		ArrayList<TextureRegion> regionsAttack = new ArrayList<TextureRegion>();
 		regionsAttack.add(atlas.findRegion("zombie_attack", 1));
 		regionsAttack.add(atlas.findRegion("zombie_attack", 2));
 		regionsAttack.add(atlas.findRegion("zombie_attack", 3));

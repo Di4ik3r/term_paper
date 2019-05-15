@@ -1,16 +1,15 @@
 package com.d43.tbs.model.unit;
 
-import com.badlogic.gdx.Gdx;
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
-import com.d43.tbs.control.ArcherController;
 import com.d43.tbs.utils.Animation;
 
 public class Archer extends RangeUnit {
 
-	private ArcherController controller;
-	
+	private static final long serialVersionUID = 7977309942227513876L;
+
 	public Archer(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
 		
@@ -20,13 +19,11 @@ public class Archer extends RangeUnit {
 		this.setDamage(11);
 		
 		this.attackAnimDelay = 0.5f;
-		
-		this.toRight = true;
 	}
 	
 	@Override
 	public void initAnimations(TextureAtlas atlas) {
-		Array<TextureRegion> regionsIdle = new Array<TextureRegion>();
+		ArrayList<TextureRegion> regionsIdle = new ArrayList<TextureRegion>();
 //		for(int i = 1; i <= 3; i++)
 //			regions.add(atlas.findRegion("archer_idle_" + Integer.toString(i)));
 		regionsIdle.add(atlas.findRegion("archer_idle", 1));
@@ -39,7 +36,7 @@ public class Archer extends RangeUnit {
 		this.idle.setSize(32, 64);
 		this.current = idle;
 		
-		Array<TextureRegion> regionsAttack = new Array<TextureRegion>();
+		ArrayList<TextureRegion> regionsAttack = new ArrayList<TextureRegion>();
 		regionsAttack.add(atlas.findRegion("archer_attack", 1));
 		regionsAttack.add(atlas.findRegion("archer_attack", 2));
 		regionsAttack.add(atlas.findRegion("archer_attack", 3));

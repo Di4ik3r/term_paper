@@ -1,5 +1,7 @@
 package com.d43.tbs.model.map;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -10,14 +12,14 @@ import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.control.MapHandler;
 import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.unit.Unit;
-import com.d43.tbs.view.ChooseScreen;
+import com.d43.tbs.view.screen.ChooseScreen;
 
 public class CellMap extends GameObject{
 	
 	private Cell[][] map;
 	private int rows, cols;
 	
-	private Array<Unit> choosingUnits;
+	private ArrayList<Unit> choosingUnits;
 	
 	private TextureAtlas textureAtlas;
 	
@@ -30,7 +32,7 @@ public class CellMap extends GameObject{
 		
 		this.textureAtlas = textureAtlas;
 		
-		this.choosingUnits = new Array<Unit>();
+		this.choosingUnits = new ArrayList<Unit>();
 	}
 	
 	public void initCells(int rows, int cols) {
@@ -47,15 +49,7 @@ public class CellMap extends GameObject{
 		
 		for(int i = 0; i < rows; i++)
 			for(int j = 0; j < cols; j++) {
-//				Cell cell = new Cell(regions, (-8 + i*0.99f)*multiplier, (-3.5f + j*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 				Cell cell;
-//				if(j % 2 == 0)
-//					cell = new Cell(regions, (-8 + i*0.99f)*multiplier+multiplier/2, (-3.5f + j*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
-//				else 
-//					cell = new Cell(regions, (-8 + i*0.99f)*multiplier, (-3.5f + j*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
-//				cell = new Cell(regions, (-8 + i*0.99f)*multiplier, (-4.3f + j*0.6f)*multiplier, 1f * multiplier, 0.625f * multiplier);
-//				cell = new Cell(regions, (-8 + i*1f)*multiplier, (-4.3f + j*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
-//				cell = new Cell(regions, (-8 + i*1f)*multiplier, (-4.5f + j*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 				cell = new Cell(regions, (-8 + i*1f)*multiplier, (-4.4f + j*0.625f)*multiplier, 1f * multiplier, 0.625f * multiplier);
 				map[i][j] = cell;
 			}
@@ -98,9 +92,12 @@ public class CellMap extends GameObject{
 				map[i][j].setMapHandler(mapHandler);
 	}
 	
-	public void placeUnits(Array<Unit> units) {
-		for(int i = 0; i < units.size; i++)
-			units.get(i).setCell(this.getCell((int)units.get(i).getLocation().x, (int)units.get(i).getLocation().y));
+	public void placeUnits(ArrayList<Unit> units) {
+		for(int i = 0; i < units.size(); i++) {
+			Cell cell = this.getCell((int)units.get(i).getLocation().x, (int)units.get(i).getLocation().y);
+			Vector2 coord = this.findCellCoord(cell);
+			units.get(i).setCell(cell, coord);
+		}
 //		for(int i = 0; i < this.cols; i++)
 //			for(int j = 0; j < this.rows; j++)
 //				cells[i][j].getController().setUnitOn(-1);
@@ -130,14 +127,22 @@ public class CellMap extends GameObject{
 		return map[x][y];
 	}
 	
+	public Vector2 findCellCoord(Cell cell) {
+		for(int i = 0; i < this.rows; i++)
+			for(int j = 0; j < this.cols; j++)
+				if(map[i][j] == cell)
+					return new Vector2(i, j);
+		return null;
+	}
+	
 //	public Cell findCell(Vector2 location) {
 //		for(int i = 0; i < this.rows; i++)
 //			for(int j = 0; j < this.cols; j++)
-//				if(cells[i][j].getController().isBelong(location.x, location.y))
-//					return cells[i][j];
+//				if(map[i][j].getController().isBelong(location.x, location.y))
+//					return map[i][j];
 //		return null;
 //	}
-//	
+	
 //	public String findCellString(Vector2 location) {
 //		for(int i = 0; i < this.rows; i++)
 //			for(int j = 0; j < this.cols; j++)

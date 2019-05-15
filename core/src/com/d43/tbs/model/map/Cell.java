@@ -10,7 +10,7 @@ import com.d43.tbs.control.CellController;
 import com.d43.tbs.control.MapHandler;
 import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.unit.Unit;
-import com.d43.tbs.view.ChooseScreen;
+import com.d43.tbs.view.screen.ChooseScreen;
 
 // cool
 

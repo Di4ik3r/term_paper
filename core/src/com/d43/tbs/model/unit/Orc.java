@@ -1,12 +1,15 @@
 package com.d43.tbs.model.unit;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.utils.Animation;
 
 public class Orc extends RangeUnit {
+
+	private static final long serialVersionUID = 4863104976572816411L;
 
 	public Orc(TextureRegion textureRegion, float x, float y, float width, float height) {
 		super(textureRegion, x, y, width, height);
@@ -18,8 +21,6 @@ public class Orc extends RangeUnit {
 		this.setIsEnemy(true);
 		
 		this.attackAnimDelay = 0.75f;
-		
-		this.toRight = false;
 	}
 	
 	@Override
@@ -33,7 +34,7 @@ public class Orc extends RangeUnit {
 
 	@Override
 	public void initAnimations(TextureAtlas atlas) {
-		Array<TextureRegion> regions = new Array<TextureRegion>();
+		ArrayList<TextureRegion> regions = new ArrayList<TextureRegion>();
 		regions.add(atlas.findRegion("orc_idle", 1));
 		regions.add(atlas.findRegion("orc_idle", 2));
 		regions.add(atlas.findRegion("orc_idle", 3));
@@ -43,7 +44,7 @@ public class Orc extends RangeUnit {
 		this.idle.setSize(38, 67);
 		this.current = idle;
 		
-		Array<TextureRegion> regionsAttack = new Array<TextureRegion>();
+		ArrayList<TextureRegion> regionsAttack = new ArrayList<TextureRegion>();
 		regionsAttack.add(atlas.findRegion("orc_attack", 7));
 		regionsAttack.add(atlas.findRegion("orc_attack", 6));
 		regionsAttack.add(atlas.findRegion("orc_attack", 5));

@@ -1,12 +1,13 @@
 package com.d43.tbs.utils;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.model.unit.Unit;
 
 public class Animation {
-	private Array<TextureRegion> frames;
+	private ArrayList<TextureRegion> frames;
 	private float maxFrameTime;
 	private float currentFrameTime;
 	private int frameCount;
@@ -21,9 +22,9 @@ public class Animation {
 	
 	private boolean toRight;
 
-	public Animation(Array<TextureRegion> frames, Unit unit, float cycleTime, boolean looping) {
+	public Animation(ArrayList<TextureRegion> frames, Unit unit, float cycleTime, boolean looping) {
 		this.frames = frames;
-		this.frameCount = frames.size;
+		this.frameCount = frames.size();
 		maxFrameTime = cycleTime / frameCount;
 		frame = 0;
 		
@@ -44,7 +45,7 @@ public class Animation {
 		else rotate = true;
 		this.toRight = toRight;
 		
-		for(int i = 0; i < this.frames.size; i++)
+		for(int i = 0; i < this.frames.size(); i++)
 			this.frames.get(i).flip(rotate, false);
 	}
 	

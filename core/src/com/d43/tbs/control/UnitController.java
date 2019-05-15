@@ -1,24 +1,23 @@
 package com.d43.tbs.control;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.math.Polygon;
+import java.io.Serializable;
+
 import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.model.unit.Unit;
 
-public class UnitController {
-
+public class UnitController implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
-	private Polygon bounds;
-	private Cell cell;
+	private transient Cell cell;										// Не серіалізується
 
 	private Unit unit;
 
 	private MapHandler mapHandler;
 
-	public UnitController(int id, Polygon bounds) {
+	public UnitController(int id) {
 		this.id = id;
-		this.bounds = bounds;
 	}
 	
 	public MapHandler getMapHandler() {

@@ -3,11 +3,12 @@ package com.d43.tbs.model.map;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.d43.tbs.control.MapHandler;
 import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.unit.Unit;
-import com.d43.tbs.view.ChooseScreen;
+import com.d43.tbs.view.screen.ChooseScreen;
 
 public class ChoosingZone extends GameObject {
 	private Cell[] allies, enemies;
@@ -63,7 +64,7 @@ public class ChoosingZone extends GameObject {
 		unit.setAlive(false);
 		for(int i = 0; i < allies.length; i++)
 			if(!allies[i].containsUnit()) {
-				unit.setCell(allies[i]);
+				unit.setCell(allies[i], new Vector2(0, 0));
 //				return;
 			}
 	}
@@ -72,7 +73,7 @@ public class ChoosingZone extends GameObject {
 		unit.setAlive(false);
 		for(int i = 0; i < enemies.length; i++)
 			if(!enemies[i].containsUnit()) {
-				unit.setCell(enemies[i]);
+				unit.setCell(enemies[i], new Vector2(0, 0));
 //				return;
 			}
 	}

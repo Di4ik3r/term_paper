@@ -1,10 +1,10 @@
 package com.d43.tbs.control;
 
-import com.badlogic.gdx.Gdx;
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.utils.Array;
-import com.d43.tbs.model.GameObject;
 import com.d43.tbs.model.map.Cell;
 import com.d43.tbs.model.map.CellMap;
 import com.d43.tbs.model.map.ChoosingZone;
@@ -14,7 +14,7 @@ public class MapChoosing extends MapHandler {
 
 	private ChoosingZone choosingZone;
 
-	public MapChoosing(CellMap cells, ChoosingZone choosingZone, Array<Unit> allies, Array<Unit> enemies) {
+	public MapChoosing(CellMap cells, ChoosingZone choosingZone, ArrayList<Unit> allies, ArrayList<Unit> enemies) {
 		this.map = cells;
 		this.allies = allies;
 		this.enemies = enemies;
@@ -115,7 +115,7 @@ public class MapChoosing extends MapHandler {
 		if (this.pickedUnit != null) {
 			Cell cell = map.findCell(bounds);
 			this.movingUnit = this.pickedUnit;
-			this.pickedUnit.setCell(cell);
+			this.pickedUnit.setCell(cell, map.findCellCoord(cell));
 			this.pickedUnit.setLocation(map.findCellCoord(cell.getBounds()).x, map.findCellCoord(cell.getBounds()).y);
 
 			this.pickedUnit.getCell().setRegion(this.textureAtlas.findRegion("cell"));
